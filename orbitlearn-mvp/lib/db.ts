@@ -1,0 +1,16 @@
+import { PrismaClient } from '@prisma/client'
+
+declare global {
+  var prisma: PrismaClient | undefined
+}
+
+export const db: PrismaClient =
+  global.prisma ||
+  new PrismaClient({
+    log: ['warn', 'error']
+  })
+
+if (process.env.NODE_ENV !== 'production') {
+  // @ts-ignore
+  global.prisma = db
+}
