@@ -1,0 +1,43 @@
+2026-03-04 03:44:18,903  INFO      Reading topics from data/topics.csv
+2026-03-04 03:44:18,903  INFO      Loaded 10 topics
+2026-03-04 03:44:18,904  DEBUG     Scored AI Tools for Small Business               D=7  M=8  C=3  F=4  P=16
+2026-03-04 03:44:18,904  DEBUG     Scored Prompt Engineering Basics                 D=5  M=5  C=6  F=6  P=10
+2026-03-04 03:44:18,904  DEBUG     Scored Automating Excel with Python              D=7  M=3  C=3  F=6  P=13
+2026-03-04 03:44:18,904  DEBUG     Scored Introduction to Machine Learning          D=7  M=5  C=6  F=6  P=12
+2026-03-04 03:44:18,904  DEBUG     Scored Business Analytics with AI                D=9  M=10  C=3  F=4  P=20
+2026-03-04 03:44:18,904  DEBUG     Scored Building Chatbots with LLMs               D=9  M=5  C=3  F=8  P=19
+2026-03-04 03:44:18,904  DEBUG     Scored Productivity Hacks for Remote Teams       D=5  M=3  C=3  F=4  P=9
+2026-03-04 03:44:18,904  DEBUG     Scored Data Visualization Fundamentals           D=6  M=3  C=6  F=4  P=7
+2026-03-04 03:44:18,904  DEBUG     Scored Automating Reports with Python            D=7  M=3  C=3  F=6  P=13
+2026-03-04 03:44:18,904  DEBUG     Scored AI for Marketing Campaigns                D=9  M=10  C=3  F=4  P=20
+2026-03-04 03:44:18,905  INFO      Wrote scored output to data/scored_topics.csv
+2026-03-04 03:44:34,874  INFO      Reading topics from /tmp/pytest-of-root/pytest-0/test_output_file_is_created0/topics.csv
+2026-03-04 03:44:34,875  INFO      Loaded 1 topics
+2026-03-04 03:44:34,875  DEBUG     Scored AI Tools for Business                     D=7  M=8  C=3  F=4  P=16
+2026-03-04 03:44:34,876  INFO      Wrote scored output to /tmp/pytest-of-root/pytest-0/test_output_file_is_created0/scored_topics.csv
+2026-03-04 03:44:34,880  INFO      Reading topics from /tmp/pytest-of-root/pytest-0/test_output_has_correct_column0/topics.csv
+2026-03-04 03:44:34,880  INFO      Reading topics from /tmp/pytest-of-root/pytest-0/test_output_has_correct_column0/topics.csv
+2026-03-04 03:44:34,881  INFO      Loaded 1 topics
+2026-03-04 03:44:34,881  INFO      Loaded 1 topics
+2026-03-04 03:44:34,881  DEBUG     Scored AI Tools for Business                     D=7  M=8  C=3  F=4  P=16
+2026-03-04 03:44:34,881  DEBUG     Scored AI Tools for Business                     D=7  M=8  C=3  F=4  P=16
+2026-03-04 03:44:34,881  INFO      Wrote scored output to /tmp/pytest-of-root/pytest-0/test_output_has_correct_column0/scored_topics.csv
+2026-03-04 03:44:34,881  INFO      Wrote scored output to /tmp/pytest-of-root/pytest-0/test_output_has_correct_column0/scored_topics.csv
+2026-03-04 03:44:34,886  INFO      Reading topics from /tmp/pytest-of-root/pytest-0/test_output_row_count_matches_0/topics.csv
+2026-03-04 03:44:34,886  INFO      Reading topics from /tmp/pytest-of-root/pytest-0/test_output_row_count_matches_0/topics.csv
+2026-03-04 03:44:34,886  INFO      Reading topics from /tmp/pytest-of-root/pytest-0/test_output_row_count_matches_0/topics.csv
+2026-03-04 03:44:34,886  INFO      Loaded 3 topics
+2026-03-04 03:44:34,886  INFO      Loaded 3 topics
+2026-03-04 03:44:34,886  INFO      Loaded 3 topics
+2026-03-04 03:44:34,886  DEBUG     Scored Topic A                                   D=5  M=5  C=3  F=4  P=11
+2026-03-04 03:44:34,886  DEBUG     Scored Topic A                                   D=5  M=5  C=3  F=4  P=11
+2026-03-04 03:44:34,886  DEBUG     Scored Topic A                                   D=5  M=5  C=3  F=4  P=11
+2026-03-04 03:44:34,886  DEBUG     Scored Topic B                                   D=5  M=5  C=3  F=2  P=9
+2026-03-04 03:44:34,886  DEBUG     Scored Topic B                                   D=5  M=5  C=3  F=2  P=9
+2026-03-04 03:44:34,886  DEBUG     Scored Topic B                                   D=5  M=5  C=3  F=2  P=9
+2026-03-04 03:44:34,886  DEBUG     Scored Topic C                                   D=4  M=3  C=3  F=4  P=8
+2026-03-04 03:44:34,886  DEBUG     Scored Topic C                                   D=4  M=3  C=3  F=4  P=8
+2026-03-04 03:44:34,886  DEBUG     Scored Topic C                                   D=4  M=3  C=3  F=4  P=8
+2026-03-04 03:44:34,887  INFO      Wrote scored output to /tmp/pytest-of-root/pytest-0/test_output_row_count_matches_0/scored_topics.csv
+2026-03-04 03:44:34,887  INFO      Wrote scored output to /tmp/pytest-of-root/pytest-0/test_output_row_count_matches_0/scored_topics.csv
+2026-03-04 03:44:34,887  INFO      Wrote scored output to /tmp/pytest-of-root/pytest-0/test_output_row_count_matches_0/scored_topics.csv
