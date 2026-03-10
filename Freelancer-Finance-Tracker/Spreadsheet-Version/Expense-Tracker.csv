@@ -1,0 +1,40 @@
+EXPENSE TRACKER,,,,,,,,
+,,,,,,,,
+#,Date,Category,Amount,Description,Payment Method,Recurring (Y/N),Tax Deductible (Y/N),Notes
+1,2026-03-01,Rent/Utilities,1200.00,Home office rent,Bank Transfer,Y,Y,30% home office deduction
+2,2026-03-01,Business Tools/Software,49.99,Adobe Creative Suite,Credit Card,Y,Y,Monthly subscription
+3,2026-03-01,Business Tools/Software,12.99,Zoom Pro,Credit Card,Y,Y,Monthly subscription
+4,2026-03-03,Marketing,75.00,Facebook ads,Credit Card,N,Y,Client acquisition campaign
+5,2026-03-05,Food/Personal,320.00,Groceries,Debit Card,Y,N,Weekly groceries
+6,2026-03-07,Transportation,45.00,Gas,Debit Card,Y,N,
+7,2026-03-10,Business Tools/Software,29.99,Canva Pro,Credit Card,Y,Y,Monthly subscription
+8,2026-03-12,Food/Personal,65.00,Dining out,Credit Card,N,N,Client lunch meeting
+9,2026-03-15,Other,150.00,Professional development,Credit Card,N,Y,Online course
+10,,,,,,,,
+11,,,,,,,,
+12,,,,,,,,
+13,,,,,,,,
+14,,,,,,,,
+15,,,,,,,,
+16,,,,,,,,
+17,,,,,,,,
+18,,,,,,,,
+19,,,,,,,,
+20,,,,,,,,
+,,,,,,,,
+SUMMARY,,,,,,,,
+Total Expenses:,"=SUM(D2:D500)",,,,,,,
+Recurring Expenses:,"=SUMIF(G2:G500,""Y"",D2:D500)",,,,,,,
+Non-Recurring:,"=SUMIF(G2:G500,""N"",D2:D500)",,,,,,,
+Tax Deductible Total:,"=SUMIF(H2:H500,""Y"",D2:D500)",,,,,,,
+Number of Entries:,"=COUNTA(D2:D500)",,,,,,,
+Average Expense:,"=IF(COUNTA(D2:D500)>0,AVERAGE(D2:D500),0)",,,,,,,
+,,,,,,,,
+EXPENSES BY CATEGORY,,,,,,,,
+Category,Total,% of Total,Count,,,,,,
+Business Tools/Software,"=SUMIF(C2:C500,""Business Tools/Software"",D2:D500)","=IF(B23>0,B31/B23*100,0)","=COUNTIF(C2:C500,""Business Tools/Software"")",,,,,,
+Marketing,"=SUMIF(C2:C500,""Marketing"",D2:D500)","=IF(B23>0,B32/B23*100,0)","=COUNTIF(C2:C500,""Marketing"")",,,,,,
+Rent/Utilities,"=SUMIF(C2:C500,""Rent/Utilities"",D2:D500)","=IF(B23>0,B33/B23*100,0)","=COUNTIF(C2:C500,""Rent/Utilities"")",,,,,,
+Food/Personal,"=SUMIF(C2:C500,""Food/Personal"",D2:D500)","=IF(B23>0,B34/B23*100,0)","=COUNTIF(C2:C500,""Food/Personal"")",,,,,,
+Transportation,"=SUMIF(C2:C500,""Transportation"",D2:D500)","=IF(B23>0,B35/B23*100,0)","=COUNTIF(C2:C500,""Transportation"")",,,,,,
+Other,"=SUMIF(C2:C500,""Other"",D2:D500)","=IF(B23>0,B36/B23*100,0)","=COUNTIF(C2:C500,""Other"")",,,,,,

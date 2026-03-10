@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Expense Tracker - Freelancer Finance Tracker</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Montserrat', sans-serif; color: #333; }
+  @page { size: letter; margin: 0.5in; }
+  .page { width: 7.5in; min-height: 10in; margin: 0 auto; padding: 0.5in; }
+  .header { background: #2D5A27; color: white; padding: 16px 24px; border-radius: 8px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+  .header h1 { font-size: 22px; font-weight: 700; }
+  .header .month-year { font-size: 14px; border: 1px solid rgba(255,255,255,0.5); padding: 6px 16px; border-radius: 4px; }
+  .section { margin-bottom: 18px; }
+  .section-title { font-size: 13px; font-weight: 700; color: #2D5A27; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #2D5A27; padding-bottom: 4px; margin-bottom: 8px; }
+  table { width: 100%; border-collapse: collapse; font-size: 10px; }
+  th { background: #708090; color: white; padding: 6px 6px; text-align: left; font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 8px 6px; border-bottom: 1px solid #e0e0e0; }
+  .total-row { background: #f0f7ef; font-weight: 700; }
+  .total-row td { border-top: 2px solid #2D5A27; }
+  .category-summary { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .cat-box { border: 1px solid #ddd; border-radius: 6px; padding: 10px; text-align: center; }
+  .cat-box .cat-name { font-size: 9px; text-transform: uppercase; color: #708090; }
+  .cat-box .cat-value { font-size: 16px; font-weight: 700; color: #2D5A27; margin-top: 2px; }
+  .footer { text-align: center; font-size: 9px; color: #999; margin-top: 16px; padding-top: 8px; border-top: 1px solid #e0e0e0; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <h1>Expense Tracker</h1>
+    <div class="month-year">Month: __________ Year: ______</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Daily Expenses</div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Date</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Payment</th>
+          <th>Recurring</th>
+          <th>Deductible</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td></td><td></td><td></td><td>$</td><td></td><td>&#9744;</td><td>&#9744;</td></tr>
+        <tr><td>2</td><td></td><td></td><td></td><td>$</td><td></td><td>&#9744;</td><td>&#9744;</td></tr>
+        <tr><td>3</td><td></td><td></td><td></td><td>$</td><td></td><td>&#9744;</td><td>&#9744;</td></tr>
+        <tr><td>4</td><td></td><td></td><td></td><td>$</td><td></td><td>&#9744;</td><td>&#9744;</td></tr>
+        <tr><td>5</td><td></td><td></td><td></td><td>$</td><td></td><td>&#9744;</td><td>&#9744;</td></tr>
+        <tr><td>6</td><td></td><td></td><td></td><td>$</td><td></td><td>&#9744;</td><td>&#9744;</td></tr>
+        <tr><td>7</td><td></td><td></td><td></td><td>$</td><td></td><td>&#9744;</td><td>&#9744;</td></tr>
+        <tr><td>8</td><td></td><td></td><td></td><td>$</td><td></td><td>&#9744;</td><td>&#9744;</td></tr>
+        <tr><td>9</td><td></td><td></td><td></td><td>$</td><td></td><td>&#9744;</td><td>&#9744;</td></tr>
+        <tr><td>10</td><td></td><td></td><td></td><td>$</td><td></td><td>&#9744;</td><td>&#9744;</td></tr>
+        <tr><td>11</td><td></td><td></td><td></td><td>$</td><td></td><td>&#9744;</td><td>&#9744;</td></tr>
+        <tr><td>12</td><td></td><td></td><td></td><td>$</td><td></td><td>&#9744;</td><td>&#9744;</td></tr>
+        <tr><td>13</td><td></td><td></td><td></td><td>$</td><td></td><td>&#9744;</td><td>&#9744;</td></tr>
+        <tr><td>14</td><td></td><td></td><td></td><td>$</td><td></td><td>&#9744;</td><td>&#9744;</td></tr>
+        <tr><td>15</td><td></td><td></td><td></td><td>$</td><td></td><td>&#9744;</td><td>&#9744;</td></tr>
+        <tr><td>16</td><td></td><td></td><td></td><td>$</td><td></td><td>&#9744;</td><td>&#9744;</td></tr>
+        <tr><td>17</td><td></td><td></td><td></td><td>$</td><td></td><td>&#9744;</td><td>&#9744;</td></tr>
+        <tr><td>18</td><td></td><td></td><td></td><td>$</td><td></td><td>&#9744;</td><td>&#9744;</td></tr>
+        <tr><td>19</td><td></td><td></td><td></td><td>$</td><td></td><td>&#9744;</td><td>&#9744;</td></tr>
+        <tr><td>20</td><td></td><td></td><td></td><td>$</td><td></td><td>&#9744;</td><td>&#9744;</td></tr>
+        <tr class="total-row"><td></td><td></td><td></td><td>TOTAL</td><td>$</td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Category Totals</div>
+    <div class="category-summary">
+      <div class="cat-box"><div class="cat-name">Business Tools</div><div class="cat-value">$_____</div></div>
+      <div class="cat-box"><div class="cat-name">Marketing</div><div class="cat-value">$_____</div></div>
+      <div class="cat-box"><div class="cat-name">Rent/Utilities</div><div class="cat-value">$_____</div></div>
+      <div class="cat-box"><div class="cat-name">Food/Personal</div><div class="cat-value">$_____</div></div>
+      <div class="cat-box"><div class="cat-name">Transportation</div><div class="cat-value">$_____</div></div>
+      <div class="cat-box"><div class="cat-name">Other</div><div class="cat-value">$_____</div></div>
+    </div>
+  </div>
+
+  <div class="section" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div>
+      <div class="section-title">Totals</div>
+      <table>
+        <tr><td>Total Expenses</td><td style="text-align:right;font-weight:700;">$________</td></tr>
+        <tr><td>Recurring Expenses</td><td style="text-align:right;">$________</td></tr>
+        <tr><td>Non-Recurring</td><td style="text-align:right;">$________</td></tr>
+        <tr><td>Tax Deductible</td><td style="text-align:right;">$________</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="section-title">Categories (use codes)</div>
+      <table style="font-size:9px;">
+        <tr><td>BT</td><td>Business Tools/Software</td></tr>
+        <tr><td>MK</td><td>Marketing</td></tr>
+        <tr><td>RU</td><td>Rent/Utilities</td></tr>
+        <tr><td>FP</td><td>Food/Personal</td></tr>
+        <tr><td>TR</td><td>Transportation</td></tr>
+        <tr><td>OT</td><td>Other</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">Freelancer Finance Tracker &bull; Print on US Letter (8.5" x 11") &bull; &copy; 2026</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Savings Tracker - Freelancer Finance Tracker</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Montserrat', sans-serif; color: #333; }
+  @page { size: letter; margin: 0.5in; }
+  .page { width: 7.5in; min-height: 10in; margin: 0 auto; padding: 0.5in; }
+  .header { background: #2D5A27; color: white; padding: 16px 24px; border-radius: 8px; margin-bottom: 20px; }
+  .header h1 { font-size: 22px; font-weight: 700; }
+  .section { margin-bottom: 20px; }
+  .section-title { font-size: 13px; font-weight: 700; color: #2D5A27; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #2D5A27; padding-bottom: 4px; margin-bottom: 8px; }
+  table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  th { background: #708090; color: white; padding: 6px 8px; text-align: left; font-size: 10px; text-transform: uppercase; }
+  td { padding: 8px; border-bottom: 1px solid #e0e0e0; }
+  .total-row { background: #f0f7ef; font-weight: 700; }
+  .goal-card { border: 2px solid #2D5A27; border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+  .goal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .goal-name { font-weight: 700; font-size: 14px; color: #2D5A27; }
+  .progress-bar { height: 20px; background: #e0e0e0; border-radius: 10px; overflow: hidden; margin: 8px 0; }
+  .progress-fill { height: 100%; background: #2D5A27; border-radius: 10px; width: 0%; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 10px; color: #708090; }
+  .challenge-grid { display: grid; grid-template-columns: repeat(13, 1fr); gap: 4px; }
+  .week-box { width: 100%; aspect-ratio: 1; border: 1px solid #2D5A27; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 8px; color: #708090; }
+  .footer { text-align: center; font-size: 9px; color: #999; margin-top: 16px; padding-top: 8px; border-top: 1px solid #e0e0e0; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <h1>Savings Tracker</h1>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Savings Goals</div>
+
+    <div class="goal-card">
+      <div class="goal-header">
+        <span class="goal-name">Goal 1: ___________________</span>
+        <span style="font-size:11px;">Target: $________ &nbsp; Deadline: ________</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+      <div class="progress-label"><span>$0</span><span>Current: $_______</span><span>$_______</span></div>
+    </div>
+
+    <div class="goal-card">
+      <div class="goal-header">
+        <span class="goal-name">Goal 2: ___________________</span>
+        <span style="font-size:11px;">Target: $________ &nbsp; Deadline: ________</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+      <div class="progress-label"><span>$0</span><span>Current: $_______</span><span>$_______</span></div>
+    </div>
+
+    <div class="goal-card">
+      <div class="goal-header">
+        <span class="goal-name">Goal 3: ___________________</span>
+        <span style="font-size:11px;">Target: $________ &nbsp; Deadline: ________</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill"></div></div>
+      <div class="progress-label"><span>$0</span><span>Current: $_______</span><span>$_______</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Savings Deposits Log</div>
+    <table>
+      <thead><tr><th>Date</th><th>Goal</th><th>Amount</th><th>Running Total</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td></td><td></td><td>$</td><td>$</td><td></td></tr>
+        <tr><td></td><td></td><td>$</td><td>$</td><td></td></tr>
+        <tr><td></td><td></td><td>$</td><td>$</td><td></td></tr>
+        <tr><td></td><td></td><td>$</td><td>$</td><td></td></tr>
+        <tr><td></td><td></td><td>$</td><td>$</td><td></td></tr>
+        <tr><td></td><td></td><td>$</td><td>$</td><td></td></tr>
+        <tr><td></td><td></td><td>$</td><td>$</td><td></td></tr>
+        <tr><td></td><td></td><td>$</td><td>$</td><td></td></tr>
+        <tr><td></td><td></td><td>$</td><td>$</td><td></td></tr>
+        <tr><td></td><td></td><td>$</td><td>$</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">52-Week Savings Challenge ($1,378 total)</div>
+    <p style="font-size:10px;color:#708090;margin-bottom:8px;">Save $1 in week 1, $2 in week 2... $52 in week 52. Check off each week as you save.</p>
+    <div class="challenge-grid">
+      <div class="week-box">1</div><div class="week-box">2</div><div class="week-box">3</div><div class="week-box">4</div>
+      <div class="week-box">5</div><div class="week-box">6</div><div class="week-box">7</div><div class="week-box">8</div>
+      <div class="week-box">9</div><div class="week-box">10</div><div class="week-box">11</div><div class="week-box">12</div>
+      <div class="week-box">13</div><div class="week-box">14</div><div class="week-box">15</div><div class="week-box">16</div>
+      <div class="week-box">17</div><div class="week-box">18</div><div class="week-box">19</div><div class="week-box">20</div>
+      <div class="week-box">21</div><div class="week-box">22</div><div class="week-box">23</div><div class="week-box">24</div>
+      <div class="week-box">25</div><div class="week-box">26</div><div class="week-box">27</div><div class="week-box">28</div>
+      <div class="week-box">29</div><div class="week-box">30</div><div class="week-box">31</div><div class="week-box">32</div>
+      <div class="week-box">33</div><div class="week-box">34</div><div class="week-box">35</div><div class="week-box">36</div>
+      <div class="week-box">37</div><div class="week-box">38</div><div class="week-box">39</div><div class="week-box">40</div>
+      <div class="week-box">41</div><div class="week-box">42</div><div class="week-box">43</div><div class="week-box">44</div>
+      <div class="week-box">45</div><div class="week-box">46</div><div class="week-box">47</div><div class="week-box">48</div>
+      <div class="week-box">49</div><div class="week-box">50</div><div class="week-box">51</div><div class="week-box">52</div>
+    </div>
+  </div>
+
+  <div class="footer">Freelancer Finance Tracker &bull; Print on US Letter (8.5" x 11") &bull; &copy; 2026</div>
+</div>
+</body>
+</html>

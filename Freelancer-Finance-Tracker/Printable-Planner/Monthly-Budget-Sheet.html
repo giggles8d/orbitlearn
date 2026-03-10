@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Monthly Budget Sheet - Freelancer Finance Tracker</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Montserrat', sans-serif; color: #333; }
+  @page { size: letter; margin: 0.5in; }
+  .page { width: 7.5in; min-height: 10in; margin: 0 auto; padding: 0.5in; }
+  .header { background: #2D5A27; color: white; padding: 16px 24px; border-radius: 8px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+  .header h1 { font-size: 22px; font-weight: 700; }
+  .header .month-year { font-size: 14px; border: 1px solid rgba(255,255,255,0.5); padding: 6px 16px; border-radius: 4px; }
+  .section { margin-bottom: 18px; }
+  .section-title { font-size: 13px; font-weight: 700; color: #2D5A27; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #2D5A27; padding-bottom: 4px; margin-bottom: 8px; }
+  table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  th { background: #708090; color: white; padding: 6px 8px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 8px 8px; border-bottom: 1px solid #e0e0e0; }
+  .total-row { background: #f0f7ef; font-weight: 700; }
+  .total-row td { border-top: 2px solid #2D5A27; }
+  .summary-box { background: #f0f7ef; border: 2px solid #2D5A27; border-radius: 8px; padding: 16px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .metric { text-align: center; }
+  .metric-label { font-size: 9px; text-transform: uppercase; color: #708090; letter-spacing: 0.5px; }
+  .metric-value { font-size: 20px; font-weight: 700; color: #2D5A27; margin-top: 4px; }
+  .footer { text-align: center; font-size: 9px; color: #999; margin-top: 16px; padding-top: 8px; border-top: 1px solid #e0e0e0; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <h1>Monthly Budget Sheet</h1>
+    <div class="month-year">Month: __________ Year: ______</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Income Sources</div>
+    <table>
+      <thead><tr><th>Source</th><th>Expected</th><th>Actual</th><th>Difference</th></tr></thead>
+      <tbody>
+        <tr><td>Client Work / Retainer</td><td>$</td><td>$</td><td>$</td></tr>
+        <tr><td>Freelance Projects</td><td>$</td><td>$</td><td>$</td></tr>
+        <tr><td>Freelance Platforms</td><td>$</td><td>$</td><td>$</td></tr>
+        <tr><td>Side Hustle / Gig Work</td><td>$</td><td>$</td><td>$</td></tr>
+        <tr><td>Digital Products / Passive</td><td>$</td><td>$</td><td>$</td></tr>
+        <tr><td>Other: ______________</td><td>$</td><td>$</td><td>$</td></tr>
+        <tr class="total-row"><td>TOTAL INCOME</td><td>$</td><td>$</td><td>$</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Fixed Expenses</div>
+    <table>
+      <thead><tr><th>Expense</th><th>Budgeted</th><th>Actual</th><th>Due Date</th><th>Paid</th></tr></thead>
+      <tbody>
+        <tr><td>Rent / Mortgage</td><td>$</td><td>$</td><td></td><td>&#9744;</td></tr>
+        <tr><td>Utilities</td><td>$</td><td>$</td><td></td><td>&#9744;</td></tr>
+        <tr><td>Internet</td><td>$</td><td>$</td><td></td><td>&#9744;</td></tr>
+        <tr><td>Phone</td><td>$</td><td>$</td><td></td><td>&#9744;</td></tr>
+        <tr><td>Insurance</td><td>$</td><td>$</td><td></td><td>&#9744;</td></tr>
+        <tr><td>Software Subscriptions</td><td>$</td><td>$</td><td></td><td>&#9744;</td></tr>
+        <tr><td>Other: ______________</td><td>$</td><td>$</td><td></td><td>&#9744;</td></tr>
+        <tr class="total-row"><td>TOTAL FIXED</td><td>$</td><td>$</td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Variable Expenses</div>
+    <table>
+      <thead><tr><th>Category</th><th>Budgeted</th><th>Actual</th><th>Difference</th></tr></thead>
+      <tbody>
+        <tr><td>Groceries</td><td>$</td><td>$</td><td>$</td></tr>
+        <tr><td>Transportation / Gas</td><td>$</td><td>$</td><td>$</td></tr>
+        <tr><td>Dining Out</td><td>$</td><td>$</td><td>$</td></tr>
+        <tr><td>Entertainment</td><td>$</td><td>$</td><td>$</td></tr>
+        <tr><td>Personal Care</td><td>$</td><td>$</td><td>$</td></tr>
+        <tr><td>Marketing / Ads</td><td>$</td><td>$</td><td>$</td></tr>
+        <tr><td>Professional Development</td><td>$</td><td>$</td><td>$</td></tr>
+        <tr><td>Miscellaneous</td><td>$</td><td>$</td><td>$</td></tr>
+        <tr class="total-row"><td>TOTAL VARIABLE</td><td>$</td><td>$</td><td>$</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Monthly Summary</div>
+    <div class="summary-box">
+      <div class="metric"><div class="metric-label">Total Income</div><div class="metric-value">$_____</div></div>
+      <div class="metric"><div class="metric-label">Total Expenses</div><div class="metric-value">$_____</div></div>
+      <div class="metric"><div class="metric-label">Net Profit</div><div class="metric-value">$_____</div></div>
+      <div class="metric"><div class="metric-label">Tax Reserve (25%)</div><div class="metric-value">$_____</div></div>
+      <div class="metric"><div class="metric-label">Take-Home Pay</div><div class="metric-value">$_____</div></div>
+      <div class="metric"><div class="metric-label">Savings Rate</div><div class="metric-value">_____%</div></div>
+    </div>
+  </div>
+
+  <div class="footer">Freelancer Finance Tracker &bull; Print on US Letter (8.5" x 11") &bull; &copy; 2026</div>
+</div>
+</body>
+</html>

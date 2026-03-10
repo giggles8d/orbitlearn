@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Financial Goal Planner - Freelancer Finance Tracker</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Montserrat', sans-serif; color: #333; }
+  @page { size: letter; margin: 0.5in; }
+  .page { width: 7.5in; min-height: 10in; margin: 0 auto; padding: 0.5in; }
+  .header { background: #2D5A27; color: white; padding: 16px 24px; border-radius: 8px; margin-bottom: 20px; }
+  .header h1 { font-size: 22px; font-weight: 700; }
+  .section { margin-bottom: 20px; }
+  .section-title { font-size: 13px; font-weight: 700; color: #2D5A27; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #2D5A27; padding-bottom: 4px; margin-bottom: 10px; }
+  .goal-block { border: 2px solid #2D5A27; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+  .goal-block h3 { color: #2D5A27; font-size: 14px; margin-bottom: 10px; }
+  .field { margin-bottom: 10px; }
+  .field-label { font-size: 10px; text-transform: uppercase; color: #708090; letter-spacing: 0.5px; margin-bottom: 2px; }
+  .field-line { border-bottom: 1px solid #ccc; height: 24px; }
+  .field-line-long { border-bottom: 1px solid #ccc; height: 48px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  th { background: #708090; color: white; padding: 6px 8px; text-align: left; font-size: 10px; }
+  td { padding: 10px 8px; border-bottom: 1px solid #e0e0e0; }
+  .vision-box { background: #f0f7ef; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+  .vision-box h3 { color: #2D5A27; font-size: 13px; margin-bottom: 8px; }
+  .checkbox-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px; font-size: 11px; }
+  .footer { text-align: center; font-size: 9px; color: #999; margin-top: 16px; padding-top: 8px; border-top: 1px solid #e0e0e0; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <h1>Financial Goal Planner</h1>
+  </div>
+
+  <div class="vision-box">
+    <h3>My Financial Vision</h3>
+    <div class="field"><div class="field-label">Where I want to be in 1 year:</div><div class="field-line-long"></div></div>
+    <div class="field"><div class="field-label">Where I want to be in 5 years:</div><div class="field-line-long"></div></div>
+    <div class="field"><div class="field-label">My "why" (what financial freedom means to me):</div><div class="field-line-long"></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Goal #1</div>
+    <div class="goal-block">
+      <div class="two-col">
+        <div class="field"><div class="field-label">Goal Name</div><div class="field-line"></div></div>
+        <div class="field"><div class="field-label">Category (Savings / Debt / Income / Investment)</div><div class="field-line"></div></div>
+      </div>
+      <div class="three-col">
+        <div class="field"><div class="field-label">Target Amount</div><div class="field-line"></div></div>
+        <div class="field"><div class="field-label">Start Date</div><div class="field-line"></div></div>
+        <div class="field"><div class="field-label">Target Date</div><div class="field-line"></div></div>
+      </div>
+      <div class="field"><div class="field-label">Monthly Action Steps</div><div class="field-line-long"></div></div>
+      <div class="field"><div class="field-label">Potential Obstacles & Solutions</div><div class="field-line-long"></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Goal #2</div>
+    <div class="goal-block">
+      <div class="two-col">
+        <div class="field"><div class="field-label">Goal Name</div><div class="field-line"></div></div>
+        <div class="field"><div class="field-label">Category</div><div class="field-line"></div></div>
+      </div>
+      <div class="three-col">
+        <div class="field"><div class="field-label">Target Amount</div><div class="field-line"></div></div>
+        <div class="field"><div class="field-label">Start Date</div><div class="field-line"></div></div>
+        <div class="field"><div class="field-label">Target Date</div><div class="field-line"></div></div>
+      </div>
+      <div class="field"><div class="field-label">Monthly Action Steps</div><div class="field-line-long"></div></div>
+      <div class="field"><div class="field-label">Potential Obstacles & Solutions</div><div class="field-line-long"></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Goal #3</div>
+    <div class="goal-block">
+      <div class="two-col">
+        <div class="field"><div class="field-label">Goal Name</div><div class="field-line"></div></div>
+        <div class="field"><div class="field-label">Category</div><div class="field-line"></div></div>
+      </div>
+      <div class="three-col">
+        <div class="field"><div class="field-label">Target Amount</div><div class="field-line"></div></div>
+        <div class="field"><div class="field-label">Start Date</div><div class="field-line"></div></div>
+        <div class="field"><div class="field-label">Target Date</div><div class="field-line"></div></div>
+      </div>
+      <div class="field"><div class="field-label">Monthly Action Steps</div><div class="field-line-long"></div></div>
+      <div class="field"><div class="field-label">Potential Obstacles & Solutions</div><div class="field-line-long"></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Quarterly Review Checkpoints</div>
+    <table>
+      <thead><tr><th>Quarter</th><th>Goal #1 Status</th><th>Goal #2 Status</th><th>Goal #3 Status</th><th>Adjustments Needed</th></tr></thead>
+      <tbody>
+        <tr><td>Q1 (Jan-Mar)</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Q2 (Apr-Jun)</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Q3 (Jul-Sep)</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Q4 (Oct-Dec)</td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Freelancer Financial Health Checklist</div>
+    <div class="checkbox-item">&#9744; I have 3+ months of expenses in an emergency fund</div>
+    <div class="checkbox-item">&#9744; I set aside 25-30% of income for taxes</div>
+    <div class="checkbox-item">&#9744; I track all income and expenses weekly</div>
+    <div class="checkbox-item">&#9744; I have a system for quarterly estimated tax payments</div>
+    <div class="checkbox-item">&#9744; I keep business and personal finances separate</div>
+    <div class="checkbox-item">&#9744; I have health insurance coverage</div>
+    <div class="checkbox-item">&#9744; I am contributing to retirement (SEP IRA / Solo 401k)</div>
+    <div class="checkbox-item">&#9744; I have at least 3 diversified income sources</div>
+    <div class="checkbox-item">&#9744; I review my finances monthly</div>
+    <div class="checkbox-item">&#9744; I have a plan to pay off all debt</div>
+  </div>
+
+  <div class="footer">Freelancer Finance Tracker &bull; Print on US Letter (8.5" x 11") &bull; &copy; 2026</div>
+</div>
+</body>
+</html>

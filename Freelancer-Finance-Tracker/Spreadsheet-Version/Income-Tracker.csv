@@ -1,0 +1,41 @@
+IRREGULAR INCOME TRACKER,,,,,,,,
+,,,,,,,,
+A,B,C,D,E,F,G,H
+#,Date,Source,Gross Amount,Tax Rate %,Tax Set-Aside,Net After Tax,Payment Method,Notes
+1,2026-03-01,Client Work,2500.00,25,"=D2*E2/100","=D2-F2",Bank Transfer,Website redesign project
+2,2026-03-05,Freelance Platform,800.00,25,"=D3*E3/100","=D3-F3",PayPal,Logo design
+3,2026-03-10,Side Hustle,350.00,25,"=D4*E4/100","=D4-F4",Venmo,Photography gig
+4,2026-03-15,Digital Products,120.00,25,"=D5*E5/100","=D5-F5",Stripe,Template sales
+5,2026-03-20,Client Work,1800.00,25,"=D6*E6/100","=D6-F6",Bank Transfer,Monthly retainer
+6,,,,,,,,,
+7,,,,,,,,,
+8,,,,,,,,,
+9,,,,,,,,,
+10,,,,,,,,,
+11,,,,,,,,,
+12,,,,,,,,,
+13,,,,,,,,,
+14,,,,,,,,,
+15,,,,,,,,,
+16,,,,,,,,,
+17,,,,,,,,,
+18,,,,,,,,,
+19,,,,,,,,,
+20,,,,,,,,,
+,,,,,,,,
+SUMMARY,,,,,,,,
+Total Gross Income:,"=SUM(D2:D100)",,,,,,,
+Total Tax Set-Aside:,"=SUM(F2:F100)",,,,,,,
+Total Net Income:,"=SUM(G2:G100)",,,,,,,
+Average Per Entry:,"=IF(COUNTA(D2:D100)>0,AVERAGE(D2:D100),0)",,,,,,,
+Number of Income Entries:,"=COUNTA(D2:D100)",,,,,,,
+Highest Single Payment:,"=IF(COUNTA(D2:D100)>0,MAX(D2:D100),0)",,,,,,,
+Lowest Single Payment:,"=IF(COUNTA(D2:D100)>0,MIN(D2:D100),0)",,,,,,,
+,,,,,,,,
+INCOME BY SOURCE,,,,,,,,
+Source,Total,Count,Average,,,,,,
+Client Work,"=SUMIF(C2:C100,""Client Work"",D2:D100)","=COUNTIF(C2:C100,""Client Work"")","=IF(C30>0,B30/C30,0)",,,,,,
+Freelance Platform,"=SUMIF(C2:C100,""Freelance Platform"",D2:D100)","=COUNTIF(C2:C100,""Freelance Platform"")","=IF(C31>0,B31/C31,0)",,,,,,
+Side Hustle,"=SUMIF(C2:C100,""Side Hustle"",D2:D100)","=COUNTIF(C2:C100,""Side Hustle"")","=IF(C32>0,B32/C32,0)",,,,,,
+Digital Products,"=SUMIF(C2:C100,""Digital Products"",D2:D100)","=COUNTIF(C2:C100,""Digital Products"")","=IF(C33>0,B33/C33,0)",,,,,,
+Other,"=SUMIF(C2:C100,""Other"",D2:D100)","=COUNTIF(C2:C100,""Other"")","=IF(C34>0,B34/C34,0)",,,,,,
