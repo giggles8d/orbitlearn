@@ -10,6 +10,17 @@ export async function POST(request: Request) {
   try {
     const profile = await request.json()
 
+    const favoriteMeals: Meal[] = profile.favoriteMeals || []
+    let favoritesSection = ''
+
+    if (favoriteMeals.length > 0) {
+      const favoriteNames = favoriteMeals.map(m => m.name)
+      favoritesSection = `
+The user has these favorite meals: ${favoriteNames.join(', ')}
+IMPORTANT: Include 1-2 of these favorites in the plan. Use them exactly as named but you may adjust servings to match the family size. Fill the remaining slots with new meals.
+`
+    }
+
     const prompt = `You are a meal planning assistant for DinnerDrop. Generate exactly 5 dinner meal plans.
 
 User profile:
@@ -18,7 +29,7 @@ User profile:
 - Max cook time per dinner: ${profile.maxCookTime} minutes
 - Cuisine preference: ${profile.cuisinePreference}
 - Dietary needs: ${profile.dietaryNeeds.length > 0 ? profile.dietaryNeeds.join(', ') : 'none'}
-
+${favoritesSection}
 Requirements:
 - Each meal must be completable in ${profile.maxCookTime} minutes or less
 - Total grocery cost must stay within ${profile.weeklyBudget}
@@ -50,7 +61,6 @@ Return ONLY valid JSON with this exact structure, no markdown:
 
     // Validate dietary restrictions if any
     if (profile.dietaryNeeds && profile.dietaryNeeds.length > 0) {
-      // Basic validation: ensure no restricted ingredients snuck through
       const needs = profile.dietaryNeeds.map((n: string) => n.toLowerCase())
       for (const meal of planData.meals) {
         if (needs.includes('vegetarian') || needs.includes('vegan')) {

@@ -13,6 +13,7 @@ export default function DashboardPage() {
   const [budget, setBudget] = useState('$100')
   const [loading, setLoading] = useState(false)
   const [hasGenerated, setHasGenerated] = useState(false)
+  const [favoriteNames, setFavoriteNames] = useState<Set<string>>(new Set())
   const router = useRouter()
   const supabase = createClient()
 
@@ -35,6 +36,17 @@ export default function DashboardPage() {
       }
     }
 
+    // Load favorites
+    const { data: favorites } = await supabase
+      .from('favorites')
+      .select('meal_name')
+      .eq('user_id', user.id)
+
+    if (favorites) {
+      setFavoriteNames(new Set(favorites.map(f => f.meal_name)))
+    }
+
+    // Load most recent meal plan
     const { data: plan } = await supabase
       .from('meal_plans')
       .select('*')
@@ -54,6 +66,35 @@ export default function DashboardPage() {
     loadExistingPlan()
   }, [loadExistingPlan])
 
+  async function toggleFavorite(meal: Meal) {
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return
+
+    const isFav = favoriteNames.has(meal.name)
+
+    if (isFav) {
+      await supabase
+        .from('favorites')
+        .delete()
+        .eq('user_id', user.id)
+        .eq('meal_name', meal.name)
+
+      setFavoriteNames(prev => {
+        const next = new Set(prev)
+        next.delete(meal.name)
+        return next
+      })
+    } else {
+      await supabase.from('favorites').insert({
+        user_id: user.id,
+        meal_name: meal.name,
+        meal_data: meal,
+      })
+
+      setFavoriteNames(prev => new Set(prev).add(meal.name))
+    }
+  }
+
   async function generatePlan() {
     setLoading(true)
 
@@ -68,6 +109,14 @@ export default function DashboardPage() {
 
     if (!profile) return
 
+    // Fetch favorite meals to include in generation
+    const { data: favorites } = await supabase
+      .from('favorites')
+      .select('meal_data')
+      .eq('user_id', user.id)
+
+    const favoriteMeals = favorites?.map(f => f.meal_data as Meal) || []
+
     try {
       const res = await fetch('/api/generate-plan', {
         method: 'POST',
@@ -78,6 +127,7 @@ export default function DashboardPage() {
           maxCookTime: profile.max_cook_time,
           cuisinePreference: profile.cuisine_preference,
           dietaryNeeds: profile.dietary_needs || [],
+          favoriteMeals,
         }),
       })
 
@@ -128,7 +178,12 @@ export default function DashboardPage() {
           </button>
         </div>
 
-        <MealGrid meals={meals} loading={loading} />
+        <MealGrid
+          meals={meals}
+          loading={loading}
+          favoriteNames={favoriteNames}
+          onToggleFavorite={toggleFavorite}
+        />
 
         {hasGenerated && meals.length > 0 && (
           <>

@@ -1,15 +1,37 @@
+'use client'
+
+import { Heart } from 'lucide-react'
 import type { Meal } from '@/types'
 
 interface MealCardProps {
   meal: Meal
+  isFavorite?: boolean
+  onToggleFavorite?: (meal: Meal) => void
 }
 
-export default function MealCard({ meal }: MealCardProps) {
+export default function MealCard({ meal, isFavorite, onToggleFavorite }: MealCardProps) {
   return (
-    <div className="rounded-lg border border-border bg-card p-5 space-y-3 hover:shadow-md transition-shadow">
-      <p className="text-xs font-medium text-primary uppercase tracking-wide">
-        {meal.day}
-      </p>
+    <div className="rounded-lg border border-border bg-card p-5 space-y-3 hover:shadow-md transition-shadow relative">
+      <div className="flex items-start justify-between">
+        <p className="text-xs font-medium text-primary uppercase tracking-wide">
+          {meal.day}
+        </p>
+        {onToggleFavorite && (
+          <button
+            onClick={() => onToggleFavorite(meal)}
+            className="p-1 -m-1 rounded-full hover:bg-muted transition-colors"
+            aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+          >
+            <Heart
+              className={`w-5 h-5 transition-colors ${
+                isFavorite
+                  ? 'fill-red-500 text-red-500'
+                  : 'text-muted-foreground hover:text-red-400'
+              }`}
+            />
+          </button>
+        )}
+      </div>
       <h3 className="text-lg font-heading font-semibold text-card-foreground leading-tight">
         {meal.name}
       </h3>

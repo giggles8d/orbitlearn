@@ -45,6 +45,14 @@ export interface GroceryItem {
   searchTerm: string    // normalized term for Instacart API lookup
 }
 
+export interface Favorite {
+  id: string
+  userId: string
+  mealName: string
+  mealData: Meal
+  createdAt: string
+}
+
 export interface MealPlan {
   id: string
   userId: string

@@ -4,6 +4,8 @@ import MealCard from './MealCard'
 interface MealGridProps {
   meals: Meal[]
   loading?: boolean
+  favoriteNames?: Set<string>
+  onToggleFavorite?: (meal: Meal) => void
 }
 
 function SkeletonCard() {
@@ -17,7 +19,7 @@ function SkeletonCard() {
   )
 }
 
-export default function MealGrid({ meals, loading }: MealGridProps) {
+export default function MealGrid({ meals, loading, favoriteNames, onToggleFavorite }: MealGridProps) {
   if (loading) {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
@@ -31,7 +33,12 @@ export default function MealGrid({ meals, loading }: MealGridProps) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
       {meals.map((meal) => (
-        <MealCard key={meal.day} meal={meal} />
+        <MealCard
+          key={meal.day}
+          meal={meal}
+          isFavorite={favoriteNames?.has(meal.name)}
+          onToggleFavorite={onToggleFavorite}
+        />
       ))}
     </div>
   )
