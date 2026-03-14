@@ -56,9 +56,11 @@ export default function DashboardPage() {
       .single()
 
     if (plan) {
-      setMeals(plan.meals as Meal[])
+      const planMeals = plan.meals as Meal[]
+      setMeals(planMeals)
       setTotalCost(plan.total_estimated_cost || 0)
       setHasGenerated(true)
+      localStorage.setItem('current-meals', JSON.stringify(planMeals))
     }
   }, [supabase, router])
 
@@ -137,6 +139,7 @@ export default function DashboardPage() {
         setMeals(data.meals)
         setTotalCost(data.totalEstimatedCost)
         setHasGenerated(true)
+        localStorage.setItem('current-meals', JSON.stringify(data.meals))
 
         const today = new Date()
         const monday = new Date(today)

@@ -13,6 +13,10 @@ interface FavoriteRow {
   created_at: string
 }
 
+function getFavMealId(fav: FavoriteRow) {
+  return `fav-${fav.id.slice(0, 8)}`
+}
+
 export default function FavoritesPage() {
   const [favorites, setFavorites] = useState<FavoriteRow[]>([])
   const [loading, setLoading] = useState(true)
@@ -38,7 +42,9 @@ export default function FavoritesPage() {
     loadFavorites()
   }, [loadFavorites])
 
-  async function removeFavorite(id: string) {
+  async function removeFavorite(e: React.MouseEvent, id: string) {
+    e.preventDefault()
+    e.stopPropagation()
     await supabase.from('favorites').delete().eq('id', id)
     setFavorites(prev => prev.filter(f => f.id !== id))
   }
@@ -81,34 +87,41 @@ export default function FavoritesPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {favorites.map((fav) => {
               const meal = fav.meal_data
+              const mealId = getFavMealId(fav)
               return (
                 <div
                   key={fav.id}
-                  className="rounded-lg border border-border bg-card p-5 space-y-3 hover:shadow-md transition-shadow relative"
+                  className="rounded-lg border border-border bg-card hover:shadow-md transition-shadow relative"
                 >
-                  <div className="flex items-start justify-between">
+                  <div className="flex items-start justify-between p-5 pb-0">
                     <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
                       {meal.day}
                     </p>
                     <button
-                      onClick={() => removeFavorite(fav.id)}
-                      className="p-1 -m-1 rounded-full hover:bg-muted transition-colors"
+                      onClick={(e) => removeFavorite(e, fav.id)}
+                      className="p-1 -m-1 rounded-full hover:bg-muted transition-colors relative z-10"
                       aria-label="Remove from favorites"
                     >
                       <Heart className="w-5 h-5 fill-red-500 text-red-500" />
                     </button>
                   </div>
-                  <h3 className="text-lg font-heading font-semibold text-card-foreground leading-tight">
-                    {meal.name}
-                  </h3>
-                  <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                    <span>{meal.cookTime} min</span>
-                    <span>&middot;</span>
-                    <span>{meal.servings} servings</span>
-                  </div>
-                  <div className="inline-block rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
-                    ${meal.estimatedCost.toFixed(2)}
-                  </div>
+                  <Link
+                    href={`/recipe/${mealId}`}
+                    onClick={() => localStorage.setItem(`meal-${mealId}`, JSON.stringify(meal))}
+                    className="block p-5 pt-3 space-y-3"
+                  >
+                    <h3 className="text-lg font-heading font-semibold text-card-foreground leading-tight">
+                      {meal.name}
+                    </h3>
+                    <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                      <span>{meal.cookTime} min</span>
+                      <span>&middot;</span>
+                      <span>{meal.servings} servings</span>
+                    </div>
+                    <div className="inline-block rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
+                      ${meal.estimatedCost.toFixed(2)}
+                    </div>
+                  </Link>
                 </div>
               )
             })}
