@@ -1,21 +1,36 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { Suspense, useCallback, useEffect, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
+import { Sparkles } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
 import MealGrid from '@/components/MealGrid'
 import type { Meal } from '@/types'
 
 export default function DashboardPage() {
+  return (
+    <Suspense>
+      <DashboardContent />
+    </Suspense>
+  )
+}
+
+function DashboardContent() {
   const [meals, setMeals] = useState<Meal[]>([])
   const [totalCost, setTotalCost] = useState(0)
   const [budget, setBudget] = useState('$100')
   const [loading, setLoading] = useState(false)
   const [hasGenerated, setHasGenerated] = useState(false)
   const [favoriteNames, setFavoriteNames] = useState<Set<string>>(new Set())
+  const [subscriptionStatus, setSubscriptionStatus] = useState<string>('free')
+  const [planCount, setPlanCount] = useState(0)
   const router = useRouter()
+  const searchParams = useSearchParams()
   const supabase = createClient()
+
+  const isSubscribed = subscriptionStatus === 'active' || subscriptionStatus === 'trialing'
+  const canGenerate = isSubscribed || planCount === 0
 
   const loadExistingPlan = useCallback(async () => {
     const { data: { user } } = await supabase.auth.getUser()
@@ -29,6 +44,7 @@ export default function DashboardPage() {
 
     if (profile) {
       setBudget(profile.weekly_budget)
+      setSubscriptionStatus(profile.subscription_status || 'free')
 
       if (!profile.onboarding_complete) {
         router.push('/onboarding')
@@ -62,11 +78,38 @@ export default function DashboardPage() {
       setHasGenerated(true)
       localStorage.setItem('current-meals', JSON.stringify(planMeals))
     }
+
+    // Count total plans generated
+    const { count } = await supabase
+      .from('meal_plans')
+      .select('id', { count: 'exact', head: true })
+      .eq('user_id', user.id)
+
+    setPlanCount(count ?? 0)
   }, [supabase, router])
 
   useEffect(() => {
     loadExistingPlan()
   }, [loadExistingPlan])
+
+  // Refresh subscription status when returning from Stripe
+  useEffect(() => {
+    if (searchParams.get('subscribed') === 'true') {
+      const refresh = async () => {
+        const { data: { user } } = await supabase.auth.getUser()
+        if (!user) return
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('subscription_status')
+          .eq('id', user.id)
+          .single()
+        if (profile) {
+          setSubscriptionStatus(profile.subscription_status || 'free')
+        }
+      }
+      refresh()
+    }
+  }, [searchParams, supabase])
 
   async function toggleFavorite(meal: Meal) {
     const { data: { user } } = await supabase.auth.getUser()
@@ -98,6 +141,11 @@ export default function DashboardPage() {
   }
 
   async function generatePlan() {
+    if (!canGenerate) {
+      router.push('/subscribe')
+      return
+    }
+
     setLoading(true)
 
     const { data: { user } } = await supabase.auth.getUser()
@@ -139,6 +187,7 @@ export default function DashboardPage() {
         setMeals(data.meals)
         setTotalCost(data.totalEstimatedCost)
         setHasGenerated(true)
+        setPlanCount(prev => prev + 1)
         localStorage.setItem('current-meals', JSON.stringify(data.meals))
 
         const today = new Date()
@@ -163,6 +212,31 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8 max-w-6xl">
+        {/* Subscription banner */}
+        {!isSubscribed && (
+          <Link
+            href="/subscribe"
+            className="flex items-center gap-3 mb-6 p-4 rounded-lg border border-primary/30 bg-primary/5 hover:bg-primary/10 transition-colors"
+          >
+            <div className="flex-shrink-0 w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-primary" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-foreground">
+                Start your free trial to generate unlimited meal plans
+              </p>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                {planCount === 0
+                  ? 'Try one plan free, then $9/month for unlimited plans.'
+                  : 'You\u2019ve used your free plan. Upgrade to keep generating.'}
+              </p>
+            </div>
+            <span className="flex-shrink-0 text-xs font-medium text-primary">
+              Upgrade &rarr;
+            </span>
+          </Link>
+        )}
+
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-heading font-bold text-foreground">
@@ -177,7 +251,13 @@ export default function DashboardPage() {
             disabled={loading}
             className="px-5 py-2 rounded-md bg-primary text-primary-foreground font-medium hover:bg-primary/90 disabled:opacity-50 transition-colors"
           >
-            {loading ? 'Generating...' : hasGenerated ? 'Generate new week' : 'Generate my plan'}
+            {loading
+              ? 'Generating...'
+              : !canGenerate
+                ? 'Upgrade to generate'
+                : hasGenerated
+                  ? 'Generate new week'
+                  : 'Generate my plan'}
           </button>
         </div>
 
