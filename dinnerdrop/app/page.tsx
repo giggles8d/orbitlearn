@@ -155,8 +155,18 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="container mx-auto px-4 py-8 max-w-4xl text-center text-sm text-muted-foreground">
-        <p>&copy; 2026 DinnerDrop. All rights reserved.</p>
+      <footer className="container mx-auto px-4 py-8 max-w-4xl text-sm text-muted-foreground">
+        <div className="flex items-center justify-between">
+          <p>&copy; 2026 DinnerDrop. All rights reserved.</p>
+          <div className="flex gap-4">
+            <Link href="/terms" className="hover:text-foreground transition-colors">
+              Terms
+            </Link>
+            <Link href="/privacy" className="hover:text-foreground transition-colors">
+              Privacy
+            </Link>
+          </div>
+        </div>
       </footer>
     </div>
   )
