@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { Heart } from 'lucide-react'
+import MealCardImage from './MealCardImage'
 import type { Meal } from '@/types'
 
 interface MealCardProps {
@@ -20,11 +21,12 @@ export default function MealCard({ meal, isFavorite, onToggleFavorite }: MealCar
   }
 
   return (
-    <div className="rounded-lg border border-border bg-card hover:shadow-md transition-shadow relative">
-      <div className="flex items-start justify-between p-5 pb-0">
-        <p className="text-xs font-medium text-primary uppercase tracking-wide">
-          {meal.day}
-        </p>
+    <div className="rounded-lg border border-border bg-card hover:shadow-md transition-shadow overflow-hidden">
+      <Link href={`/recipe/${getMealId(meal)}`} onClick={handleClick} className="block">
+        <MealCardImage mealName={meal.name} dayLabel={meal.day} />
+      </Link>
+
+      <div className="relative">
         {onToggleFavorite && (
           <button
             onClick={(e) => {
@@ -32,11 +34,11 @@ export default function MealCard({ meal, isFavorite, onToggleFavorite }: MealCar
               e.stopPropagation()
               onToggleFavorite(meal)
             }}
-            className="p-1 -m-1 rounded-full hover:bg-muted transition-colors relative z-10"
+            className="absolute top-3 right-3 p-1.5 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background transition-colors z-10"
             aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
           >
             <Heart
-              className={`w-5 h-5 transition-colors ${
+              className={`w-4 h-4 transition-colors ${
                 isFavorite
                   ? 'fill-red-500 text-red-500'
                   : 'text-muted-foreground hover:text-red-400'
@@ -44,24 +46,24 @@ export default function MealCard({ meal, isFavorite, onToggleFavorite }: MealCar
             />
           </button>
         )}
+        <Link
+          href={`/recipe/${getMealId(meal)}`}
+          onClick={handleClick}
+          className="block p-4 space-y-2"
+        >
+          <h3 className="text-base font-heading font-semibold text-card-foreground leading-tight pr-8">
+            {meal.name}
+          </h3>
+          <div className="flex items-center gap-3 text-sm text-muted-foreground">
+            <span>{meal.cookTime} min</span>
+            <span>&middot;</span>
+            <span>{meal.servings} servings</span>
+          </div>
+          <div className="inline-block rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
+            ${meal.estimatedCost.toFixed(2)}
+          </div>
+        </Link>
       </div>
-      <Link
-        href={`/recipe/${getMealId(meal)}`}
-        onClick={handleClick}
-        className="block p-5 pt-3 space-y-3"
-      >
-        <h3 className="text-lg font-heading font-semibold text-card-foreground leading-tight">
-          {meal.name}
-        </h3>
-        <div className="flex items-center gap-3 text-sm text-muted-foreground">
-          <span>{meal.cookTime} min</span>
-          <span>&middot;</span>
-          <span>{meal.servings} servings</span>
-        </div>
-        <div className="inline-block rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
-          ${meal.estimatedCost.toFixed(2)}
-        </div>
-      </Link>
     </div>
   )
 }

@@ -5,7 +5,39 @@ import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Clock, Heart, RefreshCw, Users } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
+import { useUnsplashPhoto } from '@/lib/use-unsplash-photo'
 import type { Meal } from '@/types'
+
+function HeroImage({ mealName }: { mealName: string }) {
+  const { photo, loading } = useUnsplashPhoto(mealName)
+
+  return (
+    <div className="relative h-[300px] sm:h-[400px] w-full rounded-xl overflow-hidden mb-8">
+      {loading ? (
+        <div className="absolute inset-0 bg-muted animate-pulse" />
+      ) : photo ? (
+        <>
+          <img
+            src={photo.url}
+            alt={photo.alt}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <a
+            href={`${photo.credit.link}?utm_source=dinnerdrop&utm_medium=referral`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute bottom-2 right-3 text-[10px] text-white/70 hover:text-white transition-colors"
+          >
+            Photo by {photo.credit.name} on Unsplash
+          </a>
+        </>
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-950 dark:to-orange-900" />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+    </div>
+  )
+}
 
 export default function RecipePage() {
   const params = useParams()
@@ -96,10 +128,8 @@ export default function RecipePage() {
 
       if (data.meal) {
         const newMeal = data.meal as Meal
-        // Update localStorage
         localStorage.setItem(`meal-${id}`, JSON.stringify(newMeal))
 
-        // Update the meal plan in localStorage too
         const storedMeals = localStorage.getItem('current-meals')
         if (storedMeals) {
           const meals: Meal[] = JSON.parse(storedMeals)
@@ -107,7 +137,6 @@ export default function RecipePage() {
           localStorage.setItem('current-meals', JSON.stringify(updated))
         }
 
-        // Update the meal plan in Supabase
         const { data: plan } = await supabase
           .from('meal_plans')
           .select('*')
@@ -163,6 +192,9 @@ export default function RecipePage() {
           <ArrowLeft className="w-4 h-4" />
           Back to meal plan
         </Link>
+
+        {/* Hero image */}
+        <HeroImage mealName={meal.name} />
 
         {/* Header */}
         <div className="flex items-start justify-between gap-4 mb-6">

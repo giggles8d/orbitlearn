@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Heart } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
+import MealCardImage from '@/components/MealCardImage'
 import type { Meal } from '@/types'
 
 interface FavoriteRow {
@@ -91,37 +92,42 @@ export default function FavoritesPage() {
               return (
                 <div
                   key={fav.id}
-                  className="rounded-lg border border-border bg-card hover:shadow-md transition-shadow relative"
+                  className="rounded-lg border border-border bg-card hover:shadow-md transition-shadow overflow-hidden"
                 >
-                  <div className="flex items-start justify-between p-5 pb-0">
-                    <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-                      {meal.day}
-                    </p>
-                    <button
-                      onClick={(e) => removeFavorite(e, fav.id)}
-                      className="p-1 -m-1 rounded-full hover:bg-muted transition-colors relative z-10"
-                      aria-label="Remove from favorites"
-                    >
-                      <Heart className="w-5 h-5 fill-red-500 text-red-500" />
-                    </button>
-                  </div>
                   <Link
                     href={`/recipe/${mealId}`}
                     onClick={() => localStorage.setItem(`meal-${mealId}`, JSON.stringify(meal))}
-                    className="block p-5 pt-3 space-y-3"
+                    className="block"
                   >
-                    <h3 className="text-lg font-heading font-semibold text-card-foreground leading-tight">
-                      {meal.name}
-                    </h3>
-                    <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                      <span>{meal.cookTime} min</span>
-                      <span>&middot;</span>
-                      <span>{meal.servings} servings</span>
-                    </div>
-                    <div className="inline-block rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
-                      ${meal.estimatedCost.toFixed(2)}
-                    </div>
+                    <MealCardImage mealName={meal.name} dayLabel={meal.day} />
                   </Link>
+
+                  <div className="relative">
+                    <button
+                      onClick={(e) => removeFavorite(e, fav.id)}
+                      className="absolute top-3 right-3 p-1.5 rounded-full bg-background/80 backdrop-blur-sm hover:bg-background transition-colors z-10"
+                      aria-label="Remove from favorites"
+                    >
+                      <Heart className="w-4 h-4 fill-red-500 text-red-500" />
+                    </button>
+                    <Link
+                      href={`/recipe/${mealId}`}
+                      onClick={() => localStorage.setItem(`meal-${mealId}`, JSON.stringify(meal))}
+                      className="block p-4 space-y-2"
+                    >
+                      <h3 className="text-base font-heading font-semibold text-card-foreground leading-tight pr-8">
+                        {meal.name}
+                      </h3>
+                      <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                        <span>{meal.cookTime} min</span>
+                        <span>&middot;</span>
+                        <span>{meal.servings} servings</span>
+                      </div>
+                      <div className="inline-block rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
+                        ${meal.estimatedCost.toFixed(2)}
+                      </div>
+                    </Link>
+                  </div>
                 </div>
               )
             })}
