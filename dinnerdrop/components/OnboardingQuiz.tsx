@@ -64,6 +64,14 @@ const STEPS = [
       { label: 'Halal', value: 'Halal' },
     ],
   },
+  {
+    question: 'Where do you buy groceries?',
+    field: 'preferredStore' as const,
+    options: [
+      { label: 'Instacart', value: 'instacart' },
+      { label: 'Kroger', value: 'kroger' },
+    ],
+  },
 ]
 
 interface Answers {
@@ -72,6 +80,7 @@ interface Answers {
   maxCookTime: number
   cuisinePreference: string[]
   dietaryNeeds: string[]
+  preferredStore: string
 }
 
 export default function OnboardingQuiz() {
@@ -82,6 +91,7 @@ export default function OnboardingQuiz() {
     maxCookTime: 30,
     cuisinePreference: [],
     dietaryNeeds: [],
+    preferredStore: 'instacart',
   })
   const [loading, setLoading] = useState(false)
   const router = useRouter()
@@ -144,6 +154,7 @@ export default function OnboardingQuiz() {
         max_cook_time: answers.maxCookTime,
         cuisine_preference: cuisinePref,
         dietary_needs: dietaryNeeds,
+        preferred_store: answers.preferredStore,
         onboarding_complete: true,
       })
       .eq('id', user.id)

@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase'
 import GroceryList from '@/components/GroceryList'
-import InstacartButton from '@/components/InstacartButton'
+import StoreSelector from '@/components/StoreSelector'
 import type { GroceryCategory, GroceryItem, Meal } from '@/types'
 
 type GroceryListData = Record<GroceryCategory, GroceryItem[]>
@@ -110,7 +110,7 @@ export default function GroceryListPage() {
         </div>
 
         <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/95 backdrop-blur border-t border-border sm:static sm:mt-6 sm:p-0 sm:bg-transparent sm:border-0">
-          <InstacartButton groceryList={groceryList} />
+          <StoreSelector groceryList={groceryList} />
         </div>
 
         <div className="h-20 sm:hidden" />
