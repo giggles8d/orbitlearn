@@ -1,0 +1,217 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  image     String?
+  role      Role     @default(LEARNER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  enrollments Enrollment[]
+  purchases   Purchase[]
+  notes       Note[]
+  reviews     Review[]
+  memberships Membership[]
+}
+
+model Organization {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  logoUrl   String?
+  themeJson String?
+  createdAt DateTime @default(now())
+
+  courses     Course[]
+  memberships Membership[]
+  featureFlags FeatureFlag[]
+}
+
+model Membership {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+  role      OrgRole @default(MEMBER)
+  createdAt DateTime @default(now())
+}
+
+enum OrgRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+enum Role {
+  ADMIN
+  CREATOR
+  LEARNER
+}
+
+model Course {
+  id          String   @id @default(cuid())
+  org         Organization? @relation(fields: [orgId], references: [id])
+  orgId       String?
+  slug        String   @unique
+  title       String
+  subtitle    String?
+  description String?
+  coverImageUrl String?
+  level       String?
+  category    String?
+  tags        String?
+  language    String? @default("en")
+  status      CourseStatus @default(DRAFT)
+  price       Int?
+  currency    String? @default("USD")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  modules     Module[]
+  enrollments Enrollment[]
+  purchases   Purchase[]
+  reviews     Review[]
+}
+
+enum CourseStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model Module {
+  id        String  @id @default(cuid())
+  course    Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId  String
+  index     Int
+  title     String
+  description String?
+
+  lessons   Lesson[]
+}
+
+model Lesson {
+  id        String  @id @default(cuid())
+  module    Module  @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  moduleId  String
+  index     Int
+  title     String
+  content   String?
+  videoUrl  String?
+  durationSeconds Int?
+  freePreview Boolean @default(false)
+
+  quiz      Quiz?
+  notes     Note[]
+}
+
+model Quiz {
+  id        String  @id @default(cuid())
+  lesson    Lesson  @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  lessonId  String  @unique
+  questions Question[]
+}
+
+model Question {
+  id        String  @id @default(cuid())
+  quiz      Quiz    @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  quizId    String
+  index     Int
+  type      QuestionType
+  prompt    String
+  options   Option[]
+}
+
+model Option {
+  id        String @id @default(cuid())
+  question  Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionId String
+  text      String
+  correct   Boolean @default(false)
+}
+
+enum QuestionType {
+  SINGLE_CHOICE
+  MULTIPLE_CHOICE
+}
+
+model Enrollment {
+  id        String  @id @default(cuid())
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  course    Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId  String
+  status    EnrollmentStatus @default(ACTIVE)
+  progress  Int     @default(0)
+  lastAccessAt DateTime?
+  createdAt DateTime @default(now())
+}
+
+enum EnrollmentStatus {
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+model Purchase {
+  id        String  @id @default(cuid())
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  course    Course  @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId  String
+  price     Int
+  currency  String
+  status    PurchaseStatus @default(PAID)
+  stripeSessionId String?
+  stripePaymentIntentId String?
+  createdAt DateTime @default(now())
+}
+
+enum PurchaseStatus {
+  PAID
+  REFUNDED
+  VOID
+}
+
+model FeatureFlag {
+  id        String  @id @default(cuid())
+  organization Organization? @relation(fields: [organizationId], references: [id])
+  organizationId String?
+  key       String
+  value     String?
+  enabled   Boolean @default(true)
+  createdAt DateTime @default(now())
+
+  @@unique([organizationId, key])
+}
+
+model Note {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  lesson    Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  lessonId  String
+  text      String
+  createdAt DateTime @default(now())
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId  String
+  rating    Int
+  content   String?
+  createdAt DateTime @default(now())
+}

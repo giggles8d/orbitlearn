@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0b1220;
+  --fg: #f7f7fb;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: linear-gradient(180deg, #0b1220 0%, #0f1c2d 100%);
+  color: var(--fg);
+}
+
+.container {
+  @apply mx-auto px-4;
+}
