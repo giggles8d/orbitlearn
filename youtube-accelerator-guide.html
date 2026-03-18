@@ -1,0 +1,2825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Lato:wght@300;400;600;700&display=swap');
+
+:root {
+  --navy: #0A1628;
+  --gold: #C9A84C;
+  --white: #FFFFFF;
+  --light-gray: #F5F5F5;
+  --medium-gray: #E0E0E0;
+  --dark-gray: #333333;
+  --gold-light: rgba(201,168,76,0.15);
+  --navy-light: rgba(10,22,40,0.05);
+}
+
+@page {
+  size: letter;
+  margin: 0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Lato', 'Helvetica Neue', sans-serif;
+  font-size: 11pt;
+  line-height: 1.6;
+  color: var(--dark-gray);
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  color: var(--navy);
+}
+
+/* ── COVER PAGE ── */
+.cover-page {
+  page-break-after: always;
+  width: 8.5in;
+  height: 11in;
+  background: linear-gradient(160deg, #0A1628 0%, #132744 40%, #0A1628 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 1in;
+}
+.cover-page::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 80px,
+    rgba(201,168,76,0.03) 80px,
+    rgba(201,168,76,0.03) 81px
+  );
+}
+.cover-gold-line {
+  width: 120px;
+  height: 3px;
+  background: var(--gold);
+  margin: 0 auto 30px;
+}
+.cover-page h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 42pt;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+.cover-page .accent-word {
+  color: var(--gold);
+}
+.cover-subtitle {
+  font-family: 'Lato', sans-serif;
+  font-size: 13pt;
+  font-weight: 300;
+  color: rgba(255,255,255,0.8);
+  max-width: 5.5in;
+  margin: 20px auto 40px;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+.cover-badge {
+  display: inline-block;
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  padding: 8px 28px;
+  font-size: 9pt;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+.cover-author {
+  font-family: 'Lato', sans-serif;
+  font-size: 10pt;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+.cover-bottom {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 1;
+}
+.cover-tagline {
+  font-size: 8.5pt;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ── STANDARD PAGE ── */
+.page {
+  page-break-after: always;
+  width: 8.5in;
+  min-height: 11in;
+  padding: 0.75in 0.85in 1in;
+  position: relative;
+  background: var(--white);
+}
+.page::after {
+  content: '';
+  position: absolute;
+  bottom: 0.5in;
+  right: 0.85in;
+  font-family: 'Lato', sans-serif;
+  font-size: 8pt;
+  color: #999;
+}
+.page-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  font-family: 'Playfair Display', serif;
+  font-size: 72pt;
+  color: rgba(10,22,40,0.02);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+}
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--medium-gray);
+  margin-bottom: 28px;
+}
+.page-header-title {
+  font-family: 'Lato', sans-serif;
+  font-size: 7.5pt;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.page-header-num {
+  font-family: 'Lato', sans-serif;
+  font-size: 8pt;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+/* ── SECTION DIVIDER ── */
+.section-divider {
+  page-break-after: always;
+  width: 8.5in;
+  height: 11in;
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  padding: 1in;
+}
+.section-divider::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 100px,
+    rgba(201,168,76,0.04) 100px,
+    rgba(201,168,76,0.04) 101px
+  );
+}
+.day-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 100pt;
+  font-weight: 900;
+  color: rgba(201,168,76,0.15);
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+}
+.day-label {
+  font-family: 'Lato', sans-serif;
+  font-size: 10pt;
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 1;
+}
+.section-divider h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 30pt;
+  color: var(--white);
+  max-width: 5.5in;
+  line-height: 1.3;
+  position: relative;
+  z-index: 1;
+}
+.section-divider .gold-line {
+  width: 80px;
+  height: 2px;
+  background: var(--gold);
+  margin: 20px auto;
+  position: relative;
+  z-index: 1;
+}
+.section-divider .section-desc {
+  font-family: 'Lato', sans-serif;
+  font-size: 11pt;
+  color: rgba(255,255,255,0.6);
+  max-width: 4.5in;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── PROGRESS TRACKER ── */
+.progress-tracker {
+  background: var(--light-gray);
+  border-left: 4px solid var(--gold);
+  padding: 15px 20px;
+  margin-bottom: 25px;
+  border-radius: 0 6px 6px 0;
+}
+.progress-tracker h4 {
+  font-family: 'Lato', sans-serif;
+  font-size: 9pt;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.progress-bar {
+  height: 8px;
+  background: var(--medium-gray);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), #D4B85C);
+  border-radius: 4px;
+}
+.progress-text {
+  font-size: 8pt;
+  color: #888;
+}
+
+/* ── CONTENT STYLES ── */
+.section-title {
+  font-size: 22pt;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.section-subtitle {
+  font-size: 11pt;
+  color: #777;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 15pt;
+  color: var(--navy);
+  margin-top: 22px;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid var(--gold);
+  display: inline-block;
+}
+h3::after {
+  content: '';
+  display: block;
+}
+h4.sub-heading {
+  font-family: 'Lato', sans-serif;
+  font-size: 11pt;
+  font-weight: 700;
+  color: var(--navy);
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+p { margin-bottom: 10px; }
+
+/* ── CALLOUT BOXES ── */
+.callout {
+  padding: 16px 20px;
+  margin: 16px 0;
+  border-radius: 6px;
+  position: relative;
+}
+.callout-title {
+  font-family: 'Lato', sans-serif;
+  font-size: 9pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+}
+.pro-tip {
+  background: var(--gold-light);
+  border-left: 4px solid var(--gold);
+}
+.pro-tip .callout-title { color: var(--gold); }
+.pro-tip .callout-title::before { content: '★ '; }
+
+.common-mistake {
+  background: #FFF3F0;
+  border-left: 4px solid #D94F3B;
+}
+.common-mistake .callout-title { color: #D94F3B; }
+.common-mistake .callout-title::before { content: '✗ '; }
+
+.fast-track {
+  background: #F0F7FF;
+  border-left: 4px solid #2E7DD1;
+}
+.fast-track .callout-title { color: #2E7DD1; }
+.fast-track .callout-title::before { content: '⚡ '; }
+
+/* ── QUOTE BOX ── */
+.quote-box {
+  background: var(--navy);
+  color: var(--white);
+  padding: 22px 28px;
+  margin: 20px 0;
+  border-radius: 6px;
+  position: relative;
+}
+.quote-box::before {
+  content: '"';
+  font-family: 'Playfair Display', serif;
+  font-size: 48pt;
+  color: var(--gold);
+  position: absolute;
+  top: 5px;
+  left: 16px;
+  line-height: 1;
+}
+.quote-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 13pt;
+  font-style: italic;
+  line-height: 1.6;
+  padding-left: 30px;
+  color: rgba(255,255,255,0.9);
+}
+.quote-author {
+  font-family: 'Lato', sans-serif;
+  font-size: 8.5pt;
+  color: var(--gold);
+  padding-left: 30px;
+  margin-top: 8px;
+  letter-spacing: 1px;
+}
+
+/* ── TABLES ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 9.5pt;
+}
+thead th {
+  background: var(--navy);
+  color: var(--white);
+  padding: 10px 12px;
+  text-align: left;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 8.5pt;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+tbody td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--medium-gray);
+}
+tbody tr:nth-child(even) { background: var(--light-gray); }
+tbody tr:hover { background: var(--gold-light); }
+
+/* ── CHECKLISTS ── */
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+.checklist li {
+  padding: 6px 0 6px 28px;
+  position: relative;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 10pt;
+}
+.checklist li::before {
+  content: '☐';
+  position: absolute;
+  left: 4px;
+  top: 6px;
+  color: var(--gold);
+  font-size: 13pt;
+}
+
+/* ── NUMBERED LIST ── */
+.numbered-list {
+  counter-reset: item;
+  list-style: none;
+  padding: 0;
+}
+.numbered-list li {
+  counter-increment: item;
+  padding: 8px 0 8px 40px;
+  position: relative;
+  margin-bottom: 4px;
+}
+.numbered-list li::before {
+  content: counter(item);
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 26px;
+  height: 26px;
+  background: var(--navy);
+  color: var(--gold);
+  border-radius: 50%;
+  text-align: center;
+  line-height: 26px;
+  font-size: 9pt;
+  font-weight: 700;
+}
+
+/* ── FILLABLE FIELD ── */
+.fillable {
+  border-bottom: 1.5px solid var(--medium-gray);
+  min-height: 22px;
+  display: inline-block;
+  min-width: 200px;
+  margin: 4px 0;
+}
+.fillable-area {
+  border: 1.5px solid var(--medium-gray);
+  border-radius: 4px;
+  min-height: 60px;
+  margin: 6px 0;
+  padding: 8px;
+  background: #FAFAFA;
+}
+
+/* ── TWO COLUMN ── */
+.two-col {
+  display: flex;
+  gap: 24px;
+}
+.two-col .col { flex: 1; }
+
+/* ── ICON BOX ── */
+.icon-row {
+  display: flex;
+  gap: 16px;
+  margin: 14px 0;
+  flex-wrap: wrap;
+}
+.icon-box {
+  flex: 1;
+  min-width: 140px;
+  background: var(--light-gray);
+  border-radius: 6px;
+  padding: 16px;
+  text-align: center;
+}
+.icon-box .icon {
+  font-size: 24pt;
+  margin-bottom: 6px;
+}
+.icon-box .icon-label {
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.icon-box .icon-desc {
+  font-size: 8.5pt;
+  color: #777;
+  margin-top: 4px;
+}
+
+/* ── NOTES SECTION ── */
+.notes-area {
+  background: var(--light-gray);
+  border: 1px dashed var(--medium-gray);
+  border-radius: 6px;
+  padding: 16px;
+  margin: 20px 0;
+  min-height: 100px;
+}
+.notes-area h4 {
+  font-family: 'Lato', sans-serif;
+  font-size: 9pt;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.notes-line {
+  border-bottom: 1px solid var(--medium-gray);
+  height: 28px;
+}
+
+/* ── GOLD ACCENT BOX ── */
+.gold-box {
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin: 16px 0;
+  background: var(--gold-light);
+}
+.gold-box h4 {
+  font-family: 'Playfair Display', serif;
+  color: var(--navy);
+  font-size: 12pt;
+  margin-bottom: 8px;
+}
+
+/* ── BACK COVER ── */
+.back-cover {
+  page-break-after: always;
+  width: 8.5in;
+  height: 11in;
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.5in;
+}
+.back-cover h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28pt;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+.back-cover .gold-line {
+  width: 80px;
+  height: 2px;
+  background: var(--gold);
+  margin: 0 auto 20px;
+}
+.back-cover p {
+  font-size: 11pt;
+  color: rgba(255,255,255,0.6);
+  max-width: 4.5in;
+  line-height: 1.7;
+}
+.back-cover .back-tagline {
+  margin-top: 40px;
+  font-size: 9pt;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* ── TOC ── */
+.toc-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px dotted #ccc;
+}
+.toc-title {
+  font-family: 'Lato', sans-serif;
+  font-size: 10.5pt;
+  color: var(--navy);
+  font-weight: 600;
+}
+.toc-page {
+  font-family: 'Lato', sans-serif;
+  font-size: 10pt;
+  color: var(--gold);
+  font-weight: 700;
+}
+.toc-section {
+  font-family: 'Playfair Display', serif;
+  font-size: 13pt;
+  color: var(--navy);
+  font-weight: 700;
+  margin-top: 18px;
+  margin-bottom: 6px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--gold);
+}
+
+/* Utility */
+.mb-0 { margin-bottom: 0; }
+.mt-20 { margin-top: 20px; }
+.text-small { font-size: 9pt; color: #888; }
+.text-gold { color: var(--gold); }
+.text-navy { color: var(--navy); }
+.bold { font-weight: 700; }
+.center { text-align: center; }
+.gold-line-sm { width: 60px; height: 2px; background: var(--gold); margin: 12px 0; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════ COVER PAGE ═══════════════════════ -->
+<div class="cover-page">
+  <div class="cover-badge">Premium Edition • 2025</div>
+  <div class="cover-gold-line"></div>
+  <h1>The 6-Day<br>YouTube <span class="accent-word">Accelerator</span></h1>
+  <p class="cover-subtitle">A Premium Step-by-Step System for Building a Profitable YouTube Channel from Zero to Momentum in Less Than One Week</p>
+  <div class="cover-gold-line"></div>
+  <p class="cover-author">By [Your Name Here]</p>
+  <div class="cover-bottom">
+    <p class="cover-tagline">Strategy • Production • Growth • Monetization</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════ TABLE OF CONTENTS ═══════════════════════ -->
+<div class="page">
+  <div class="page-watermark">ACCELERATOR</div>
+  <div class="page-header">
+    <span class="page-header-title">The 6-Day YouTube Accelerator</span>
+    <span class="page-header-num">ii</span>
+  </div>
+  <h2 class="section-title" style="text-align:center; margin-bottom: 4px;">Table of Contents</h2>
+  <div class="cover-gold-line" style="margin-bottom:24px;"></div>
+
+  <div class="toc-section">Introduction</div>
+  <div class="toc-item"><span class="toc-title">Welcome & How to Use This Guide</span><span class="toc-page">1</span></div>
+
+  <div class="toc-section">Day 1 — Channel Foundation & Strategic Positioning</div>
+  <div class="toc-item"><span class="toc-title">Identify Your YouTube Niche with Precision</span><span class="toc-page">4</span></div>
+  <div class="toc-item"><span class="toc-title">Competitor Analysis Framework</span><span class="toc-page">5</span></div>
+  <div class="toc-item"><span class="toc-title">Channel Naming Formula & Examples</span><span class="toc-page">6</span></div>
+  <div class="toc-item"><span class="toc-title">About Section Copywriting Template</span><span class="toc-page">7</span></div>
+  <div class="toc-item"><span class="toc-title">Channel Art & Thumbnail Style Guide</span><span class="toc-page">8</span></div>
+  <div class="toc-item"><span class="toc-title">Day 1 Action Checklist</span><span class="toc-page">10</span></div>
+
+  <div class="toc-section">Day 2 — Content Strategy & Video Planning</div>
+  <div class="toc-item"><span class="toc-title">The YouTube Content Pyramid</span><span class="toc-page">12</span></div>
+  <div class="toc-item"><span class="toc-title">90-Day Content Calendar System</span><span class="toc-page">13</span></div>
+  <div class="toc-item"><span class="toc-title">Video Idea Generation System</span><span class="toc-page">14</span></div>
+  <div class="toc-item"><span class="toc-title">The Hook Formula</span><span class="toc-page">16</span></div>
+  <div class="toc-item"><span class="toc-title">Keyword Research Walkthrough</span><span class="toc-page">17</span></div>
+  <div class="toc-item"><span class="toc-title">Fillable 90-Day Content Planner</span><span class="toc-page">18</span></div>
+
+  <div class="toc-section">Day 3 — Production Without Perfection</div>
+  <div class="toc-item"><span class="toc-title">Minimal Gear Setup Guide</span><span class="toc-page">20</span></div>
+  <div class="toc-item"><span class="toc-title">The 3-Camera iPhone Setup</span><span class="toc-page">22</span></div>
+  <div class="toc-item"><span class="toc-title">Lighting & Audio Fundamentals</span><span class="toc-page">23</span></div>
+  <div class="toc-item"><span class="toc-title">Script & Outline Template</span><span class="toc-page">25</span></div>
+  <div class="toc-item"><span class="toc-title">B-Roll Checklist</span><span class="toc-page">26</span></div>
+
+  <div class="toc-section">Day 4 — Editing, Thumbnails & Titles</div>
+  <div class="toc-item"><span class="toc-title">Editing Software Comparison</span><span class="toc-page">28</span></div>
+  <div class="toc-item"><span class="toc-title">The 5-Step Editing Workflow</span><span class="toc-page">29</span></div>
+  <div class="toc-item"><span class="toc-title">Thumbnail Design Rules</span><span class="toc-page">31</span></div>
+  <div class="toc-item"><span class="toc-title">Title Formula Bank</span><span class="toc-page">32</span></div>
+  <div class="toc-item"><span class="toc-title">Description SEO & Tags Strategy</span><span class="toc-page">34</span></div>
+
+  <div class="toc-section">Day 5 — Upload, Optimization & Publishing</div>
+  <div class="toc-item"><span class="toc-title">The Perfect Upload Checklist</span><span class="toc-page">36</span></div>
+  <div class="toc-item"><span class="toc-title">End Screens, Cards & Chapters</span><span class="toc-page">38</span></div>
+  <div class="toc-item"><span class="toc-title">Community Tab & Scheduling Strategy</span><span class="toc-page">39</span></div>
+
+  <div class="toc-section">Day 6 — Growth, Monetization & Momentum</div>
+  <div class="toc-item"><span class="toc-title">YouTube Algorithm Decoded</span><span class="toc-page">41</span></div>
+  <div class="toc-item"><span class="toc-title">Shorts Strategy & Collaborations</span><span class="toc-page">43</span></div>
+  <div class="toc-item"><span class="toc-title">Monetization Roadmap</span><span class="toc-page">44</span></div>
+  <div class="toc-item"><span class="toc-title">Analytics Dashboard & Growth Tracker</span><span class="toc-page">46</span></div>
+
+  <div class="toc-section">Bonus Sections</div>
+  <div class="toc-item"><span class="toc-title">YouTube Channel Launch Checklist</span><span class="toc-page">48</span></div>
+  <div class="toc-item"><span class="toc-title">30 Hook Openers Swipe File</span><span class="toc-page">49</span></div>
+  <div class="toc-item"><span class="toc-title">Sponsorship Pitch Template</span><span class="toc-page">51</span></div>
+  <div class="toc-item"><span class="toc-title">Equipment Budget Planner</span><span class="toc-page">52</span></div>
+  <div class="toc-item"><span class="toc-title">Frequently Asked Questions</span><span class="toc-page">53</span></div>
+</div>
+
+<!-- ═══════════════════════ INTRODUCTION ═══════════════════════ -->
+<div class="page">
+  <div class="page-watermark">ACCELERATOR</div>
+  <div class="page-header">
+    <span class="page-header-title">Introduction</span>
+    <span class="page-header-num">01</span>
+  </div>
+
+  <h2 class="section-title">Welcome to Your YouTube Journey</h2>
+  <p class="section-subtitle">Everything you need to launch a professional YouTube channel in six focused days.</p>
+  <div class="gold-line-sm"></div>
+
+  <p>Congratulations on investing in yourself. The 6-Day YouTube Accelerator is not a theory-heavy textbook — it is a <strong>battle-tested, action-oriented system</strong> designed to take you from zero to a fully operational, optimized, and momentum-ready YouTube channel in less than one week.</p>
+
+  <p>Whether you are a coach, entrepreneur, educator, or creative professional, this guide gives you the exact frameworks, templates, and checklists used by channels that have grown from nothing to six-figure businesses.</p>
+
+  <div class="quote-box">
+    <p class="quote-text">The best time to start a YouTube channel was five years ago. The second best time is today — with the right strategy.</p>
+    <p class="quote-author">— The 6-Day YouTube Accelerator</p>
+  </div>
+
+  <h3>How to Use This Guide</h3>
+  <p>Each day is structured as a self-contained sprint. Complete the tasks in order, use the templates and checklists provided, and by Day 6, you will have a channel that looks, feels, and performs like it was built by a professional team.</p>
+
+  <div class="icon-row">
+    <div class="icon-box">
+      <div class="icon">📖</div>
+      <div class="icon-label">Read</div>
+      <div class="icon-desc">Study each day's strategy</div>
+    </div>
+    <div class="icon-box">
+      <div class="icon">✏️</div>
+      <div class="icon-label">Fill In</div>
+      <div class="icon-desc">Complete every template</div>
+    </div>
+    <div class="icon-box">
+      <div class="icon">✅</div>
+      <div class="icon-label">Execute</div>
+      <div class="icon-desc">Check off every action item</div>
+    </div>
+    <div class="icon-box">
+      <div class="icon">🚀</div>
+      <div class="icon-label">Launch</div>
+      <div class="icon-desc">Go live with confidence</div>
+    </div>
+  </div>
+
+  <div class="callout pro-tip">
+    <div class="callout-title">Pro Tip</div>
+    <p>Print the action checklists at the end of each day. Physically checking off tasks creates momentum and accountability that digital-only tracking cannot replicate.</p>
+  </div>
+
+  <h3>What You Will Achieve</h3>
+  <ul class="checklist">
+    <li>A fully branded YouTube channel with professional art and positioning</li>
+    <li>A 90-day content calendar with proven video ideas</li>
+    <li>A production workflow that looks premium on any budget</li>
+    <li>SEO-optimized uploads that the algorithm rewards</li>
+    <li>A monetization roadmap for your first $1,000 and beyond</li>
+    <li>A growth engine powered by Shorts, collaborations, and analytics</li>
+  </ul>
+
+  <div class="notes-area">
+    <h4>My Personal Goals for This Guide</h4>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════ DAY 1 DIVIDER ═══════════════════════ -->
+<div class="section-divider">
+  <div class="day-number">01</div>
+  <div class="day-label">Day One</div>
+  <h2>Channel Foundation &<br>Strategic Positioning</h2>
+  <div class="gold-line"></div>
+  <p class="section-desc">Today you lay the groundwork that separates amateur channels from professional brands. Every decision you make today compounds over time.</p>
+</div>
+
+<!-- DAY 1 PAGE 1 -->
+<div class="page">
+  <div class="page-watermark">DAY ONE</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 1 — Channel Foundation & Strategic Positioning</span>
+    <span class="page-header-num">04</span>
+  </div>
+
+  <div class="progress-tracker">
+    <h4>Your Progress</h4>
+    <div class="progress-bar"><div class="progress-fill" style="width: 16.6%"></div></div>
+    <p class="progress-text">Day 1 of 6 — Building Your Foundation</p>
+  </div>
+
+  <h2 class="section-title">Identify Your YouTube Niche with Precision</h2>
+  <p class="section-subtitle">The right niche is the intersection of your expertise, audience demand, and monetization potential.</p>
+
+  <p>Choosing a niche is the single most important decision you will make. A poorly chosen niche leads to burnout, low views, and zero revenue. A well-chosen niche creates a flywheel of content ideas, audience growth, and income streams.</p>
+
+  <h3>The Niche Validation Framework</h3>
+  <p>Answer these five questions to identify your ideal niche. Score each on a 1-10 scale:</p>
+
+  <table>
+    <thead>
+      <tr><th>Criteria</th><th>Question to Ask</th><th>Your Score (1-10)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Passion</strong></td><td>Can I create 200+ videos on this topic without getting bored?</td><td class="fillable"></td></tr>
+      <tr><td><strong>Expertise</strong></td><td>Do I have unique knowledge, experience, or perspective?</td><td class="fillable"></td></tr>
+      <tr><td><strong>Demand</strong></td><td>Are people actively searching for this content on YouTube?</td><td class="fillable"></td></tr>
+      <tr><td><strong>Competition</strong></td><td>Can I differentiate from existing channels? (Higher = less competition)</td><td class="fillable"></td></tr>
+      <tr><td><strong>Monetization</strong></td><td>Does this niche have clear paths to revenue?</td><td class="fillable"></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout pro-tip">
+    <div class="callout-title">Pro Tip</div>
+    <p>Any niche scoring 35+ out of 50 is a strong candidate. If you score below 25, keep brainstorming. The sweet spot is a topic where you have genuine enthusiasm <em>and</em> where an audience is already searching for answers.</p>
+  </div>
+
+  <h3>Top 15 Profitable YouTube Niches in 2025</h3>
+  <div class="two-col">
+    <div class="col">
+      <ol class="numbered-list">
+        <li>Personal Finance & Investing</li>
+        <li>AI Tools & Technology Reviews</li>
+        <li>Health, Fitness & Wellness</li>
+        <li>Online Business & Side Hustles</li>
+        <li>Cooking & Meal Prep</li>
+        <li>Self-Improvement & Productivity</li>
+        <li>Real Estate & Property</li>
+        <li>Travel & Digital Nomad Life</li>
+      </ol>
+    </div>
+    <div class="col">
+      <ol class="numbered-list" style="counter-reset: item 8;">
+        <li>Gaming & Game Development</li>
+        <li>Fashion & Style for Men/Women</li>
+        <li>Parenting & Family Life</li>
+        <li>DIY, Home Improvement & Crafts</li>
+        <li>Career Development & Job Hunting</li>
+        <li>Pet Care & Animal Training</li>
+        <li>Education & Study Tips</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="callout fast-track">
+    <div class="callout-title">Fast Track</div>
+    <p>Already know your niche? Skip to the Competitor Analysis Framework on the next page. If you are choosing between two niches, pick the one where you can more easily demonstrate results or transformations — those channels grow fastest.</p>
+  </div>
+</div>
+
+<!-- DAY 1 PAGE 2 — COMPETITOR ANALYSIS -->
+<div class="page">
+  <div class="page-watermark">DAY ONE</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 1 — Channel Foundation & Strategic Positioning</span>
+    <span class="page-header-num">05</span>
+  </div>
+
+  <h3>Competitor Analysis Framework</h3>
+  <p>Study five channels in your niche. This is not about copying — it is about understanding what works, what gaps exist, and where you can differentiate. Fill in the table below for each competitor.</p>
+
+  <table>
+    <thead>
+      <tr><th style="width:18%">Channel Name</th><th style="width:12%">Subscribers</th><th style="width:22%">Top Video Topic</th><th style="width:14%">Avg. Views</th><th style="width:18%">Upload Frequency</th><th style="width:16%">Gap / Opportunity</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+    </tbody>
+  </table>
+
+  <h4 class="sub-heading">What to Look For</h4>
+  <ul class="checklist">
+    <li>Which video topics consistently get the most views relative to subscriber count?</li>
+    <li>What style of thumbnails do the top performers use? (Close-up face, text overlay, before/after?)</li>
+    <li>How long are their most popular videos? (Under 10 min? 15-20 min? Over 30 min?)</li>
+    <li>What questions are viewers asking in the comments that are NOT being answered?</li>
+    <li>What is missing from their content that you could provide?</li>
+  </ul>
+
+  <div class="callout common-mistake">
+    <div class="callout-title">Common Mistake</div>
+    <p>Do not pick a niche just because a competitor is successful. If a channel with 2 million subscribers dominates every keyword in your space, you need a sub-niche or a unique angle. Example: Instead of "Fitness," try "Fitness for Busy Dads Over 40" or "Apartment Workouts — No Equipment."</p>
+  </div>
+
+  <div class="quote-box">
+    <p class="quote-text">Your goal is not to be the best at everything — it is to be the only one doing your specific thing.</p>
+    <p class="quote-author">— Kevin Kelly, 1000 True Fans</p>
+  </div>
+
+  <div class="gold-box">
+    <h4>Your Differentiation Statement</h4>
+    <p>Complete this sentence: "My channel helps <span class="fillable" style="min-width:150px;"></span> achieve <span class="fillable" style="min-width:150px;"></span> by <span class="fillable" style="min-width:150px;"></span> , which no other channel does because <span class="fillable" style="min-width:150px;"></span>."</p>
+  </div>
+</div>
+
+<!-- DAY 1 PAGE 3 — CHANNEL NAMING -->
+<div class="page">
+  <div class="page-watermark">DAY ONE</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 1 — Channel Foundation & Strategic Positioning</span>
+    <span class="page-header-num">06</span>
+  </div>
+
+  <h3>Channel Naming Formula</h3>
+  <p>Your channel name is your first impression. It needs to be memorable, searchable, and clearly communicate your value. Use one of the formulas below to brainstorm at least five options.</p>
+
+  <table>
+    <thead>
+      <tr><th>Formula</th><th>Example</th><th>Why It Works</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>[Your Name] + Niche</strong></td><td>Sarah Cooks Simple</td><td>Builds personal brand + clarity</td></tr>
+      <tr><td><strong>[Adjective] + [Niche Noun]</strong></td><td>Smart Money Tactics</td><td>Promises a specific benefit</td></tr>
+      <tr><td><strong>[Audience] + [Outcome]</strong></td><td>Beginner Investor Wins</td><td>Speaks directly to target viewer</td></tr>
+      <tr><td><strong>[Action Verb] + [Topic]</strong></td><td>Master Your Macros</td><td>Implies transformation</td></tr>
+      <tr><td><strong>[Number/Time] + [Promise]</strong></td><td>Five Minute Fitness</td><td>Sets clear expectations</td></tr>
+      <tr><td><strong>[Name] Explains</strong></td><td>James Explains Tech</td><td>Authority positioning</td></tr>
+      <tr><td><strong>[Compound Word]</strong></td><td>CodeCraft Academy</td><td>Unique, brandable</td></tr>
+      <tr><td><strong>[Metaphor/Symbol]</strong></td><td>The Growth Compass</td><td>Memorable imagery</td></tr>
+      <tr><td><strong>[Location/Identity]</strong></td><td>Brooklyn Home Chef</td><td>Adds character and specificity</td></tr>
+      <tr><td><strong>[Challenge/Journey]</strong></td><td>Zero to Fluent</td><td>Story-driven, invites viewers to follow along</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout pro-tip">
+    <div class="callout-title">Pro Tip</div>
+    <p>Before committing, check that the name is available on YouTube, Instagram, TikTok, and as a .com domain. Use <strong>namecheckr.com</strong> to verify availability across platforms in seconds. Consistency across platforms dramatically increases discoverability.</p>
+  </div>
+
+  <h4 class="sub-heading">Your Channel Name Brainstorm</h4>
+  <table>
+    <thead>
+      <tr><th>#</th><th>Candidate Name</th><th>Available? (Y/N)</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td class="fillable"></td><td class="fillable" style="min-width:60px;"></td><td class="fillable"></td></tr>
+      <tr><td>2</td><td class="fillable"></td><td class="fillable" style="min-width:60px;"></td><td class="fillable"></td></tr>
+      <tr><td>3</td><td class="fillable"></td><td class="fillable" style="min-width:60px;"></td><td class="fillable"></td></tr>
+      <tr><td>4</td><td class="fillable"></td><td class="fillable" style="min-width:60px;"></td><td class="fillable"></td></tr>
+      <tr><td>5</td><td class="fillable"></td><td class="fillable" style="min-width:60px;"></td><td class="fillable"></td></tr>
+    </tbody>
+  </table>
+
+  <p class="mt-20"><strong>Final Choice:</strong> <span class="fillable" style="min-width: 300px;"></span></p>
+</div>
+
+<!-- DAY 1 PAGE 4 — ABOUT SECTION -->
+<div class="page">
+  <div class="page-watermark">DAY ONE</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 1 — Channel Foundation & Strategic Positioning</span>
+    <span class="page-header-num">07</span>
+  </div>
+
+  <h3>About Section Copywriting Template</h3>
+  <p>Your channel's About section is prime real estate for SEO and first impressions. Use this proven structure to write a compelling description that converts visitors into subscribers.</p>
+
+  <div class="gold-box">
+    <h4>The 5-Part About Section Formula</h4>
+    <p><strong>Line 1 — The Hook:</strong> A bold statement or question that speaks to your ideal viewer's desire or pain point.</p>
+    <p><strong>Line 2 — The Promise:</strong> What viewers will get from your channel (knowledge, entertainment, transformation).</p>
+    <p><strong>Line 3 — The Proof:</strong> Your credentials, experience, or unique perspective that earns trust.</p>
+    <p><strong>Line 4 — The Schedule:</strong> When you upload and how often, so viewers know what to expect.</p>
+    <p><strong>Line 5 — The CTA:</strong> A clear call to subscribe and turn on notifications.</p>
+  </div>
+
+  <h4 class="sub-heading">Example About Section (Personal Finance Niche)</h4>
+  <div style="background: var(--light-gray); padding: 16px 20px; border-radius: 6px; margin: 10px 0; font-style: italic;">
+    <p>"Tired of living paycheck to paycheck? You are in the right place.</p>
+    <p>On this channel, I break down complex money topics into simple, actionable steps that anyone can follow — whether you are paying off debt, building your first investment portfolio, or creating a side income stream.</p>
+    <p>I am a certified financial planner with 10 years of experience helping everyday people take control of their money. Everything I teach here is the same advice I give my private clients — for free.</p>
+    <p>New videos every Tuesday and Friday at 8 AM EST.</p>
+    <p>Subscribe now, hit the bell, and let's build your wealth together."</p>
+  </div>
+
+  <h4 class="sub-heading">Write Your About Section</h4>
+  <p><strong>The Hook:</strong></p>
+  <div class="fillable-area"></div>
+  <p><strong>The Promise:</strong></p>
+  <div class="fillable-area"></div>
+  <p><strong>The Proof:</strong></p>
+  <div class="fillable-area"></div>
+  <p><strong>The Schedule:</strong></p>
+  <div class="fillable-area"></div>
+  <p><strong>The CTA:</strong></p>
+  <div class="fillable-area"></div>
+
+  <div class="callout common-mistake">
+    <div class="callout-title">Common Mistake</div>
+    <p>Do not write your About section in third person ("John is a tech reviewer..."). Speak directly to your viewer in second person ("You will learn...") and first person ("I help you..."). This builds connection and feels authentic.</p>
+  </div>
+</div>
+
+<!-- DAY 1 PAGE 5 — CHANNEL ART & THUMBNAILS -->
+<div class="page">
+  <div class="page-watermark">DAY ONE</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 1 — Channel Foundation & Strategic Positioning</span>
+    <span class="page-header-num">08</span>
+  </div>
+
+  <h3>Channel Art & Thumbnail Style Guide</h3>
+  <p>Visual consistency is what separates professional channels from amateur ones. Before you create a single piece of art, define your visual brand system.</p>
+
+  <h4 class="sub-heading">Channel Banner Specifications</h4>
+  <table>
+    <thead>
+      <tr><th>Element</th><th>Specification</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Banner Size</td><td>2560 x 1440 pixels</td><td>YouTube's recommended size</td></tr>
+      <tr><td>Safe Area (Mobile)</td><td>1546 x 423 pixels (center)</td><td>Text must be within this zone</td></tr>
+      <tr><td>File Format</td><td>JPG or PNG, under 6 MB</td><td>PNG for crisp text</td></tr>
+      <tr><td>Must Include</td><td>Channel name, value prop, schedule</td><td>Keep it clean — no clutter</td></tr>
+      <tr><td>Free Tools</td><td>Canva, Adobe Express, Figma</td><td>Use pre-made YouTube templates</td></tr>
+    </tbody>
+  </table>
+
+  <h4 class="sub-heading">Profile Picture Guidelines</h4>
+  <table>
+    <thead>
+      <tr><th>Element</th><th>Specification</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Size</td><td>800 x 800 pixels (displays as circle)</td></tr>
+      <tr><td>Best Practice</td><td>High-contrast headshot with solid background color, or a bold logo</td></tr>
+      <tr><td>Avoid</td><td>Full-body photos, busy backgrounds, text that is too small to read at thumbnail size</td></tr>
+    </tbody>
+  </table>
+
+  <h4 class="sub-heading">Your Thumbnail Style System</h4>
+  <p>Consistency in thumbnails is critical. Define your style once and use it for every video. Viewers should recognize your content in a crowded feed without reading the title.</p>
+
+  <div class="gold-box">
+    <h4>Define Your Visual Brand</h4>
+    <p><strong>Primary Color:</strong> <span class="fillable" style="min-width:120px;"></span> <strong>Secondary Color:</strong> <span class="fillable" style="min-width:120px;"></span></p>
+    <p><strong>Accent Color:</strong> <span class="fillable" style="min-width:120px;"></span> <strong>Background Style:</strong> <span class="fillable" style="min-width:120px;"></span></p>
+    <p><strong>Font for Thumbnails:</strong> <span class="fillable" style="min-width:180px;"></span></p>
+    <p><strong>Face on Thumbnail?</strong> <span class="fillable" style="min-width:120px;"></span> <strong>Text Overlay Style:</strong> <span class="fillable" style="min-width:120px;"></span></p>
+  </div>
+
+  <h4 class="sub-heading">Thumbnail Design Rules</h4>
+  <div class="two-col">
+    <div class="col">
+      <p><strong style="color: #2E8B57;">DO:</strong></p>
+      <ul class="checklist">
+        <li>Use maximum 3-5 words of text</li>
+        <li>Use high-contrast colors</li>
+        <li>Show expressive facial emotions</li>
+        <li>Create visual curiosity gaps</li>
+        <li>Test at small size (mobile)</li>
+      </ul>
+    </div>
+    <div class="col">
+      <p><strong style="color: #D94F3B;">DON'T:</strong></p>
+      <ul class="checklist">
+        <li>Use more than 2 fonts</li>
+        <li>Include the full title text</li>
+        <li>Use dark, muddy colors</li>
+        <li>Copy competitor thumbnails exactly</li>
+        <li>Use generic stock photos</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout fast-track">
+    <div class="callout-title">Fast Track</div>
+    <p>Open Canva, search "YouTube Thumbnail," and pick one template that matches your style. Customize the colors and fonts to your brand. Save it as a template you can duplicate for every future video. This one-time setup saves hours over the life of your channel.</p>
+  </div>
+</div>
+
+<!-- DAY 1 PAGE 6 — CHANNEL ART CONTINUED + CHECKLIST -->
+<div class="page">
+  <div class="page-watermark">DAY ONE</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 1 — Channel Foundation & Strategic Positioning</span>
+    <span class="page-header-num">09</span>
+  </div>
+
+  <h3>Channel Setup Essentials</h3>
+  <p>Beyond the visuals, these technical settings ensure your channel is fully optimized from the start.</p>
+
+  <table>
+    <thead>
+      <tr><th>Setting</th><th>What to Do</th><th>Why It Matters</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Channel URL</td><td>Set a custom URL once eligible (100+ subscribers)</td><td>Easier to share and looks professional</td></tr>
+      <tr><td>Channel Keywords</td><td>Add 7-10 keywords in YouTube Studio > Settings > Channel</td><td>Helps YouTube categorize your content</td></tr>
+      <tr><td>Country</td><td>Set to your primary audience's country</td><td>Improves local search relevance</td></tr>
+      <tr><td>Channel Trailer</td><td>Create a 60-90 second intro video for non-subscribers</td><td>Converts visitors into subscribers</td></tr>
+      <tr><td>Featured Video</td><td>Set your best-performing video for returning subscribers</td><td>Keeps your audience engaged</td></tr>
+      <tr><td>Sections</td><td>Organize your homepage with playlists and sections</td><td>Professional appearance + longer sessions</td></tr>
+      <tr><td>Watermark</td><td>Upload a subscribe button watermark</td><td>Passive subscriber growth on every video</td></tr>
+      <tr><td>Links</td><td>Add website, social profiles, and email in banner</td><td>Cross-platform growth + sponsor inquiries</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout pro-tip">
+    <div class="callout-title">Pro Tip</div>
+    <p>Your channel trailer should follow this formula: <strong>Hook (5 sec)</strong> → <strong>Who you are (10 sec)</strong> → <strong>What viewers get (20 sec)</strong> → <strong>Best content clips (30 sec)</strong> → <strong>Subscribe CTA (5 sec)</strong>. Keep it under 90 seconds. Energy and pacing matter more than production quality.</p>
+  </div>
+
+  <div class="quote-box">
+    <p class="quote-text">A well-designed channel page is like a well-designed storefront — it invites people in and gives them a reason to stay.</p>
+    <p class="quote-author">— Roberto Blake, YouTube Strategist</p>
+  </div>
+</div>
+
+<!-- DAY 1 PAGE 7 — ACTION CHECKLIST -->
+<div class="page">
+  <div class="page-watermark">DAY ONE</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 1 — Channel Foundation & Strategic Positioning</span>
+    <span class="page-header-num">10</span>
+  </div>
+
+  <h3>Day 1 — Action Checklist</h3>
+  <p>Complete every item before moving to Day 2. Check off each task as you finish it.</p>
+
+  <ul class="checklist">
+    <li>Complete the Niche Validation Framework (score 35+ out of 50)</li>
+    <li>Research and fill in the Competitor Analysis table for 5 channels</li>
+    <li>Write your Channel Differentiation Statement</li>
+    <li>Brainstorm 5 channel name options and verify availability</li>
+    <li>Select your final channel name</li>
+    <li>Create your Google/YouTube account (if not already done)</li>
+    <li>Write your About section using the 5-part formula</li>
+    <li>Define your visual brand: colors, fonts, thumbnail style</li>
+    <li>Design your channel banner (2560 x 1440 px)</li>
+    <li>Create or photograph your profile picture (800 x 800 px)</li>
+    <li>Upload banner and profile picture to YouTube</li>
+    <li>Set channel keywords (7-10 relevant terms)</li>
+    <li>Add social links and contact email to your banner area</li>
+    <li>Upload a subscribe button watermark</li>
+    <li>Create your first thumbnail template in Canva</li>
+    <li>Set your country and language preferences</li>
+  </ul>
+
+  <div class="callout fast-track">
+    <div class="callout-title">Fast Track</div>
+    <p>If you complete all 16 tasks in under 4 hours, you are ahead of schedule. Most new creators spend weeks on what you are accomplishing in a single focused day. That is the power of a system.</p>
+  </div>
+
+  <div class="notes-area">
+    <h4>Day 1 Notes & Reflections</h4>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════ DAY 2 DIVIDER ═══════════════════════ -->
+<div class="section-divider">
+  <div class="day-number">02</div>
+  <div class="day-label">Day Two</div>
+  <h2>Content Strategy &<br>Video Planning</h2>
+  <div class="gold-line"></div>
+  <p class="section-desc">Strategy before production. Today you build the content engine that keeps your channel consistent, relevant, and impossible to ignore.</p>
+</div>
+
+<!-- DAY 2 PAGE 1 — CONTENT PYRAMID -->
+<div class="page">
+  <div class="page-watermark">DAY TWO</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 2 — Content Strategy & Video Planning</span>
+    <span class="page-header-num">12</span>
+  </div>
+
+  <div class="progress-tracker">
+    <h4>Your Progress</h4>
+    <div class="progress-bar"><div class="progress-fill" style="width: 33%"></div></div>
+    <p class="progress-text">Day 2 of 6 — Building Your Content Engine</p>
+  </div>
+
+  <h2 class="section-title">The YouTube Content Pyramid</h2>
+  <p class="section-subtitle">Three types of content, one unified strategy that drives sustainable growth.</p>
+
+  <p>Every successful YouTube channel uses a three-tier content system. Understanding and balancing these three types is what separates channels that plateau at 500 subscribers from channels that break 100,000.</p>
+
+  <div class="gold-box">
+    <h4>Tier 1 — Discovery Content (50% of uploads)</h4>
+    <p>Search-driven videos that answer specific questions. These are your "how to" and "what is" videos. They bring new viewers to your channel through YouTube Search and Google. Examples: "How to Start a Budget in 2025," "Best Free Editing Software for Beginners."</p>
+  </div>
+
+  <div class="gold-box">
+    <h4>Tier 2 — Community Content (30% of uploads)</h4>
+    <p>Videos for your existing audience that build loyalty and watch time. These include vlogs, opinion pieces, Q&As, and behind-the-scenes content. They keep subscribers engaged and increase session duration. Examples: "My Honest Review After 1 Year," "Answering Your Top 20 Questions."</p>
+  </div>
+
+  <div class="gold-box">
+    <h4>Tier 3 — Tent-Pole Content (20% of uploads)</h4>
+    <p>Big, ambitious videos tied to trends, events, or culturally relevant moments. These have viral potential and drive massive subscriber spikes. Examples: "I Tried Every AI Tool So You Don't Have To," "The Complete 2025 Beginner Guide."</p>
+  </div>
+
+  <div class="callout pro-tip">
+    <div class="callout-title">Pro Tip</div>
+    <p>When you are starting out, lean heavily on Tier 1 (Discovery) content. You need new viewers finding you through search. As your subscriber base grows past 1,000, shift toward a more balanced mix. Most failing channels post only Tier 2 content — talking to an audience they have not built yet.</p>
+  </div>
+
+  <div class="quote-box">
+    <p class="quote-text">Content is fire. Social media is gasoline. But strategy is the match.</p>
+    <p class="quote-author">— Jay Baer, Marketing Expert</p>
+  </div>
+</div>
+
+<!-- DAY 2 PAGE 2 — 90 DAY CALENDAR -->
+<div class="page">
+  <div class="page-watermark">DAY TWO</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 2 — Content Strategy & Video Planning</span>
+    <span class="page-header-num">13</span>
+  </div>
+
+  <h3>How to Build a 90-Day Content Calendar</h3>
+  <p>A content calendar eliminates the "what should I film today?" problem. You will never sit in front of a camera with a blank mind again. Follow these five steps to build your first 90 days of content.</p>
+
+  <ol class="numbered-list">
+    <li><strong>Define your upload frequency.</strong> For new channels, 1-2 videos per week is ideal. Consistency beats volume. If you commit to every Tuesday, never miss a Tuesday.</li>
+    <li><strong>Assign content types.</strong> If uploading twice per week: one Discovery video + one Community or Tent-Pole video. This ensures you are always attracting new viewers while keeping existing ones engaged.</li>
+    <li><strong>Brainstorm 30 topics.</strong> Use the Video Idea Generation System on the next page. Write down every idea without filtering — you will refine later.</li>
+    <li><strong>Map topics to dates.</strong> Alternate between content types. Place tent-pole content around relevant dates (New Year, product launches, seasonal trends).</li>
+    <li><strong>Build a 2-week buffer.</strong> Always stay at least two weeks ahead of your publishing schedule. This prevents panic uploads and maintains quality.</li>
+  </ol>
+
+  <div class="callout common-mistake">
+    <div class="callout-title">Common Mistake</div>
+    <p>Do not plan 90 days of content and then rigidly follow it no matter what. Your calendar is a living document. Review it monthly. If a video performs exceptionally well, double down on that topic. If analytics show a topic underperforming, pivot. The calendar is a guide, not a contract.</p>
+  </div>
+
+  <h4 class="sub-heading">Sample 4-Week Content Calendar</h4>
+  <table>
+    <thead>
+      <tr><th>Week</th><th>Tuesday Upload</th><th>Type</th><th>Friday Upload</th><th>Type</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Week 1</td><td>How to [Solve Common Problem]</td><td>Discovery</td><td>My [Niche] Journey So Far</td><td>Community</td></tr>
+      <tr><td>Week 2</td><td>Best [Tools/Products] for [Audience]</td><td>Discovery</td><td>[Trending Topic] — My Take</td><td>Tent-Pole</td></tr>
+      <tr><td>Week 3</td><td>[Number] Tips for [Desired Outcome]</td><td>Discovery</td><td>Q&A: Your Top Questions Answered</td><td>Community</td></tr>
+      <tr><td>Week 4</td><td>Complete Beginner Guide to [Topic]</td><td>Tent-Pole</td><td>Behind the Scenes: How I [Process]</td><td>Community</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout fast-track">
+    <div class="callout-title">Fast Track</div>
+    <p>Use a free tool like Google Sheets, Notion, or Trello to manage your calendar. Create columns for: Date, Title, Type, Status (Idea → Scripted → Filmed → Edited → Published), and Performance Notes.</p>
+  </div>
+</div>
+
+<!-- DAY 2 PAGE 3 — VIDEO IDEAS -->
+<div class="page">
+  <div class="page-watermark">DAY TWO</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 2 — Content Strategy & Video Planning</span>
+    <span class="page-header-num">14</span>
+  </div>
+
+  <h3>Video Idea Generation System</h3>
+  <p>Never run out of ideas again. Use these 50 proven video structures and customize them for your niche. Replace the brackets with your specific topic.</p>
+
+  <h4 class="sub-heading">Discovery Videos (Search-Driven)</h4>
+  <table>
+    <thead><tr><th>#</th><th>Video Title Template</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>How to [Achieve Desired Outcome] in [Timeframe]</td></tr>
+      <tr><td>2</td><td>[Number] [Niche] Tips I Wish I Knew Sooner</td></tr>
+      <tr><td>3</td><td>The Complete Beginner's Guide to [Topic]</td></tr>
+      <tr><td>4</td><td>[Product/Tool] Review — Is It Worth It in 2025?</td></tr>
+      <tr><td>5</td><td>[Topic A] vs [Topic B] — Which Is Better?</td></tr>
+      <tr><td>6</td><td>What Nobody Tells You About [Topic]</td></tr>
+      <tr><td>7</td><td>Best [Category] for [Specific Audience] Under $[Price]</td></tr>
+      <tr><td>8</td><td>[Number] Mistakes [Audience] Make with [Topic]</td></tr>
+      <tr><td>9</td><td>How I [Achieved Result] in [Timeframe] (Step by Step)</td></tr>
+      <tr><td>10</td><td>Everything You Need to Know About [Topic] in [Year]</td></tr>
+      <tr><td>11</td><td>[Topic] Explained in [Number] Minutes</td></tr>
+      <tr><td>12</td><td>The Truth About [Controversial Topic in Niche]</td></tr>
+      <tr><td>13</td><td>How to Fix [Common Problem] — [Number] Solutions That Work</td></tr>
+      <tr><td>14</td><td>[Niche] for Beginners: Where to Start in 2025</td></tr>
+      <tr><td>15</td><td>I Tested [Number] [Products/Methods] — Here Are the Results</td></tr>
+    </tbody>
+  </table>
+
+  <h4 class="sub-heading">Community Videos (Audience-Building)</h4>
+  <table>
+    <thead><tr><th>#</th><th>Video Title Template</th></tr></thead>
+    <tbody>
+      <tr><td>16</td><td>My [Niche] Story: How I Got Started</td></tr>
+      <tr><td>17</td><td>Reacting to Your [Niche Submissions/Comments]</td></tr>
+      <tr><td>18</td><td>Day in the Life of a [Your Role/Niche]</td></tr>
+      <tr><td>19</td><td>Q&A: Answering Your Most Asked Questions</td></tr>
+      <tr><td>20</td><td>My Current [Setup/Routine/Toolkit] — Full Tour</td></tr>
+      <tr><td>21</td><td>[Month] Update: What Worked and What Failed</td></tr>
+      <tr><td>22</td><td>Unpopular Opinions About [Niche]</td></tr>
+      <tr><td>23</td><td>Subscriber Challenge: I Tried Your [Niche] Suggestions</td></tr>
+      <tr><td>24</td><td>The [Number] [Books/Podcasts/Resources] That Changed My [Niche]</td></tr>
+      <tr><td>25</td><td>Honest Review of My [Niche] Results After [Timeframe]</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- DAY 2 PAGE 4 — VIDEO IDEAS CONTINUED -->
+<div class="page">
+  <div class="page-watermark">DAY TWO</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 2 — Content Strategy & Video Planning</span>
+    <span class="page-header-num">15</span>
+  </div>
+
+  <h4 class="sub-heading">Tent-Pole Videos (High-Impact)</h4>
+  <table>
+    <thead><tr><th>#</th><th>Video Title Template</th></tr></thead>
+    <tbody>
+      <tr><td>26</td><td>I [Did Extreme Challenge] for [Timeframe] — Here's What Happened</td></tr>
+      <tr><td>27</td><td>The Ultimate [Year] Guide to [Topic] (Everything You Need)</td></tr>
+      <tr><td>28</td><td>[Number] [Niche] Trends That Will Dominate [Year]</td></tr>
+      <tr><td>29</td><td>I Spent $[Amount] on [Topic] So You Don't Have To</td></tr>
+      <tr><td>30</td><td>From [Starting Point] to [End Result]: The Complete Documentary</td></tr>
+      <tr><td>31</td><td>[Celebrity/Expert] Was Wrong About [Topic] — Here's Why</td></tr>
+      <tr><td>32</td><td>The [Niche] Tier List: Ranking [Items] from Worst to Best</td></tr>
+      <tr><td>33</td><td>I Asked [Number] [Experts] for Their #1 [Niche] Tip</td></tr>
+      <tr><td>34</td><td>[Niche] in 2025: What's Changed and What Hasn't</td></tr>
+      <tr><td>35</td><td>The $0 vs $100 vs $1,000 [Niche] Challenge</td></tr>
+    </tbody>
+  </table>
+
+  <h4 class="sub-heading">YouTube Shorts Ideas</h4>
+  <table>
+    <thead><tr><th>#</th><th>Shorts Title Template</th></tr></thead>
+    <tbody>
+      <tr><td>36</td><td>[Number]-Second [Niche] Tip That Changed Everything</td></tr>
+      <tr><td>37</td><td>POV: You Just Discovered [Niche Hack]</td></tr>
+      <tr><td>38</td><td>One [Niche] Tip Per Day — Day [Number]</td></tr>
+      <tr><td>39</td><td>[Niche] Myth vs. Reality</td></tr>
+      <tr><td>40</td><td>Rate My [Niche Setup/Result] 1-10</td></tr>
+      <tr><td>41</td><td>The [Niche] Mistake Everyone Makes</td></tr>
+      <tr><td>42</td><td>What $[Amount] Gets You in [Niche]</td></tr>
+      <tr><td>43</td><td>Things [Audience] Should STOP Doing in 2025</td></tr>
+      <tr><td>44</td><td>This [Tool/Method] is a Game Changer for [Niche]</td></tr>
+      <tr><td>45</td><td>[Niche] Beginners vs. Pros — The Difference</td></tr>
+    </tbody>
+  </table>
+
+  <h4 class="sub-heading">Evergreen Recurring Series Ideas</h4>
+  <table>
+    <thead><tr><th>#</th><th>Series Concept</th></tr></thead>
+    <tbody>
+      <tr><td>46</td><td>Weekly [Niche] News Breakdown</td></tr>
+      <tr><td>47</td><td>"Ask Me Anything" Monthly Episode</td></tr>
+      <tr><td>48</td><td>[Niche] Case Study Series: Analyzing Real Examples</td></tr>
+      <tr><td>49</td><td>Tool/Product of the Week Review</td></tr>
+      <tr><td>50</td><td>[Niche] Transformation Series: Following a Journey</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout pro-tip">
+    <div class="callout-title">Pro Tip</div>
+    <p>Start with templates 1, 3, 7, 9, and 14 for your first five videos. These are high-search, low-competition formats that establish your authority and attract new viewers consistently.</p>
+  </div>
+</div>
+
+<!-- DAY 2 PAGE 5 — HOOK FORMULA -->
+<div class="page">
+  <div class="page-watermark">DAY TWO</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 2 — Content Strategy & Video Planning</span>
+    <span class="page-header-num">16</span>
+  </div>
+
+  <h3>The Hook Formula</h3>
+  <p>The first 10 seconds of your video determine whether someone watches or clicks away. YouTube's data shows that 20% of viewers leave within the first 5 seconds. A strong hook is not optional — it is survival.</p>
+
+  <h4 class="sub-heading">Structure 1 — The Problem-Agitate-Promise (PAP) Hook</h4>
+  <div class="gold-box">
+    <p><strong>Problem:</strong> Name the viewer's pain point directly.</p>
+    <p><strong>Agitate:</strong> Make it worse — show the consequences of not solving it.</p>
+    <p><strong>Promise:</strong> Tell them exactly what they will learn in this video.</p>
+    <p style="margin-top:10px;"><em>Example: "You're posting videos and getting zero views. If you don't fix this, you'll waste months creating content nobody sees. In the next 8 minutes, I'll show you the exact 3 changes that took my videos from 50 views to 50,000."</em></p>
+  </div>
+
+  <h4 class="sub-heading">Structure 2 — The Curiosity Gap Hook</h4>
+  <div class="gold-box">
+    <p><strong>Tease a result</strong> without revealing how you got there. Create an open loop that can only be closed by watching.</p>
+    <p style="margin-top:10px;"><em>Example: "I just made $4,300 from a single YouTube video that took me 45 minutes to film. And no, I didn't go viral. I used a strategy that almost nobody talks about — and I'm going to break it all down right now."</em></p>
+  </div>
+
+  <h4 class="sub-heading">Structure 3 — The Bold Contrarian Hook</h4>
+  <div class="gold-box">
+    <p><strong>Challenge a common belief</strong> in your niche. This triggers an emotional response that forces the viewer to keep watching to see if you can back it up.</p>
+    <p style="margin-top:10px;"><em>Example: "Everything you've been told about the YouTube algorithm is wrong. Posting more does not help. Thumbnails are not the most important thing. And going viral is actually bad for your channel. Let me explain."</em></p>
+  </div>
+
+  <div class="callout common-mistake">
+    <div class="callout-title">Common Mistake</div>
+    <p>Never start a video with "Hey guys, welcome back to my channel, today we're going to talk about..." This is the fastest way to lose viewers. Get to the value immediately. Save your intro and branding for after the hook.</p>
+  </div>
+</div>
+
+<!-- DAY 2 PAGE 6 — KEYWORD RESEARCH -->
+<div class="page">
+  <div class="page-watermark">DAY TWO</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 2 — Content Strategy & Video Planning</span>
+    <span class="page-header-num">17</span>
+  </div>
+
+  <h3>Keyword Research Walkthrough</h3>
+  <p>Keywords are how new viewers find you. Before filming any video, validate that people are actually searching for that topic. Here is a step-by-step process using completely free tools.</p>
+
+  <ol class="numbered-list">
+    <li><strong>YouTube Search Autocomplete.</strong> Type your topic into YouTube's search bar and note the suggestions. These are real searches by real people. Screenshot them — they are gold.</li>
+    <li><strong>Google Trends (trends.google.com).</strong> Select "YouTube Search" from the dropdown. Compare your topic variations to see which has more interest. Choose topics with stable or rising trends.</li>
+    <li><strong>VidIQ or TubeBuddy (free versions).</strong> Install either browser extension. Search for your keyword and note: Search Volume (higher is better), Competition Score (lower is better), and the top-ranking videos.</li>
+    <li><strong>Competitor Video Analysis.</strong> Find successful videos on your topic. Note their exact titles, descriptions, and tags (VidIQ shows these). Identify patterns in language and structure.</li>
+    <li><strong>The "Alphabet Soup" Method.</strong> Type your niche keyword followed by each letter of the alphabet: "[niche] a...", "[niche] b..." etc. This reveals long-tail keywords with lower competition and high intent.</li>
+  </ol>
+
+  <h4 class="sub-heading">Keyword Research Template</h4>
+  <table>
+    <thead>
+      <tr><th>Target Keyword</th><th>Monthly Searches</th><th>Competition</th><th>Top Video Views</th><th>Your Angle</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout fast-track">
+    <div class="callout-title">Fast Track</div>
+    <p>Target keywords with 1,000-10,000 monthly searches and low-to-medium competition for your first 10 videos. These "goldilocks" keywords have enough demand to bring views but not so much competition that you get buried. Avoid broad terms like "fitness" — target "home workout for beginners no equipment" instead.</p>
+  </div>
+
+  <div class="quote-box">
+    <p class="quote-text">Don't create content you want to make. Create content people are searching for — then make it your way.</p>
+    <p class="quote-author">— Derral Eves, The YouTube Formula</p>
+  </div>
+</div>
+
+<!-- DAY 2 PAGE 7 — 90 DAY PLANNER -->
+<div class="page">
+  <div class="page-watermark">DAY TWO</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 2 — Content Strategy & Video Planning</span>
+    <span class="page-header-num">18</span>
+  </div>
+
+  <h3>Fillable 90-Day Content Planner</h3>
+  <p>Use this template to map out your first 90 days. Fill in the video title, content type, target keyword, and status for each week.</p>
+
+  <table>
+    <thead>
+      <tr><th>Week</th><th>Video Title</th><th>Type</th><th>Target Keyword</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>2</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>3</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>4</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>5</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>6</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>7</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>8</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>9</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>10</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>11</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>12</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>13</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Day 2 — Action Checklist</h3>
+  <ul class="checklist">
+    <li>Study the YouTube Content Pyramid and decide your content mix ratio</li>
+    <li>Define your upload frequency and days (e.g., Tuesday &amp; Friday)</li>
+    <li>Generate at least 30 video ideas using the Video Idea Generation System</li>
+    <li>Research keywords for your top 10 video ideas</li>
+    <li>Complete the Keyword Research Template for 5 priority topics</li>
+    <li>Map your first 13 weeks on the 90-Day Content Planner</li>
+    <li>Write a hook for your first 3 videos using one of the 3 structures</li>
+    <li>Set up your content calendar tool (Notion, Sheets, or Trello)</li>
+    <li>Identify 3-5 trending topics in your niche to capitalize on</li>
+    <li>Review competitor upload schedules and note the best-performing days</li>
+  </ul>
+
+  <div class="notes-area">
+    <h4>Day 2 Notes & Reflections</h4>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════ DAY 3 DIVIDER ═══════════════════════ -->
+<div class="section-divider">
+  <div class="day-number">03</div>
+  <div class="day-label">Day Three</div>
+  <h2>Production Without<br>Perfection</h2>
+  <div class="gold-line"></div>
+  <p class="section-desc">Done is better than perfect. Today you learn to produce professional-quality videos with minimal gear and maximum confidence.</p>
+</div>
+
+<!-- DAY 3 PAGE 1 — GEAR SETUP -->
+<div class="page">
+  <div class="page-watermark">DAY THREE</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 3 — Production Without Perfection</span>
+    <span class="page-header-num">20</span>
+  </div>
+
+  <div class="progress-tracker">
+    <h4>Your Progress</h4>
+    <div class="progress-bar"><div class="progress-fill" style="width: 50%"></div></div>
+    <p class="progress-text">Day 3 of 6 — Setting Up Your Production System</p>
+  </div>
+
+  <h2 class="section-title">Minimal Gear Setup Guide</h2>
+  <p class="section-subtitle">Professional-looking videos at every budget. Start with what you have, upgrade when it matters.</p>
+
+  <p>The biggest myth in YouTube is that you need expensive equipment to succeed. The truth: <strong>audio quality and lighting matter far more than camera resolution.</strong> Viewers will tolerate 1080p footage with great audio, but they will immediately click away from 4K footage with bad sound.</p>
+
+  <h4 class="sub-heading">Budget Tier 1 — Under $200 (The Essentials)</h4>
+  <table>
+    <thead>
+      <tr><th>Item</th><th>Recommendation</th><th>Approx. Cost</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Camera</td><td>Your smartphone (iPhone 12+ or Samsung S21+)</td><td>$0 (already own)</td></tr>
+      <tr><td>Tripod</td><td>UBeesize 60" Phone Tripod</td><td>$26</td></tr>
+      <tr><td>Microphone</td><td>BOYA BY-M1 Lavalier Mic</td><td>$20</td></tr>
+      <tr><td>Lighting</td><td>Neewer 18" Ring Light with Stand</td><td>$36</td></tr>
+      <tr><td>Background</td><td>Clean wall + affordable tapestry or bookshelf</td><td>$0-$30</td></tr>
+      <tr><td>Editing Software</td><td>DaVinci Resolve (free) or CapCut (free)</td><td>$0</td></tr>
+      <tr><td>SD Card / Storage</td><td>Samsung 128GB microSD or iCloud storage</td><td>$15</td></tr>
+      <tr><td><strong>TOTAL</strong></td><td></td><td><strong>$97-$127</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h4 class="sub-heading">Budget Tier 2 — Under $500 (The Upgrade)</h4>
+  <table>
+    <thead>
+      <tr><th>Item</th><th>Recommendation</th><th>Approx. Cost</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Camera</td><td>Sony ZV-1F or Canon PowerShot G7X Mark III</td><td>$250-$350</td></tr>
+      <tr><td>Tripod</td><td>Joby GorillaPod 3K PRO</td><td>$55</td></tr>
+      <tr><td>Microphone</td><td>Rode VideoMicro II (on-camera shotgun)</td><td>$60</td></tr>
+      <tr><td>Lighting</td><td>Elgato Key Light Mini (2-pack)</td><td>$80</td></tr>
+      <tr><td>Editing</td><td>DaVinci Resolve (free) or Final Cut Pro trial</td><td>$0</td></tr>
+      <tr><td><strong>TOTAL</strong></td><td></td><td><strong>$445-$545</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout pro-tip">
+    <div class="callout-title">Pro Tip</div>
+    <p>If you can only invest in one upgrade, make it audio. A $20 lavalier mic will make a bigger difference to viewer retention than a $500 camera upgrade. YouTube's own Creator Academy confirms that audio quality is the #1 factor in viewer satisfaction.</p>
+  </div>
+</div>
+
+<!-- DAY 3 PAGE 2 — BUDGET TIER 3 + IPHONE SETUP -->
+<div class="page">
+  <div class="page-watermark">DAY THREE</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 3 — Production Without Perfection</span>
+    <span class="page-header-num">21</span>
+  </div>
+
+  <h4 class="sub-heading">Budget Tier 3 — Under $1,000 (The Professional)</h4>
+  <table>
+    <thead>
+      <tr><th>Item</th><th>Recommendation</th><th>Approx. Cost</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Camera</td><td>Sony ZV-E10 II (mirrorless, interchangeable lens)</td><td>$500</td></tr>
+      <tr><td>Lens</td><td>Sigma 16mm f/1.4 (beautiful background blur)</td><td>$200 (used)</td></tr>
+      <tr><td>Tripod</td><td>Manfrotto Befree Advanced</td><td>$90</td></tr>
+      <tr><td>Microphone</td><td>Rode Wireless GO II (wireless lav system)</td><td>$150</td></tr>
+      <tr><td>Lighting</td><td>2x Neewer 660 LED Panels + Stands</td><td>$80</td></tr>
+      <tr><td>Backdrop</td><td>Elgato Green Screen or acoustic panels</td><td>$50</td></tr>
+      <tr><td>Editing</td><td>Adobe Premiere Pro ($22/mo) or DaVinci Resolve</td><td>$0-$22/mo</td></tr>
+      <tr><td><strong>TOTAL</strong></td><td></td><td><strong>$870-$1,070</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout fast-track">
+    <div class="callout-title">Fast Track</div>
+    <p>Start with Tier 1 for your first 10 videos. Use the revenue from early monetization to upgrade. Many channels with 100K+ subscribers started with nothing more than a smartphone and a window for lighting. Your content quality matters more than your gear quality.</p>
+  </div>
+
+  <h3>The 3-Camera iPhone Setup</h3>
+  <p>You can create the illusion of a multi-camera production using a single iPhone. This technique is used by professional YouTubers to add visual variety and maintain viewer attention.</p>
+
+  <ol class="numbered-list">
+    <li><strong>Wide Shot (Main).</strong> Position your iPhone at chest level, about 3-4 feet away. This is your primary talking-head angle. Film your entire script from this position at 4K resolution.</li>
+    <li><strong>Medium Close-Up (Punch-In).</strong> In editing, crop the 4K footage to 150% zoom. This creates a tighter frame that simulates a second camera angle. Use this when emphasizing important points.</li>
+    <li><strong>Detail / B-Roll Shot.</strong> After filming your main take, use the same iPhone to capture close-up shots of your hands, screen recordings, product details, or relevant items. These become your cutaway shots.</li>
+  </ol>
+
+  <div class="gold-box">
+    <h4>iPhone Camera Settings for YouTube</h4>
+    <p><strong>Resolution:</strong> 4K at 30fps (allows punch-in editing)</p>
+    <p><strong>Stabilization:</strong> ON (or use a tripod — always preferred)</p>
+    <p><strong>Exposure Lock:</strong> Tap and hold on your face, then adjust exposure slider</p>
+    <p><strong>Lens:</strong> Use the main wide lens (1x), not ultra-wide</p>
+    <p><strong>Grid:</strong> Turn on grid lines for proper framing (rule of thirds)</p>
+    <p><strong>Do Not Disturb:</strong> Enable to prevent notifications during recording</p>
+  </div>
+
+  <div class="quote-box">
+    <p class="quote-text">The best camera is the one you have with you. Stop waiting for perfect equipment and start creating with what you own today.</p>
+    <p class="quote-author">— Chase Jarvis, Photographer & Entrepreneur</p>
+  </div>
+</div>
+
+<!-- DAY 3 PAGE 3 — LIGHTING -->
+<div class="page">
+  <div class="page-watermark">DAY THREE</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 3 — Production Without Perfection</span>
+    <span class="page-header-num">22</span>
+  </div>
+
+  <h3>Lighting Fundamentals: 3-Point Lighting on a Budget</h3>
+  <p>Good lighting is the single fastest way to make any camera look professional. The 3-point lighting system is the industry standard used in film, television, and professional YouTube production.</p>
+
+  <h4 class="sub-heading">The Three Lights Explained</h4>
+
+  <div class="gold-box">
+    <h4>1. Key Light (Main Light)</h4>
+    <p><strong>Position:</strong> 45 degrees to the left or right of your face, slightly above eye level.</p>
+    <p><strong>Purpose:</strong> Your primary light source. It illuminates your face and creates dimension.</p>
+    <p><strong>Budget Option:</strong> Large window with natural light (free), ring light ($30-$50), or LED panel ($40).</p>
+    <p><strong>Setting:</strong> Should be the brightest light in your setup — around 5500K (daylight) color temperature.</p>
+  </div>
+
+  <div class="gold-box">
+    <h4>2. Fill Light (Secondary Light)</h4>
+    <p><strong>Position:</strong> Opposite side of the key light, at the same height or slightly lower.</p>
+    <p><strong>Purpose:</strong> Softens shadows created by the key light. Without it, half your face will be in darkness.</p>
+    <p><strong>Budget Option:</strong> White foam board as a reflector ($5), second smaller LED light ($25), or a desk lamp with a daylight bulb ($15).</p>
+    <p><strong>Setting:</strong> Should be about 50-75% the brightness of your key light.</p>
+  </div>
+
+  <div class="gold-box">
+    <h4>3. Back Light (Rim/Hair Light)</h4>
+    <p><strong>Position:</strong> Behind you, pointed at the back of your head and shoulders.</p>
+    <p><strong>Purpose:</strong> Separates you from the background, adding depth and a professional look.</p>
+    <p><strong>Budget Option:</strong> Small LED light ($15), RGB strip light ($20), or a desk lamp behind you pointed at the wall.</p>
+    <p><strong>Setting:</strong> Subtle glow — you should not be able to see the light source in the frame.</p>
+  </div>
+
+  <div class="callout common-mistake">
+    <div class="callout-title">Common Mistake</div>
+    <p>Never sit with a window <em>behind</em> you. This creates a silhouette and makes your face dark. Always face toward your light source. If using natural light from a window, sit facing the window with your camera between you and the window.</p>
+  </div>
+
+  <h4 class="sub-heading">Audio Quality Checklist</h4>
+  <ul class="checklist">
+    <li>Use an external microphone — never rely on your camera's built-in mic</li>
+    <li>Record in a quiet room — turn off AC, fans, and appliances</li>
+    <li>Add soft surfaces to reduce echo (blankets, curtains, rugs, foam panels)</li>
+    <li>Position your mic 6-12 inches from your mouth</li>
+    <li>Do a 10-second test recording and listen with headphones before filming</li>
+    <li>Record 10 seconds of "room tone" (silence) for noise removal in editing</li>
+    <li>Monitor audio levels: aim for -12dB to -6dB peaks</li>
+    <li>Always carry a backup mic or have a phone recording as backup audio</li>
+  </ul>
+</div>
+
+<!-- DAY 3 PAGE 4 — SCRIPT TEMPLATE -->
+<div class="page">
+  <div class="page-watermark">DAY THREE</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 3 — Production Without Perfection</span>
+    <span class="page-header-num">24</span>
+  </div>
+
+  <h3>Script & Outline Template</h3>
+  <p>You do not need to memorize a script. The best YouTube videos use a structured outline that keeps you on track while allowing natural delivery. Use this template for every video.</p>
+
+  <div class="gold-box">
+    <h4>The 7-Part Video Script Structure</h4>
+    <p><strong>1. Hook (0:00-0:15):</strong> Grab attention with a problem, question, or bold statement.</p>
+    <p><strong>2. Intro (0:15-0:30):</strong> Brief channel intro + what the viewer will learn today.</p>
+    <p><strong>3. Context (0:30-1:30):</strong> Why this topic matters. Establish credibility.</p>
+    <p><strong>4. Main Content (1:30-8:00):</strong> 3-5 key points with examples. This is the meat of your video.</p>
+    <p><strong>5. Recap (8:00-8:30):</strong> Summarize the key takeaways in 2-3 sentences.</p>
+    <p><strong>6. CTA (8:30-9:00):</strong> Ask viewers to like, subscribe, and comment. Give them a specific question to answer.</p>
+    <p><strong>7. Next Video Tease (9:00-9:15):</strong> Preview what is coming next to keep them on your channel.</p>
+  </div>
+
+  <h4 class="sub-heading">Fillable Script Outline</h4>
+  <p><strong>Video Title:</strong> <span class="fillable" style="min-width: 350px;"></span></p>
+  <p><strong>Target Length:</strong> <span class="fillable" style="min-width: 100px;"></span> minutes</p>
+  <p><strong>Target Keyword:</strong> <span class="fillable" style="min-width: 250px;"></span></p>
+
+  <p style="margin-top: 12px;"><strong>HOOK — What problem are you solving?</strong></p>
+  <div class="fillable-area"></div>
+
+  <p><strong>MAIN POINT 1:</strong></p>
+  <div class="fillable-area"></div>
+
+  <p><strong>MAIN POINT 2:</strong></p>
+  <div class="fillable-area"></div>
+
+  <p><strong>MAIN POINT 3:</strong></p>
+  <div class="fillable-area"></div>
+
+  <p><strong>CTA — What should viewers do next?</strong></p>
+  <div class="fillable-area"></div>
+
+  <div class="callout pro-tip">
+    <div class="callout-title">Pro Tip</div>
+    <p>Use bullet points, not full sentences. When you read a full script, your eyes glaze over and your delivery sounds robotic. Bullet points force you to speak naturally while keeping you on track. Practice your outline 2-3 times before hitting record.</p>
+  </div>
+</div>
+
+<!-- DAY 3 PAGE 5 — B-ROLL + CHECKLIST -->
+<div class="page">
+  <div class="page-watermark">DAY THREE</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 3 — Production Without Perfection</span>
+    <span class="page-header-num">25</span>
+  </div>
+
+  <h3>B-Roll Checklist for Professional-Looking Videos</h3>
+  <p>B-roll is supplementary footage that covers your main footage during transitions, examples, or visual explanations. It separates amateur videos from professional productions.</p>
+
+  <h4 class="sub-heading">Essential B-Roll Shots to Capture</h4>
+  <ul class="checklist">
+    <li>Close-up of your hands typing, writing, or demonstrating</li>
+    <li>Screen recordings of websites, apps, or tools you mention</li>
+    <li>Slow-motion detail shots of products or equipment</li>
+    <li>Wide shot of your workspace or filming environment</li>
+    <li>Over-the-shoulder perspective shots</li>
+    <li>Time-lapse of a process (setup, cooking, building, etc.)</li>
+    <li>Text overlays or animated graphics for key statistics</li>
+    <li>Stock footage from free sources (Pexels, Pixabay, Coverr)</li>
+    <li>Photos or screenshots displayed with subtle zoom animation</li>
+    <li>Outdoor shots if relevant to your niche (walking, exploring)</li>
+  </ul>
+
+  <div class="callout fast-track">
+    <div class="callout-title">Fast Track</div>
+    <p>After filming your main footage, spend 10 extra minutes capturing 5-10 B-roll clips. Even simple shots of your desk, coffee mug, keyboard, or a whiteboard dramatically improve production value. Aim for 3-5 seconds per clip.</p>
+  </div>
+
+  <h3>Day 3 — Action Checklist</h3>
+  <ul class="checklist">
+    <li>Audit your current gear and identify what you already have</li>
+    <li>Choose your budget tier and order any missing essentials</li>
+    <li>Set up your filming space with proper lighting (3-point system)</li>
+    <li>Configure your camera/phone settings for YouTube (4K, 30fps)</li>
+    <li>Test your audio: record a 30-second clip and listen with headphones</li>
+    <li>Practice the 3-camera iPhone technique with a test recording</li>
+    <li>Write a script outline for your first video using the template</li>
+    <li>Film a complete test video (does not need to be published)</li>
+    <li>Capture at least 10 B-roll clips for your niche</li>
+    <li>Review your test video and note 3 things to improve</li>
+    <li>Set up your recording environment for repeat use (mark positions with tape)</li>
+  </ul>
+
+  <div class="notes-area">
+    <h4>Day 3 Notes & Reflections</h4>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════ DAY 4 DIVIDER ═══════════════════════ -->
+<div class="section-divider">
+  <div class="day-number">04</div>
+  <div class="day-label">Day Four</div>
+  <h2>Editing, Thumbnails<br>& Titles</h2>
+  <div class="gold-line"></div>
+  <p class="section-desc">Post-production is where good footage becomes great content. Today you master editing efficiency, thumbnail design, and title psychology.</p>
+</div>
+
+<!-- DAY 4 PAGE 1 — EDITING SOFTWARE -->
+<div class="page">
+  <div class="page-watermark">DAY FOUR</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 4 — Editing, Thumbnails & Titles</span>
+    <span class="page-header-num">28</span>
+  </div>
+
+  <div class="progress-tracker">
+    <h4>Your Progress</h4>
+    <div class="progress-bar"><div class="progress-fill" style="width: 66%"></div></div>
+    <p class="progress-text">Day 4 of 6 — Mastering Post-Production</p>
+  </div>
+
+  <h2 class="section-title">Editing Software Comparison</h2>
+  <p class="section-subtitle">Choose the right tool for your skill level and budget. Every option here can produce professional results.</p>
+
+  <table>
+    <thead>
+      <tr><th>Software</th><th>Price</th><th>Platform</th><th>Skill Level</th><th>Best For</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>CapCut Desktop</strong></td><td>Free</td><td>Mac, Windows</td><td>Beginner</td><td>Quick edits, auto-captions, trending effects</td></tr>
+      <tr><td><strong>DaVinci Resolve</strong></td><td>Free</td><td>Mac, Win, Linux</td><td>Intermediate</td><td>Color grading, professional features at no cost</td></tr>
+      <tr><td><strong>iMovie</strong></td><td>Free</td><td>Mac, iOS</td><td>Beginner</td><td>Apple users who want simple, clean editing</td></tr>
+      <tr><td><strong>Adobe Premiere Pro</strong></td><td>$22/mo</td><td>Mac, Windows</td><td>Advanced</td><td>Industry standard, deep integration with Adobe suite</td></tr>
+      <tr><td><strong>Final Cut Pro</strong></td><td>$300 one-time</td><td>Mac only</td><td>Intermediate</td><td>Fast rendering, magnetic timeline, Mac optimized</td></tr>
+      <tr><td><strong>Filmora</strong></td><td>$50/yr</td><td>Mac, Windows</td><td>Beginner</td><td>Drag-and-drop simplicity with pro templates</td></tr>
+      <tr><td><strong>Descript</strong></td><td>$24/mo</td><td>Mac, Windows</td><td>Beginner</td><td>Text-based editing, auto-remove filler words</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout pro-tip">
+    <div class="callout-title">Pro Tip</div>
+    <p>Start with <strong>CapCut</strong> or <strong>DaVinci Resolve</strong> — both are free and more than capable for YouTube. You do not need Premiere Pro to make great videos. When your channel generates revenue, upgrade if you need specific features. The editing software matters less than the editing technique.</p>
+  </div>
+
+  <h3>The 5-Step Editing Workflow</h3>
+  <p>Follow this workflow for every video. It keeps your editing efficient and prevents the "perfectionism paralysis" that causes creators to spend 20 hours editing a 10-minute video.</p>
+
+  <ol class="numbered-list">
+    <li><strong>Rough Cut (30 min).</strong> Import your footage. Cut out all mistakes, long pauses, "ums," and dead space. Do not worry about polish — just remove what does not belong. You should cut 30-50% of raw footage.</li>
+    <li><strong>Fine Cut (30 min).</strong> Tighten the pacing. Add jump cuts where energy dips. Trim the beginning and end of each section so transitions feel snappy. Your goal: no moment where a viewer would get bored.</li>
+    <li><strong>B-Roll & Graphics (20 min).</strong> Layer in B-roll footage, screen recordings, text overlays, and lower thirds. Follow the "5-second rule" — never show the same shot for more than 5 seconds without a visual change.</li>
+    <li><strong>Audio Polish (15 min).</strong> Normalize audio levels. Add background music at 10-15% volume. Apply noise reduction if needed. Ensure your voice is clear and consistent throughout.</li>
+    <li><strong>Review & Export (15 min).</strong> Watch the entire video at 1x speed with headphones. Note any issues. Fix them. Export at 1080p or 4K, H.264 codec, high bitrate. Upload.</li>
+  </ol>
+
+  <div class="callout common-mistake">
+    <div class="callout-title">Common Mistake</div>
+    <p>Do not spend more than 2-3 hours editing a 10-minute video when you are starting out. Perfectionism kills consistency. A good video posted today is better than a perfect video posted never. Set a timer and commit to publishing.</p>
+  </div>
+</div>
+
+<!-- DAY 4 PAGE 2 — EDITING CONTINUED -->
+<div class="page">
+  <div class="page-watermark">DAY FOUR</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 4 — Editing, Thumbnails & Titles</span>
+    <span class="page-header-num">30</span>
+  </div>
+
+  <h4 class="sub-heading">Essential Editing Techniques</h4>
+  <table>
+    <thead>
+      <tr><th>Technique</th><th>What It Does</th><th>When to Use It</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Jump Cut</strong></td><td>Removes pauses between sentences</td><td>Talking-head videos to maintain energy</td></tr>
+      <tr><td><strong>J-Cut</strong></td><td>Audio starts before the visual transition</td><td>Transitioning between scenes smoothly</td></tr>
+      <tr><td><strong>L-Cut</strong></td><td>Audio continues after visual transition</td><td>Showing B-roll while narrating</td></tr>
+      <tr><td><strong>Zoom/Punch-In</strong></td><td>Crops into footage for emphasis</td><td>Key points, emotional moments, lists</td></tr>
+      <tr><td><strong>Speed Ramp</strong></td><td>Speeds up or slows down footage</td><td>Demonstrations, time-lapse setup shots</td></tr>
+      <tr><td><strong>Lower Third</strong></td><td>Text overlay at bottom of screen</td><td>Introducing names, credentials, links</td></tr>
+      <tr><td><strong>Text Pop-Up</strong></td><td>Animated text on screen</td><td>Emphasizing statistics, key terms, lists</td></tr>
+      <tr><td><strong>Sound Effects</strong></td><td>Whoosh, pop, ding audio cues</td><td>Transitions, emphasis, humor (use sparingly)</td></tr>
+    </tbody>
+  </table>
+
+  <h4 class="sub-heading">Free Music & Sound Effect Resources</h4>
+  <table>
+    <thead>
+      <tr><th>Resource</th><th>Type</th><th>License</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>YouTube Audio Library</td><td>Music + Sound Effects</td><td>Free for YouTube use</td></tr>
+      <tr><td>Epidemic Sound</td><td>Music + Sound Effects</td><td>$15/mo (30-day free trial)</td></tr>
+      <tr><td>Artlist</td><td>Music + Sound Effects</td><td>$10/mo (annual plan)</td></tr>
+      <tr><td>Pixabay Music</td><td>Music</td><td>Free, no attribution required</td></tr>
+      <tr><td>Freesound.org</td><td>Sound Effects</td><td>Free, Creative Commons</td></tr>
+      <tr><td>Uppbeat</td><td>Music</td><td>Free tier available</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout fast-track">
+    <div class="callout-title">Fast Track</div>
+    <p>Start with the YouTube Audio Library — it is free, copyright-safe, and has thousands of tracks. Search by mood (e.g., "upbeat," "inspirational," "calm") to find tracks that match your content style. Download 5-10 tracks you love and reuse them across videos for brand consistency.</p>
+  </div>
+
+  <div class="quote-box">
+    <p class="quote-text">Editing is not about adding effects — it is about removing everything that does not serve the viewer's experience.</p>
+    <p class="quote-author">— Walter Murch, Film Editor</p>
+  </div>
+</div>
+
+<!-- DAY 4 PAGE 3 — THUMBNAILS -->
+<div class="page">
+  <div class="page-watermark">DAY FOUR</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 4 — Editing, Thumbnails & Titles</span>
+    <span class="page-header-num">31</span>
+  </div>
+
+  <h3>Thumbnail Design Rules</h3>
+  <p>Your thumbnail is a billboard. It has 1-2 seconds to convince a viewer to click. YouTube's own data shows that 90% of the best-performing videos have custom thumbnails. This is not optional — it is essential.</p>
+
+  <h4 class="sub-heading">The 8 Rules of High-Converting Thumbnails</h4>
+  <ol class="numbered-list">
+    <li><strong>Use 3-5 words maximum.</strong> Thumbnails are viewed at small sizes on mobile. Long text is unreadable. Use bold, short phrases that create curiosity. Example: "I QUIT" or "$10K/mo" instead of "How I Made $10,000 Per Month Working From Home."</li>
+    <li><strong>Show an expressive face.</strong> Thumbnails with faces get 38% higher click-through rates. Use emotions that match the content: surprise, excitement, concern, joy. Exaggerate slightly — subtle expressions do not read at small sizes.</li>
+    <li><strong>Use high-contrast colors.</strong> Your thumbnail must pop against YouTube's white background. Use complementary colors (blue/orange, purple/yellow). Avoid dark, muted tones. Test by shrinking to 25% size — can you still read it?</li>
+    <li><strong>Create a visual curiosity gap.</strong> Show a result without explaining how it happened. Show a before/after. Show something unexpected. The viewer should think: "I need to click to understand this."</li>
+    <li><strong>Maintain brand consistency.</strong> Use the same color palette, font, and layout style across all thumbnails. Viewers should recognize your video in a feed before reading the title. This builds brand equity over time.</li>
+    <li><strong>Never duplicate the title.</strong> Your thumbnail and title should complement each other, not repeat the same information. The thumbnail is visual — the title is verbal. Together they tell a more compelling story.</li>
+    <li><strong>Use depth and layers.</strong> Separate foreground (you/subject), middle ground (text/graphics), and background (solid color or blur). This creates a professional, magazine-quality composition.</li>
+    <li><strong>Test at mobile size.</strong> Over 70% of YouTube views come from mobile devices. Always preview your thumbnail at the size it will actually be seen. If it is unclear at phone size, simplify.</li>
+  </ol>
+
+  <div class="two-col" style="margin-top: 16px;">
+    <div class="col">
+      <div style="background: #E8F5E9; padding: 14px; border-radius: 6px;">
+        <p style="font-weight: 700; color: #2E8B57; text-align: center; margin-bottom: 8px;">EFFECTIVE THUMBNAIL</p>
+        <p style="font-size: 9pt;">Close-up face with surprised expression. Bold yellow text "I WAS WRONG" on dark blue background. Clean, simple, 3 elements max. Readable at any size. Creates immediate curiosity.</p>
+      </div>
+    </div>
+    <div class="col">
+      <div style="background: #FFEBEE; padding: 14px; border-radius: 6px;">
+        <p style="font-weight: 700; color: #D94F3B; text-align: center; margin-bottom: 8px;">INEFFECTIVE THUMBNAIL</p>
+        <p style="font-size: 9pt;">Small distant figure. 12 words of text in thin white font. Busy, cluttered background with multiple elements competing for attention. Unreadable on mobile. No emotional hook.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 4 PAGE 4 — TITLE FORMULA BANK -->
+<div class="page">
+  <div class="page-watermark">DAY FOUR</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 4 — Editing, Thumbnails & Titles</span>
+    <span class="page-header-num">32</span>
+  </div>
+
+  <h3>Title Formula Bank: 20 Proven Structures</h3>
+  <p>Your title works with your thumbnail to drive clicks. A great title triggers curiosity, promises value, or creates urgency. Use these proven structures for consistent results.</p>
+
+  <table>
+    <thead>
+      <tr><th>#</th><th>Formula</th><th>Example</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>How to [Result] (Even If [Objection])</td><td>How to Save $10K This Year (Even If You're Broke)</td></tr>
+      <tr><td>2</td><td>[Number] [Topic] Mistakes You're Making Right Now</td><td>7 Editing Mistakes You're Making Right Now</td></tr>
+      <tr><td>3</td><td>I Tried [Thing] for [Time] — Here's What Happened</td><td>I Tried Waking Up at 5AM for 30 Days — Here's What Happened</td></tr>
+      <tr><td>4</td><td>The [Adjective] Guide to [Topic]</td><td>The Complete Guide to YouTube SEO</td></tr>
+      <tr><td>5</td><td>Why [Common Belief] Is Wrong</td><td>Why Posting Daily on YouTube Is Wrong</td></tr>
+      <tr><td>6</td><td>[Topic] for Beginners: [Promise]</td><td>Investing for Beginners: Start with $100</td></tr>
+      <tr><td>7</td><td>Stop [Mistake] — Do This Instead</td><td>Stop Using Hashtags Wrong — Do This Instead</td></tr>
+      <tr><td>8</td><td>[Result] in [Timeframe]: Step by Step</td><td>First 1,000 Subscribers in 30 Days: Step by Step</td></tr>
+      <tr><td>9</td><td>What Nobody Tells You About [Topic]</td><td>What Nobody Tells You About Starting a Business</td></tr>
+      <tr><td>10</td><td>[Thing A] vs [Thing B]: Which Is Actually Better?</td><td>iPhone vs Samsung: Which Is Actually Better?</td></tr>
+      <tr><td>11</td><td>I [Did Something Extreme] and [Unexpected Result]</td><td>I Deleted All Social Media and My Business Grew</td></tr>
+      <tr><td>12</td><td>The $[Amount] [Thing] That Changed My [Life/Career]</td><td>The $12 Tool That Changed My Photography</td></tr>
+      <tr><td>13</td><td>Watch This Before You [Common Action]</td><td>Watch This Before You Buy a Camera in 2025</td></tr>
+      <tr><td>14</td><td>[Number] Things I Wish I Knew Before [Action]</td><td>10 Things I Wish I Knew Before Starting YouTube</td></tr>
+      <tr><td>15</td><td>The Truth About [Popular Topic]</td><td>The Truth About Dropshipping in 2025</td></tr>
+      <tr><td>16</td><td>How I [Achieved Result] With $0</td><td>How I Built a 6-Figure Business With $0</td></tr>
+      <tr><td>17</td><td>[Ranking] Best [Category] in [Year]</td><td>Top 5 Best Budget Cameras in 2025</td></tr>
+      <tr><td>18</td><td>I Asked [Expert/Number] and This Is What They Said</td><td>I Asked 100 Millionaires Their #1 Tip</td></tr>
+      <tr><td>19</td><td>Do NOT [Action] Until You Watch This</td><td>Do NOT Buy a MacBook Until You Watch This</td></tr>
+      <tr><td>20</td><td>[Simple Question]? [Intriguing Answer]</td><td>Is College Worth It? I Ran the Numbers.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout pro-tip">
+    <div class="callout-title">Pro Tip</div>
+    <p>Write 5 title options for every video and pick the best one. Use power words like "ultimate," "exactly," "proven," "secret," and "mistake." Avoid clickbait that does not deliver — broken trust destroys channels. Your title should be a 100% accurate promise.</p>
+  </div>
+</div>
+
+<!-- DAY 4 PAGE 5 — DESCRIPTION SEO + TAGS -->
+<div class="page">
+  <div class="page-watermark">DAY FOUR</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 4 — Editing, Thumbnails & Titles</span>
+    <span class="page-header-num">34</span>
+  </div>
+
+  <h3>Description SEO Template</h3>
+  <p>Your video description is a powerful SEO tool that most creators ignore. YouTube reads every word to understand and rank your content. Use this template for every upload.</p>
+
+  <div class="gold-box">
+    <h4>The Optimized Description Structure</h4>
+    <p><strong>Line 1-2 (Above the fold):</strong> Write a compelling 2-sentence summary that includes your primary keyword naturally. This is what viewers see before clicking "Show more."</p>
+    <p><strong>Line 3-4:</strong> Call to action — subscribe link, relevant playlist link.</p>
+    <p><strong>Lines 5-15:</strong> Detailed description of the video content (150-300 words). Include your target keyword 2-3 times and related keywords naturally. Write for humans, optimize for search.</p>
+    <p><strong>Timestamps:</strong> Add chapter markers (covered in Day 5).</p>
+    <p><strong>Links Section:</strong> Related videos, social profiles, product links, affiliate links.</p>
+    <p><strong>Hashtags:</strong> 3-5 relevant hashtags at the very bottom (#YouTube #Tutorial #YourNiche).</p>
+  </div>
+
+  <h4 class="sub-heading">Sample Description</h4>
+  <div style="background: var(--light-gray); padding: 16px; border-radius: 6px; font-size: 9.5pt; margin: 10px 0;">
+    <p>In this video, I break down the exact 5-step system I use to edit YouTube videos in under 2 hours — even as a complete beginner. If you've been spending too long in the editing chair, this workflow will change everything.</p>
+    <p style="margin-top:8px;">🔔 SUBSCRIBE for weekly YouTube growth tips: [link]<br>📋 FREE Editing Checklist: [link]</p>
+    <p style="margin-top:8px;">Whether you're using DaVinci Resolve, Premiere Pro, or CapCut, this editing workflow applies to any software. I'll walk you through the rough cut, fine cut, B-roll placement, audio polish, and final export settings that professional YouTubers use daily...</p>
+    <p style="margin-top:8px;">⏱ TIMESTAMPS:<br>0:00 — Why editing takes so long<br>1:15 — Step 1: The Rough Cut<br>3:30 — Step 2: Fine Cut &amp; Pacing<br>5:45 — Step 3: B-Roll &amp; Graphics...</p>
+    <p style="margin-top:8px;">#YouTubeEditing #VideoEditing #ContentCreator</p>
+  </div>
+
+  <h3>Tags Strategy Guide</h3>
+  <p>While tags have less impact than they once did, they still help YouTube understand your content, especially for new channels. Follow this tagging system.</p>
+
+  <table>
+    <thead>
+      <tr><th>Tag Type</th><th>Example</th><th>How Many</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Exact Target Keyword</strong></td><td>how to edit youtube videos</td><td>1</td></tr>
+      <tr><td><strong>Broad Keyword</strong></td><td>youtube editing, video editing tips</td><td>2-3</td></tr>
+      <tr><td><strong>Long-Tail Variations</strong></td><td>how to edit videos for beginners free</td><td>3-5</td></tr>
+      <tr><td><strong>Channel Name</strong></td><td>[Your Channel Name]</td><td>1</td></tr>
+      <tr><td><strong>Related Topics</strong></td><td>davinci resolve tutorial, youtube tips 2025</td><td>3-5</td></tr>
+      <tr><td><strong>Competitor Keywords</strong></td><td>similar to [competitor channel name]</td><td>1-2</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Day 4 — Action Checklist</h3>
+  <ul class="checklist">
+    <li>Choose and install your editing software (DaVinci Resolve or CapCut recommended)</li>
+    <li>Edit your test video from Day 3 using the 5-step workflow</li>
+    <li>Practice jump cuts, B-roll insertion, and text overlays</li>
+    <li>Add background music from YouTube Audio Library</li>
+    <li>Design your first thumbnail using the 8 rules</li>
+    <li>Create a reusable thumbnail template in Canva</li>
+    <li>Write 5 title options for your first video using the formula bank</li>
+    <li>Write your first video description using the SEO template</li>
+    <li>Research and add 10-15 tags for your first video</li>
+    <li>Export your edited video (1080p minimum, H.264)</li>
+  </ul>
+
+  <div class="notes-area">
+    <h4>Day 4 Notes & Reflections</h4>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════ DAY 5 DIVIDER ═══════════════════════ -->
+<div class="section-divider">
+  <div class="day-number">05</div>
+  <div class="day-label">Day Five</div>
+  <h2>Upload, Optimization<br>& Publishing</h2>
+  <div class="gold-line"></div>
+  <p class="section-desc">The moment your video goes live, a chain reaction begins. Today you learn how to maximize every upload for reach, discoverability, and engagement.</p>
+</div>
+
+<!-- DAY 5 PAGE 1 — UPLOAD CHECKLIST -->
+<div class="page">
+  <div class="page-watermark">DAY FIVE</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 5 — Upload, Optimization & Publishing</span>
+    <span class="page-header-num">36</span>
+  </div>
+
+  <div class="progress-tracker">
+    <h4>Your Progress</h4>
+    <div class="progress-bar"><div class="progress-fill" style="width: 83%"></div></div>
+    <p class="progress-text">Day 5 of 6 — Optimizing for Maximum Impact</p>
+  </div>
+
+  <h2 class="section-title">The Perfect Upload Checklist</h2>
+  <p class="section-subtitle">35 items to verify before every single video goes live. Bookmark this page.</p>
+
+  <h4 class="sub-heading">Pre-Upload (Before You Open YouTube Studio)</h4>
+  <ul class="checklist">
+    <li>Video exported at 1080p minimum (4K preferred), H.264 codec</li>
+    <li>Audio levels normalized (-12dB to -6dB, no clipping)</li>
+    <li>Watch full video one final time — check for errors, dead air, audio sync issues</li>
+    <li>Thumbnail designed and exported (1280x720 px, under 2MB, JPG or PNG)</li>
+    <li>5 title options written — best one selected</li>
+    <li>Description written with primary keyword in first 2 lines</li>
+    <li>Tags researched (10-15 relevant tags)</li>
+    <li>End screen graphic prepared (last 20 seconds of video)</li>
+  </ul>
+
+  <h4 class="sub-heading">During Upload (YouTube Studio Settings)</h4>
+  <ul class="checklist">
+    <li>Title entered with primary keyword included naturally</li>
+    <li>Description pasted with all links, timestamps, and hashtags</li>
+    <li>Custom thumbnail uploaded (never use auto-generated thumbnails)</li>
+    <li>Playlist assigned (create one if it does not exist yet)</li>
+    <li>Tags added in the "Show more" section</li>
+    <li>Language set correctly</li>
+    <li>Category selected (most common: Education, How-to & Style, Entertainment)</li>
+    <li>Recording date set (if relevant for evergreen content)</li>
+    <li>Video marked as "Not made for kids" (unless it actually is)</li>
+    <li>Paid promotion disclosed (if applicable)</li>
+    <li>Subtitles/CC uploaded or auto-generated enabled</li>
+    <li>Cards added (link to relevant videos at key moments)</li>
+    <li>End screen configured (subscribe button + best video + latest video)</li>
+    <li>Chapter markers added via timestamps in description</li>
+  </ul>
+
+  <h4 class="sub-heading">Post-Upload (After Publishing)</h4>
+  <ul class="checklist">
+    <li>Pin a comment with a question or CTA to boost engagement</li>
+    <li>Share to Instagram Stories with a teaser clip</li>
+    <li>Share to Twitter/X with a hook and link</li>
+    <li>Share to relevant Facebook groups or communities</li>
+    <li>Share to your email list (if you have one)</li>
+    <li>Create a YouTube Short teaser from the best 30-60 seconds</li>
+    <li>Respond to every comment in the first 2 hours (critical for algorithm)</li>
+    <li>Check analytics after 24 hours: CTR, average view duration, traffic sources</li>
+    <li>A/B test your thumbnail if CTR is below 5% after 48 hours</li>
+    <li>Add the video to your channel homepage sections</li>
+    <li>Cross-link from previous related videos (add cards retroactively)</li>
+    <li>Update your channel trailer if this is your best video yet</li>
+    <li>Document performance in your content tracker spreadsheet</li>
+  </ul>
+
+  <div class="callout pro-tip">
+    <div class="callout-title">Pro Tip</div>
+    <p>The first 48 hours after upload are critical. YouTube tests your video with a small audience and measures click-through rate (CTR) and average view duration (AVD). If both metrics are strong, the algorithm pushes your video to a larger audience. Respond to every comment, share across all platforms, and do everything possible to maximize engagement in that window.</p>
+  </div>
+</div>
+
+<!-- DAY 5 PAGE 2 — END SCREENS, CARDS, CHAPTERS -->
+<div class="page">
+  <div class="page-watermark">DAY FIVE</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 5 — Upload, Optimization & Publishing</span>
+    <span class="page-header-num">38</span>
+  </div>
+
+  <h3>End Screen & Cards Strategy</h3>
+  <p>End screens and cards are YouTube's built-in tools for keeping viewers on your channel. Used correctly, they dramatically increase watch time and subscriber conversion.</p>
+
+  <h4 class="sub-heading">End Screen Best Practices</h4>
+  <table>
+    <thead>
+      <tr><th>Element</th><th>What to Include</th><th>Why It Works</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Subscribe Button</td><td>Always include — bottom right corner</td><td>Passive subscriber growth on every video</td></tr>
+      <tr><td>Best for Viewer</td><td>YouTube's algorithm picks the best match</td><td>Higher click-through than manual selection</td></tr>
+      <tr><td>Specific Video</td><td>Link to a related video on your channel</td><td>Creates a viewing chain — increases session time</td></tr>
+      <tr><td>Playlist</td><td>Link to a relevant playlist</td><td>Triggers autoplay — viewers watch 2-5 more videos</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout fast-track">
+    <div class="callout-title">Fast Track</div>
+    <p>Design your video to include a verbal CTA at the end: "If you enjoyed this, you'll love this video right here" while pointing to the end screen element. Verbal + visual CTAs convert 3x better than silent end screens.</p>
+  </div>
+
+  <h3>Chapter Markers Guide</h3>
+  <p>Chapter markers (timestamps) improve viewer experience, boost SEO, and can appear in Google search results. YouTube auto-generates chapters from your description timestamps.</p>
+
+  <div class="gold-box">
+    <h4>How to Add Chapter Markers</h4>
+    <p><strong>Step 1:</strong> Start with <code>0:00</code> — this is required for chapters to work.</p>
+    <p><strong>Step 2:</strong> Add timestamps for each major section (minimum 3 chapters, each at least 10 seconds long).</p>
+    <p><strong>Step 3:</strong> Write descriptive labels that include relevant keywords.</p>
+    <p><strong>Example Format:</strong></p>
+    <p style="font-size: 9.5pt; margin-top: 6px;">0:00 — Introduction<br>1:15 — Why Most Beginners Fail<br>3:30 — Step 1: Choose Your Niche<br>5:45 — Step 2: Set Up Your Channel<br>8:00 — Step 3: Plan Your Content<br>10:30 — Common Mistakes to Avoid<br>12:00 — Final Tips & Next Steps</p>
+  </div>
+
+  <h3>Community Tab Activation Guide</h3>
+  <p>The Community tab lets you post polls, images, text updates, and links directly to your subscribers' feeds. It is one of the most underused tools for audience engagement.</p>
+
+  <h4 class="sub-heading">Community Post Ideas</h4>
+  <ul class="checklist">
+    <li><strong>Poll:</strong> "What topic should my next video cover?" (gives you content ideas + engagement)</li>
+    <li><strong>Behind the scenes:</strong> Photo of your setup, editing screen, or filming process</li>
+    <li><strong>Teaser:</strong> Screenshot from upcoming video with caption "This drops Tuesday 🔥"</li>
+    <li><strong>Question:</strong> Ask a niche-related question to start a conversation in comments</li>
+    <li><strong>Resource share:</strong> Link to a helpful tool, article, or free resource</li>
+    <li><strong>Milestone celebration:</strong> Thank your audience for subscriber milestones</li>
+    <li><strong>Repurpose:</strong> Share a key quote or tip from your latest video as a text post</li>
+  </ul>
+
+  <div class="callout common-mistake">
+    <div class="callout-title">Common Mistake</div>
+    <p>The Community tab is available once you reach 500 subscribers (as of 2025). Until then, use YouTube Stories (available at 0 subscribers on mobile) and pinned comments for engagement. Do not wait for the Community tab to start building a relationship with your audience.</p>
+  </div>
+</div>
+
+<!-- DAY 5 PAGE 3 — SCHEDULING + CHECKLIST -->
+<div class="page">
+  <div class="page-watermark">DAY FIVE</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 5 — Upload, Optimization & Publishing</span>
+    <span class="page-header-num">39</span>
+  </div>
+
+  <h3>Premiere vs. Standard Upload</h3>
+  <table>
+    <thead>
+      <tr><th>Feature</th><th>Standard Upload</th><th>Premiere</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>How it works</td><td>Video goes live immediately or at scheduled time</td><td>Live countdown + chat, then video is available</td></tr>
+      <tr><td>Best for</td><td>Most regular uploads</td><td>Special content, launches, announcements</td></tr>
+      <tr><td>Engagement</td><td>Normal comment activity</td><td>Live chat creates event-like excitement</td></tr>
+      <tr><td>Algorithm impact</td><td>Standard recommendation flow</td><td>Can boost initial engagement signals</td></tr>
+      <tr><td>When to use</td><td>Weekly content, tutorials, evergreen videos</td><td>Monthly tent-pole content, special episodes</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Scheduling Strategy</h3>
+  <p>Data from multiple studies analyzing millions of YouTube videos reveals consistent patterns for optimal upload timing.</p>
+
+  <h4 class="sub-heading">Best Days to Upload (Ranked by Performance)</h4>
+  <table>
+    <thead>
+      <tr><th>Rank</th><th>Day</th><th>Why</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td><strong>Thursday</strong></td><td>High engagement before weekend browsing. Ideal for most niches.</td></tr>
+      <tr><td>2</td><td><strong>Friday</strong></td><td>Viewers plan weekend activities, seek entertainment and tutorials.</td></tr>
+      <tr><td>3</td><td><strong>Tuesday</strong></td><td>Midweek engagement peak. Strong for educational and business content.</td></tr>
+      <tr><td>4</td><td><strong>Wednesday</strong></td><td>Solid mid-week option, especially for tech and productivity niches.</td></tr>
+      <tr><td>5</td><td><strong>Saturday</strong></td><td>Good for entertainment, vlogs, and lifestyle content.</td></tr>
+    </tbody>
+  </table>
+
+  <h4 class="sub-heading">Best Times to Upload</h4>
+  <div class="gold-box">
+    <p><strong>General Rule:</strong> Upload 2-3 hours before your audience's peak viewing time so YouTube can index and start recommending your video.</p>
+    <p><strong>US Audience:</strong> 12:00 PM - 3:00 PM EST (catches both coasts)</p>
+    <p><strong>UK/EU Audience:</strong> 2:00 PM - 5:00 PM GMT</p>
+    <p><strong>Global Audience:</strong> 9:00 AM - 12:00 PM EST (captures multiple time zones)</p>
+    <p><strong>After 1,000 subscribers:</strong> Check YouTube Studio Analytics → Audience → "When your viewers are on YouTube" for your specific audience's peak times.</p>
+  </div>
+
+  <h3>Day 5 — Action Checklist</h3>
+  <ul class="checklist">
+    <li>Complete the full 35-item upload checklist for your first video</li>
+    <li>Upload your video to YouTube (scheduled or published)</li>
+    <li>Add end screens with subscribe button + recommended video</li>
+    <li>Add 2-3 cards linking to relevant content</li>
+    <li>Write and format chapter markers in your description</li>
+    <li>Pin a comment with a question to drive engagement</li>
+    <li>Share your video on 3+ social media platforms</li>
+    <li>Respond to every comment within the first 2 hours</li>
+    <li>Set your upload schedule for the next 4 weeks</li>
+    <li>Create a YouTube Short teaser from your first video</li>
+  </ul>
+
+  <div class="notes-area">
+    <h4>Day 5 Notes & Reflections</h4>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════ DAY 6 DIVIDER ═══════════════════════ -->
+<div class="section-divider">
+  <div class="day-number">06</div>
+  <div class="day-label">Day Six</div>
+  <h2>Growth, Monetization<br>& Momentum</h2>
+  <div class="gold-line"></div>
+  <p class="section-desc">You have built the foundation. Now it is time to scale. Today you learn the growth engines and revenue streams that turn a channel into a business.</p>
+</div>
+
+<!-- DAY 6 PAGE 1 — ALGORITHM -->
+<div class="page">
+  <div class="page-watermark">DAY SIX</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 6 — Growth, Monetization & Momentum</span>
+    <span class="page-header-num">41</span>
+  </div>
+
+  <div class="progress-tracker">
+    <h4>Your Progress</h4>
+    <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
+    <p class="progress-text">Day 6 of 6 — Final Day: Building Your Growth Engine</p>
+  </div>
+
+  <h2 class="section-title">YouTube Algorithm Decoded</h2>
+  <p class="section-subtitle">What actually matters for recommendation in 2025, stripped of myths and noise.</p>
+
+  <p>The YouTube algorithm is not a single system — it is multiple AI models working together across different surfaces: Search, Suggested Videos, Browse (Homepage), Shorts Feed, and Notifications. Each surface has different ranking signals, but they all share one core principle: <strong>YouTube recommends videos that keep viewers on the platform longer.</strong></p>
+
+  <h3>The 5 Metrics That Drive the Algorithm</h3>
+
+  <table>
+    <thead>
+      <tr><th>Metric</th><th>What It Measures</th><th>Target</th><th>How to Improve</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Click-Through Rate (CTR)</strong></td><td>% of impressions that result in clicks</td><td>5-10%+</td><td>Better thumbnails + titles</td></tr>
+      <tr><td><strong>Average View Duration (AVD)</strong></td><td>How long viewers watch before leaving</td><td>50%+ of video length</td><td>Better hooks, pacing, editing</td></tr>
+      <tr><td><strong>Average % Viewed</strong></td><td>What percentage of total video is watched</td><td>40-60%+</td><td>Tighter scripts, remove fluff</td></tr>
+      <tr><td><strong>Session Watch Time</strong></td><td>Total time a viewer spends on YouTube after your video</td><td>Higher is better</td><td>End screens, playlists, series</td></tr>
+      <tr><td><strong>Engagement Rate</strong></td><td>Likes, comments, shares, saves per view</td><td>4-8%+</td><td>CTAs, questions, controversial takes</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout pro-tip">
+    <div class="callout-title">Pro Tip</div>
+    <p>CTR and AVD are the two most important metrics for new channels. If your CTR is below 4%, your thumbnails and titles need work. If your AVD is below 40% of video length, your content or pacing needs improvement. Fix these two metrics and the algorithm will do the heavy lifting.</p>
+  </div>
+
+  <h4 class="sub-heading">Algorithm Myths Debunked</h4>
+  <table>
+    <thead>
+      <tr><th>Myth</th><th>Reality</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>"You need to post every day"</td><td>Consistency matters more than frequency. 1 great video/week beats 7 mediocre ones.</td></tr>
+      <tr><td>"The algorithm punishes you for taking breaks"</td><td>YouTube has confirmed there is no penalty for pausing uploads. Quality always wins.</td></tr>
+      <tr><td>"Subscribers are the most important metric"</td><td>Watch time and engagement matter more. Many channels with fewer subs get more views.</td></tr>
+      <tr><td>"Tags are critical for ranking"</td><td>Tags have minimal impact. Titles, descriptions, and viewer behavior drive ranking.</td></tr>
+      <tr><td>"Longer videos always perform better"</td><td>The right length is whatever keeps your audience engaged. A tight 8-min video outperforms a bloated 20-min one.</td></tr>
+      <tr><td>"Shorts hurt long-form performance"</td><td>YouTube treats them as complementary. Shorts can funnel viewers to your long-form content.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="quote-box">
+    <p class="quote-text">The algorithm does not reward creators. It rewards viewers. Make content that viewers love, and the algorithm will find them for you.</p>
+    <p class="quote-author">— Todd Beaupré, YouTube Growth Lead</p>
+  </div>
+</div>
+
+<!-- DAY 6 PAGE 2 — SHORTS + COLLABORATIONS -->
+<div class="page">
+  <div class="page-watermark">DAY SIX</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 6 — Growth, Monetization & Momentum</span>
+    <span class="page-header-num">43</span>
+  </div>
+
+  <h3>Shorts Strategy to Accelerate Growth</h3>
+  <p>YouTube Shorts receive billions of daily views and are the fastest path to gaining subscribers in 2025. A single viral Short can add thousands of subscribers overnight.</p>
+
+  <h4 class="sub-heading">Shorts Best Practices</h4>
+  <ul class="checklist">
+    <li>Keep Shorts between 30-58 seconds (sweet spot for completion rate)</li>
+    <li>Hook viewers in the first 1-2 seconds — no intros, no logos, get to the point</li>
+    <li>Use vertical format (9:16 aspect ratio, 1080x1920 pixels)</li>
+    <li>Add captions/subtitles — 85% of mobile viewers watch without sound</li>
+    <li>End with a loop — make the ending flow into the beginning for rewatches</li>
+    <li>Post 3-5 Shorts per week (higher frequency is fine for Shorts)</li>
+    <li>Repurpose the best 30-60 seconds from your long-form videos</li>
+    <li>Include "#Shorts" in your title or description</li>
+    <li>Use trending sounds when relevant to your niche</li>
+    <li>Always include a CTA: "Follow for more [niche] tips"</li>
+  </ul>
+
+  <div class="callout fast-track">
+    <div class="callout-title">Fast Track</div>
+    <p>Your first 10 Shorts should be repurposed clips from your long-form videos. Find the most engaging 30-60 second segment (check your retention graphs), add captions, and upload as a Short. This requires almost zero extra effort and can double your subscriber growth rate.</p>
+  </div>
+
+  <h3>Collaboration Outreach Email Template</h3>
+  <p>Collaborations are the fastest organic growth strategy after Shorts. Here is a proven outreach template that gets responses.</p>
+
+  <div class="gold-box">
+    <h4>Collaboration Outreach Template</h4>
+    <p><strong>Subject:</strong> Collab idea — [specific topic] that would help both our audiences</p>
+    <p style="margin-top:10px;"><em>Hi [Creator Name],</em></p>
+    <p><em>I have been following your channel for [timeframe] and really enjoyed your recent video on [specific video title]. The part about [specific detail] really resonated with me.</em></p>
+    <p><em>I run [Your Channel Name], where I create content about [your niche]. I have [subscriber count] subscribers and my videos average [view count] views.</em></p>
+    <p><em>I have an idea for a collaboration that I think would provide genuine value to both our audiences: [specific collab idea in 1-2 sentences].</em></p>
+    <p><em>I am flexible on format — this could be a joint video, a guest appearance, or even a simple shoutout exchange. Whatever works best for you.</em></p>
+    <p><em>Would you be open to a quick 10-minute call this week to discuss?</em></p>
+    <p><em>Best,<br>[Your Name]<br>[Your Channel Link]</em></p>
+  </div>
+
+  <div class="callout common-mistake">
+    <div class="callout-title">Common Mistake</div>
+    <p>Do not cold-email creators who are 100x your size. Target creators with a similar subscriber count (0.5x to 2x yours). The collaboration should feel like a partnership, not a favor. Engage with their content genuinely for 2-4 weeks before reaching out — comment on their videos, share their content — so your name is already familiar when they see your email.</p>
+  </div>
+</div>
+
+<!-- DAY 6 PAGE 3 — MONETIZATION -->
+<div class="page">
+  <div class="page-watermark">DAY SIX</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 6 — Growth, Monetization & Momentum</span>
+    <span class="page-header-num">44</span>
+  </div>
+
+  <h3>Monetization Roadmap</h3>
+  <p>YouTube offers multiple revenue streams. Here is a realistic roadmap from your first dollar to a full-time income, with actionable milestones.</p>
+
+  <h4 class="sub-heading">Phase 1: Foundation (0-1,000 Subscribers)</h4>
+  <table>
+    <thead>
+      <tr><th>Revenue Stream</th><th>Requirements</th><th>Potential Earnings</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Affiliate Marketing</td><td>0 subscribers (start immediately)</td><td>$50-$500/mo</td></tr>
+      <tr><td>Digital Products</td><td>An audience, even small (templates, guides, presets)</td><td>$100-$1,000/mo</td></tr>
+      <tr><td>Services</td><td>Expertise in your niche (coaching, consulting, freelancing)</td><td>$500-$5,000/mo</td></tr>
+    </tbody>
+  </table>
+
+  <h4 class="sub-heading">Phase 2: Growth (1,000-10,000 Subscribers)</h4>
+  <table>
+    <thead>
+      <tr><th>Revenue Stream</th><th>Requirements</th><th>Potential Earnings</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>YouTube Partner Program (AdSense)</td><td>1,000 subs + 4,000 watch hours (or 10M Shorts views)</td><td>$200-$2,000/mo</td></tr>
+      <tr><td>Channel Memberships</td><td>1,000 subscribers</td><td>$100-$500/mo</td></tr>
+      <tr><td>Super Chats &amp; Super Thanks</td><td>YouTube Partner Program eligibility</td><td>$50-$300/mo</td></tr>
+      <tr><td>Small Sponsorships</td><td>Consistent content + engaged audience</td><td>$200-$1,000/video</td></tr>
+    </tbody>
+  </table>
+
+  <h4 class="sub-heading">Phase 3: Scale (10,000-100,000+ Subscribers)</h4>
+  <table>
+    <thead>
+      <tr><th>Revenue Stream</th><th>Requirements</th><th>Potential Earnings</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Brand Sponsorships</td><td>Consistent audience, professional media kit</td><td>$1,000-$20,000/video</td></tr>
+      <tr><td>Online Courses</td><td>Expertise + audience trust</td><td>$2,000-$50,000/mo</td></tr>
+      <tr><td>Merchandise</td><td>Strong brand identity + loyal community</td><td>$500-$10,000/mo</td></tr>
+      <tr><td>Speaking &amp; Events</td><td>Authority status in your niche</td><td>$1,000-$25,000/event</td></tr>
+      <tr><td>Licensing &amp; Partnerships</td><td>Unique content or IP</td><td>Varies widely</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout pro-tip">
+    <div class="callout-title">Pro Tip</div>
+    <p>Do not wait for AdSense to start making money. Affiliate marketing and digital products can generate revenue from Day 1. Include affiliate links to tools and products you genuinely use in every video description. Platforms like Amazon Associates, Impact, and ShareASale are free to join and pay commissions on every sale you refer.</p>
+  </div>
+
+  <div class="quote-box">
+    <p class="quote-text">The creator who diversifies income streams early builds a business. The creator who relies solely on AdSense builds a job they can be fired from at any time.</p>
+    <p class="quote-author">— Pat Flynn, Smart Passive Income</p>
+  </div>
+</div>
+
+<!-- DAY 6 PAGE 4 — ANALYTICS + GROWTH TRACKER -->
+<div class="page">
+  <div class="page-watermark">DAY SIX</div>
+  <div class="page-header">
+    <span class="page-header-title">Day 6 — Growth, Monetization & Momentum</span>
+    <span class="page-header-num">46</span>
+  </div>
+
+  <h3>Analytics Dashboard: The 7 Metrics That Matter</h3>
+  <p>YouTube Studio provides hundreds of data points. These seven are the only ones you need to check weekly as a new creator.</p>
+
+  <table>
+    <thead>
+      <tr><th>#</th><th>Metric</th><th>Where to Find It</th><th>What "Good" Looks Like</th><th>Action If Low</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td><strong>Views</strong></td><td>Dashboard → Overview</td><td>Trending upward week over week</td><td>Improve titles/thumbnails, increase upload frequency</td></tr>
+      <tr><td>2</td><td><strong>Watch Time (Hours)</strong></td><td>Analytics → Overview</td><td>Growing monthly</td><td>Make longer videos, improve retention</td></tr>
+      <tr><td>3</td><td><strong>Subscribers Gained</strong></td><td>Analytics → Overview</td><td>Positive net growth</td><td>Add CTAs, improve content quality</td></tr>
+      <tr><td>4</td><td><strong>CTR (Click-Through Rate)</strong></td><td>Analytics → Reach</td><td>5-10%</td><td>Redesign thumbnails, rewrite titles</td></tr>
+      <tr><td>5</td><td><strong>Avg. View Duration</strong></td><td>Analytics → Engagement</td><td>50%+ of video length</td><td>Better hooks, cut fluff, improve pacing</td></tr>
+      <tr><td>6</td><td><strong>Traffic Sources</strong></td><td>Analytics → Reach</td><td>Mix of Search + Browse + Suggested</td><td>Improve SEO (search), quality (browse/suggested)</td></tr>
+      <tr><td>7</td><td><strong>Revenue (when eligible)</strong></td><td>Analytics → Revenue</td><td>Growing RPM</td><td>Target higher-CPM niches, add mid-rolls for 8+ min videos</td></tr>
+    </tbody>
+  </table>
+
+  <h3>30-Day Post-Launch Growth Tracker</h3>
+  <p>Track your progress daily for the first 30 days. Fill in the numbers each week to identify trends and adjust your strategy.</p>
+
+  <table>
+    <thead>
+      <tr><th>Week</th><th>Videos Published</th><th>Total Views</th><th>New Subscribers</th><th>Avg. CTR</th><th>Avg. View Duration</th><th>Watch Time (hrs)</th><th>Top Performing Video</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Week 1</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>Week 2</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>Week 3</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>Week 4</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Day 6 — Action Checklist</h3>
+  <ul class="checklist">
+    <li>Study the YouTube algorithm metrics and understand what drives recommendations</li>
+    <li>Plan your Shorts strategy: identify 5 clips to repurpose from long-form content</li>
+    <li>Create and publish your first YouTube Short</li>
+    <li>Identify 5 potential collaboration partners in your niche</li>
+    <li>Send your first collaboration outreach email</li>
+    <li>Set up your first affiliate marketing account (Amazon Associates, etc.)</li>
+    <li>Add affiliate links to your video descriptions</li>
+    <li>Create your 30-day growth tracker spreadsheet</li>
+    <li>Set up weekly analytics review (every Sunday, 15 minutes)</li>
+    <li>Write your monetization goals for 90 days, 6 months, and 1 year</li>
+    <li>Celebrate — you have built a professional YouTube channel in 6 days!</li>
+  </ul>
+
+  <div class="notes-area">
+    <h4>Day 6 Notes & Reflections</h4>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+    <div class="notes-line"></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════ BONUS DIVIDER ═══════════════════════ -->
+<div class="section-divider">
+  <div class="day-number">+</div>
+  <div class="day-label">Bonus</div>
+  <h2>Premium Templates,<br>Swipe Files & Resources</h2>
+  <div class="gold-line"></div>
+  <p class="section-desc">Your toolkit for long-term success. Print these pages, save them, and reference them every time you create, upload, or optimize.</p>
+</div>
+
+<!-- BONUS 1 — FULL LAUNCH CHECKLIST -->
+<div class="page">
+  <div class="page-watermark">BONUS</div>
+  <div class="page-header">
+    <span class="page-header-title">Bonus — YouTube Channel Launch Checklist</span>
+    <span class="page-header-num">48</span>
+  </div>
+
+  <h2 class="section-title">YouTube Channel Launch Checklist</h2>
+  <p class="section-subtitle">The complete one-page printable checklist. Print this and check off every item.</p>
+
+  <h4 class="sub-heading">Channel Setup</h4>
+  <ul class="checklist">
+    <li>Google account created and verified</li>
+    <li>Channel name finalized and consistent across platforms</li>
+    <li>Profile picture uploaded (800x800, high contrast)</li>
+    <li>Channel banner uploaded (2560x1440, text in safe zone)</li>
+    <li>About section written with keywords and CTA</li>
+    <li>Channel keywords set (7-10 terms)</li>
+    <li>Contact email added for business inquiries</li>
+    <li>Social links added to banner</li>
+    <li>Subscribe watermark uploaded</li>
+    <li>Channel trailer created and set</li>
+    <li>Homepage sections organized with playlists</li>
+    <li>Default upload settings configured (description template, tags, category)</li>
+  </ul>
+
+  <h4 class="sub-heading">Content & Production</h4>
+  <ul class="checklist">
+    <li>Niche validated (scored 35+ on framework)</li>
+    <li>90-day content calendar created</li>
+    <li>First 5 video topics researched with keywords</li>
+    <li>Filming space set up with lighting and audio</li>
+    <li>Equipment tested with a practice recording</li>
+    <li>Thumbnail template created in Canva</li>
+    <li>Script outline template ready to use</li>
+    <li>Editing software installed and tested</li>
+  </ul>
+
+  <h4 class="sub-heading">Optimization & Growth</h4>
+  <ul class="checklist">
+    <li>First video uploaded with full SEO optimization</li>
+    <li>End screens and cards configured</li>
+    <li>Pinned comment with engagement question</li>
+    <li>Video shared on 3+ social platforms</li>
+    <li>YouTube Short created from first video</li>
+    <li>Analytics tracking spreadsheet set up</li>
+    <li>Upload schedule committed (day and time)</li>
+    <li>Affiliate accounts created (where applicable)</li>
+    <li>Collaboration target list created (5 creators)</li>
+    <li>Weekly analytics review scheduled</li>
+  </ul>
+
+  <div class="callout pro-tip">
+    <div class="callout-title">Pro Tip</div>
+    <p>Print this page and tape it to your wall. Return to it weekly. Every checked box represents progress that most aspiring YouTubers never achieve. You are already ahead of 90% of people who "want to start a channel."</p>
+  </div>
+</div>
+
+<!-- BONUS 2 — 30 HOOK OPENERS -->
+<div class="page">
+  <div class="page-watermark">BONUS</div>
+  <div class="page-header">
+    <span class="page-header-title">Bonus — 30 Hook Openers Swipe File</span>
+    <span class="page-header-num">49</span>
+  </div>
+
+  <h2 class="section-title">30 Hook Openers Swipe File</h2>
+  <p class="section-subtitle">Copy, customize, and use these proven opening lines for your videos. Each one is designed to stop the scroll.</p>
+
+  <table>
+    <thead>
+      <tr><th>#</th><th>Hook Opener</th><th>Type</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>"Stop doing [common action] — it is killing your [results]."</td><td>Contrarian</td></tr>
+      <tr><td>2</td><td>"In the next [X] minutes, I am going to show you exactly how to [desired result]."</td><td>Promise</td></tr>
+      <tr><td>3</td><td>"What if I told you everything you know about [topic] is wrong?"</td><td>Curiosity</td></tr>
+      <tr><td>4</td><td>"I just [achieved impressive result] and I am going to show you how."</td><td>Proof</td></tr>
+      <tr><td>5</td><td>"This one mistake is costing you [specific negative outcome]. Here is how to fix it."</td><td>Problem</td></tr>
+      <tr><td>6</td><td>"[Number]% of people get [topic] completely wrong. Are you one of them?"</td><td>Challenge</td></tr>
+      <tr><td>7</td><td>"I spent [time/money] testing [thing] so you do not have to."</td><td>Sacrifice</td></tr>
+      <tr><td>8</td><td>"If you are struggling with [pain point], this video will change everything."</td><td>Empathy</td></tr>
+      <tr><td>9</td><td>"The [topic] strategy that [experts/companies] do not want you to know."</td><td>Secrecy</td></tr>
+      <tr><td>10</td><td>"Here is the exact step-by-step process I used to [achievement]."</td><td>Blueprint</td></tr>
+      <tr><td>11</td><td>"Do not [action] until you watch this. Seriously."</td><td>Urgency</td></tr>
+      <tr><td>12</td><td>"I am about to share the [number] biggest [niche] lessons I have learned in [timeframe]."</td><td>Experience</td></tr>
+      <tr><td>13</td><td>"Let me save you [time/money] — here is what actually works."</td><td>Value</td></tr>
+      <tr><td>14</td><td>"You have been lied to about [topic]. Let me show you the truth."</td><td>Controversy</td></tr>
+      <tr><td>15</td><td>"This is the video I wish I had when I started [niche]."</td><td>Hindsight</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="page">
+  <div class="page-watermark">BONUS</div>
+  <div class="page-header">
+    <span class="page-header-title">Bonus — 30 Hook Openers Swipe File (Continued)</span>
+    <span class="page-header-num">50</span>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>#</th><th>Hook Opener</th><th>Type</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>16</td><td>"I am going to reveal the [number] [tools/tactics] that [specific result]."</td><td>Reveal</td></tr>
+      <tr><td>17</td><td>"Most people think [common belief]. But the data says something different."</td><td>Data-Driven</td></tr>
+      <tr><td>18</td><td>"After [timeframe] of [activity], here are my honest results."</td><td>Transparency</td></tr>
+      <tr><td>19</td><td>"Warning: once you learn this [niche] technique, you cannot unlearn it."</td><td>Intrigue</td></tr>
+      <tr><td>20</td><td>"The difference between [average result] and [amazing result] comes down to [one thing]."</td><td>Simplification</td></tr>
+      <tr><td>21</td><td>"I asked [number] [experts] for their number one tip, and you will not believe what they said."</td><td>Social Proof</td></tr>
+      <tr><td>22</td><td>"If you can spare [time], I can teach you [valuable skill]."</td><td>Low Barrier</td></tr>
+      <tr><td>23</td><td>"Here is why [popular method] no longer works — and what to do instead."</td><td>Update</td></tr>
+      <tr><td>24</td><td>"This [free tool/method] replaced my $[expensive amount] [solution]."</td><td>Value Swap</td></tr>
+      <tr><td>25</td><td>"I made every [niche] mistake possible so you can skip straight to the results."</td><td>Shortcut</td></tr>
+      <tr><td>26</td><td>"The internet is full of [bad advice about topic]. Let me set the record straight."</td><td>Authority</td></tr>
+      <tr><td>27</td><td>"You are [timeframe] away from [desired result]. Here is the roadmap."</td><td>Timeline</td></tr>
+      <tr><td>28</td><td>"I found a [niche] hack that is almost too good to share."</td><td>Exclusivity</td></tr>
+      <tr><td>29</td><td>"[Impressive statistic about topic]. And I am going to show you how to get there."</td><td>Statistical</td></tr>
+      <tr><td>30</td><td>"Before you [common action], there are [number] things you absolutely need to know."</td><td>Prevention</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout fast-track">
+    <div class="callout-title">Fast Track</div>
+    <p>Pick 5 hooks from this list that match your style. Customize them for your niche and save them in a swipe file. Before filming any video, write 3 hook options and choose the strongest one. Practice delivering your hook out loud 3 times before hitting record — energy and conviction matter.</p>
+  </div>
+
+  <div class="quote-box">
+    <p class="quote-text">You do not rise to the level of your goals. You fall to the level of your systems.</p>
+    <p class="quote-author">— James Clear, Atomic Habits</p>
+  </div>
+</div>
+
+<!-- BONUS 3 — SPONSORSHIP PITCH -->
+<div class="page">
+  <div class="page-watermark">BONUS</div>
+  <div class="page-header">
+    <span class="page-header-title">Bonus — Sponsorship Pitch Email Template</span>
+    <span class="page-header-num">51</span>
+  </div>
+
+  <h2 class="section-title">Sponsorship Pitch Email Template</h2>
+  <p class="section-subtitle">Use this template once you have 1,000+ subscribers and consistent content to attract brand deals.</p>
+
+  <div class="gold-box">
+    <h4>Sponsorship Outreach Template</h4>
+    <p><strong>Subject Line:</strong> Partnership Opportunity — [Your Channel Name] x [Brand Name]</p>
+    <p style="margin-top: 12px;"><em>Hi [Brand Contact Name / Marketing Team],</em></p>
+    <p><em>My name is [Your Name], and I run [Channel Name], a YouTube channel focused on [niche] with [subscriber count] subscribers and an average of [view count] views per video.</em></p>
+    <p><em>My audience is primarily [demographic: age, gender, location, interests], which aligns perfectly with [Brand Name]'s target market.</em></p>
+    <p><em>I have been using [Brand's Product] for [timeframe] and genuinely believe it is the best [product category] available. I would love to feature it in an upcoming video.</em></p>
+    <p><em>Here is what I can offer:</em></p>
+    <p><em>• Dedicated video review or integration (60-90 second segment)<br>• Custom thumbnail featuring your product<br>• Permanent link in video description<br>• Cross-promotion on Instagram/TikTok ([follower counts])<br>• Usage rights for your marketing channels</em></p>
+    <p><em>My media kit with full analytics, audience demographics, and past partnership examples is attached.</em></p>
+    <p><em>I would love to discuss how we can create something valuable for both your brand and my audience. Are you available for a 15-minute call this week?</em></p>
+    <p><em>Best regards,<br>[Your Name]<br>[Channel Link] | [Email] | [Phone]</em></p>
+  </div>
+
+  <div class="callout pro-tip">
+    <div class="callout-title">Pro Tip</div>
+    <p>Always personalize every pitch. Mention a specific product you use, a campaign they ran that you admired, or how your audience has asked about their brand. Generic pitches get deleted. Personalized pitches get responses. Send 5-10 pitches per week and expect a 10-20% response rate.</p>
+  </div>
+
+  <h4 class="sub-heading">Sponsorship Rate Guide</h4>
+  <table>
+    <thead>
+      <tr><th>Subscriber Range</th><th>Dedicated Video</th><th>Integration (60-90 sec)</th><th>Shorts Mention</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1,000-10,000</td><td>$200-$500</td><td>$100-$250</td><td>$50-$100</td></tr>
+      <tr><td>10,000-50,000</td><td>$500-$2,500</td><td>$250-$1,000</td><td>$100-$400</td></tr>
+      <tr><td>50,000-100,000</td><td>$2,500-$7,500</td><td>$1,000-$3,500</td><td>$400-$1,500</td></tr>
+      <tr><td>100,000-500,000</td><td>$7,500-$25,000</td><td>$3,500-$10,000</td><td>$1,500-$5,000</td></tr>
+      <tr><td>500,000+</td><td>$25,000+</td><td>$10,000+</td><td>$5,000+</td></tr>
+    </tbody>
+  </table>
+  <p class="text-small">Rates vary by niche, engagement rate, and audience demographics. Finance, tech, and business niches command higher rates. Use these as starting points for negotiation.</p>
+</div>
+
+<!-- BONUS 4 — EQUIPMENT BUDGET PLANNER -->
+<div class="page">
+  <div class="page-watermark">BONUS</div>
+  <div class="page-header">
+    <span class="page-header-title">Bonus — Equipment Budget Planner</span>
+    <span class="page-header-num">52</span>
+  </div>
+
+  <h2 class="section-title">Equipment Budget Planner</h2>
+  <p class="section-subtitle">Plan your gear purchases strategically. Fill in your budget and prioritize purchases by impact.</p>
+
+  <p><strong>Total Budget Available:</strong> $ <span class="fillable" style="min-width: 120px;"></span></p>
+
+  <table>
+    <thead>
+      <tr><th>Category</th><th>Item</th><th>Priority (1-5)</th><th>Budget</th><th>Actual Cost</th><th>Purchased?</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Camera</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>Microphone</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>Lighting (Key)</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>Lighting (Fill)</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>Lighting (Back)</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>Tripod / Mount</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>Backdrop</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>Editing Software</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>Storage / SD Card</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>Music License</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>Other</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+      <tr><td>Other</td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td><td class="fillable"></td></tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top: 12px;"><strong>Total Spent:</strong> $ <span class="fillable" style="min-width: 120px;"></span> &nbsp;&nbsp; <strong>Remaining Budget:</strong> $ <span class="fillable" style="min-width: 120px;"></span></p>
+
+  <div class="callout pro-tip">
+    <div class="callout-title">Pro Tip</div>
+    <p>Priority order for purchases: <strong>1) Microphone</strong> (biggest impact per dollar), <strong>2) Lighting</strong> (transforms any camera's output), <strong>3) Tripod</strong> (stable footage is non-negotiable), <strong>4) Camera upgrade</strong> (only after the first three are solid). Audio and lighting account for 80% of perceived video quality.</p>
+  </div>
+</div>
+
+<!-- BONUS 5 — FAQ -->
+<div class="page">
+  <div class="page-watermark">BONUS</div>
+  <div class="page-header">
+    <span class="page-header-title">Bonus — Frequently Asked Questions</span>
+    <span class="page-header-num">53</span>
+  </div>
+
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <p class="section-subtitle">Answers to the 10 most common questions from new YouTube creators.</p>
+
+  <h4 class="sub-heading">1. How often should I upload?</h4>
+  <p>Start with once per week. Consistency is more important than frequency. A channel that uploads every Tuesday for 52 weeks will outperform a channel that uploads daily for a month and then burns out. Once you have a system, increase to twice per week if your quality can be maintained.</p>
+
+  <h4 class="sub-heading">2. How long should my videos be?</h4>
+  <p>As long as they need to be — and not a second longer. For tutorials and how-to content, 8-15 minutes is the sweet spot. For listicles and reviews, 10-20 minutes works well. For vlogs and entertainment, 7-12 minutes. The right length is whatever keeps your audience retention above 50%. Check your analytics and adjust.</p>
+
+  <h4 class="sub-heading">3. Should I show my face on camera?</h4>
+  <p>It is not required, but it helps significantly. Channels with a human face build stronger connections and convert viewers to subscribers faster. If you are uncomfortable on camera, start with voiceover content and gradually introduce yourself. Faceless channels can succeed, but they typically grow slower and have lower engagement rates.</p>
+
+  <h4 class="sub-heading">4. How long until I get monetized?</h4>
+  <p>The average time to reach 1,000 subscribers and 4,000 watch hours (YouTube Partner Program requirements) is 12-18 months with consistent weekly uploads. Channels with strong SEO and niche focus can reach it in 6-9 months. Channels using Shorts effectively can qualify via the 10 million Shorts views path even faster.</p>
+
+  <h4 class="sub-heading">5. What if my first videos are bad?</h4>
+  <p>They will be. Every creator's first videos are their worst. This is normal and expected. Your first 10 videos are practice — they teach you the mechanics of filming, editing, and publishing. Do not delete them. They become part of your growth story. Focus on improving by 1% with each video rather than achieving perfection immediately.</p>
+
+  <h4 class="sub-heading">6. Should I use my real name or a brand name?</h4>
+  <p>If you plan to be the face of your channel, your real name builds a stronger personal brand. If you plan to eventually sell the channel or hire a team, a brand name gives you more flexibility. Many successful creators use a hybrid: "Sarah's Finance Lab" or "Mike's Tech Reviews." Choose what feels authentic and what you will not regret in five years.</p>
+
+  <h4 class="sub-heading">7. Do I need a niche, or can I post about anything?</h4>
+  <p>You need a niche, especially in the beginning. The YouTube algorithm learns what your channel is "about" and recommends it to relevant audiences. A channel about cooking, gaming, and personal finance confuses the algorithm and splits your audience. Pick one niche. You can expand later once you have a loyal base.</p>
+
+  <h4 class="sub-heading">8. Is it too late to start a YouTube channel?</h4>
+  <p>No. YouTube has over 2 billion monthly active users and is growing. New creators break through every single day. The barrier is not timing — it is consistency, strategy, and quality. This guide gives you the strategy. You provide the consistency and the unique perspective that no one else can replicate.</p>
+
+  <h4 class="sub-heading">9. How do I deal with negative comments?</h4>
+  <p>Negative comments are a sign of growth — they mean people are watching. Respond professionally to constructive criticism (it makes you better). Ignore trolls — do not engage, do not delete (unless abusive), and do not let them affect your output. Every successful creator deals with negativity. It is the price of visibility.</p>
+
+  <h4 class="sub-heading">10. What is the single most important thing for YouTube success?</h4>
+  <p>Publishing consistently for 12 months without quitting. The vast majority of creators give up within the first 3 months. Those who push through the "valley of death" (months 3-9, where growth feels painfully slow) are the ones who build sustainable channels. Talent is common. Persistence is rare. Be persistent.</p>
+</div>
+
+<!-- ═══════════════════════ BACK COVER ═══════════════════════ -->
+<div class="back-cover">
+  <h2 style="font-size: 22pt; color: var(--gold); margin-bottom: 12px;">You Did It.</h2>
+  <h2>Your Channel Is Ready.</h2>
+  <div class="gold-line"></div>
+  <p>Six days ago, you had an idea. Now you have a fully branded, strategically positioned, content-ready YouTube channel with a production system, optimization framework, and monetization roadmap.</p>
+  <p style="margin-top: 16px;">The difference between creators who succeed and creators who quit is not talent — it is systems. You now have the system. The only thing left is execution.</p>
+  <p style="margin-top: 16px; color: var(--gold); font-weight: 600;">Post your first video this week. Then post the next one. And the next. Momentum is everything.</p>
+  <div class="gold-line" style="margin-top: 40px;"></div>
+  <p class="back-tagline" style="margin-top: 30px;">The 6-Day YouTube Accelerator</p>
+  <p style="font-size: 9pt; color: rgba(255,255,255,0.3); margin-top: 10px;">Premium Edition • 2025</p>
+  <p style="font-size: 8pt; color: rgba(255,255,255,0.25); margin-top: 30px;">© 2025 All Rights Reserved. This guide is for personal use only.<br>Reproduction or distribution without permission is prohibited.</p>
+</div>
+
+</body>
+</html>
