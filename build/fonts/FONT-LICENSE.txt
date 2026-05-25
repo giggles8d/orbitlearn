@@ -1,0 +1,15 @@
+Fonts bundled in this folder
+============================
+
+The .ttf files here are static-weight instances generated (via fontTools) from
+the official variable-font sources published on Google Fonts. They are used to
+render "THE ATOMIC RESET" workbook PDF.
+
+  - Playfair Display  — Copyright the Playfair Display Project Authors
+  - Montserrat        — Copyright the Montserrat Project Authors
+  - Dancing Script    — Copyright the Dancing Script Project Authors
+
+All three are licensed under the SIL Open Font License, Version 1.1.
+License text: https://openfontlicense.org/
+
+The OFL permits bundling and redistribution of these fonts with the document.
